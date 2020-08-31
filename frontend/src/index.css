@@ -1,0 +1,27 @@
+
+
+.draggable {
+  touch-action: none;
+}
+.pointing {
+  color: orange;
+}
+body {
+  color: black;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+      user-select: none;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: black;
+  background: url(./img/WEBTEST.png);
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+a {
+  color:orange;
+}
