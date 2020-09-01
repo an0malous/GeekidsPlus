@@ -20,7 +20,8 @@ export default class App extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.setOverlayHandler = this.setOverlayHandler.bind(this);
+    this.handleSetOverlay = this.handleSetOverlay.bind(this);
+
   }
 
   componentDidMount() {
@@ -69,7 +70,7 @@ export default class App extends React.Component {
     })
   }
 
-  setOverlayHandler() {
+  handleSetOverlay = () => {
     this.setState({overlay: !this.state.overlay})
   }
   
@@ -89,7 +90,7 @@ export default class App extends React.Component {
         <Route path={"/"} admin={this.state.admin} updateUser={this.updateUser} exact component={Landing} />
         <Route exact path={"/register"} admin={this.state.admin} exact component={Register} />
         <Route exact path={"/login"} render={()=><Login updateUser={this.updateUser} />} />
-        <Route path={"/phonics"} setOverlayHandler={this.setOverlayHandler} exact component={Game} />
+        <Route exact path={"/phonics"} handleSetOverlay={this.handleSetOverlay} exact component={Game} />
         <Route path={"/admin"} admin={this.state.admin} updateUser={this.updateUser} component={adminPanel} />
       </div>
       </div>
