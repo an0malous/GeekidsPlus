@@ -7,8 +7,8 @@ export default class Login extends React.Component {
         axios.defaults.withCredentials = true;
         this.state = {username: '', password: ''};
         this.onSubmit = this.onSubmit.bind(this);
-        this.onUsernameChange = this.onUsernameChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onChange = this.onChange.bind(this);
+
     }
   
     onSubmit = (event) =>{
@@ -23,42 +23,35 @@ export default class Login extends React.Component {
                 console.log('login response: ')
                 console.log(response)
                 if (response.status === 200) {
-                    // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
                         username: response.data.username,
                         admin: response.data.admin
                     })
-                    // update the state to redirect to home
-                    
                 }
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
-                
             })
 	}
 
-    onUsernameChange = (event) =>{
-        this.setState({username: event.target.value})
+    onChange = (event) =>{
+        this.setState({[event.target.name]: event.target.value})
 
     }
 
-    onPasswordChange = (event) =>{
-        this.setState({password: event.target.value})
-
-    }
+ 
     render(){
         return (
             <div>
                 <form className="ui form">
                     <div className="field">
                         <label>Username</label>
-                        <input onChange={this.onUsernameChange} type="text" name="username" placeholder="username" />
+                        <input onChange={this.onChange} type="text" name="username" placeholder="username" />
                     </div>
                     <div className="field">
                         <label>Password</label>
-                        <input onChange={this.onPasswordChange} type="password" name="password" placeholder="password" />
+                        <input onChange={this.onChange} type="password" name="password" placeholder="password" />
                     </div>
                     <button className="ui button" type="submit" onClick={this.onSubmit}>Login</button>
                </form>
