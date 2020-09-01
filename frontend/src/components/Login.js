@@ -1,27 +1,22 @@
 import React from 'react';
-import axios from 'axios';
-import { login } from '../api';
-
+import api from '../api';
 export default class Login extends React.Component {
     constructor(props){
         super(props)
-        axios.defaults.withCredentials = true;
         this.state = {username: '', password: ''};
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-
     }
   
     onSubmit = async event =>{
         event.preventDefault()
         console.log('handleSubmit')
 
-       
         const { username, password } = this.state;
         if(username && password) {
             try {
                 const payload = { username, password };
-                const response = await login(payload)
+                const response = await api.login(payload)
                 console.log('login response: ')
                 console.log(response)
                 if (response.status === 200) {
@@ -40,10 +35,8 @@ export default class Login extends React.Component {
 
     onChange = (event) =>{
         this.setState({[event.target.name]: event.target.value})
-
     }
 
- 
     render(){
         return (
             <div>
