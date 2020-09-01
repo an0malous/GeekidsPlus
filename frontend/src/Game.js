@@ -22,18 +22,14 @@ export default class Game extends React.Component {
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
   }
 
-  loadWords() {
-    axios
-      .get("http://localhost:3000/cards")
-      .then((response) => (this.currentWords = response.data))
-      .then(() => {
-        this.currentWord = this.currentWords[
-          this.currentWordsIndexCounter
-        ].name;
-        this.difficultLetters = [
-          ...this.currentWords[this.currentWordsIndexCounter].name,
-        ];
-      });
+  async loadWords () {
+    try {
+        const response = await axios.get("http://localhost:3000/cards")
+        console.log(response.data)
+        this.currentWords = response.data
+      } catch (err) {
+        console.log(err)
+      }
   }
 
   setAlphabetData() {
@@ -83,7 +79,8 @@ export default class Game extends React.Component {
 
   //-- Game Controller Logic --\\
 
-  roundStart = () => {
+  async roundStart () {
+    await this.loadWords();
     this.setDropzoneData();
     this.setAlphabetData();
     this.setCurrentImgData();
@@ -123,16 +120,11 @@ export default class Game extends React.Component {
   };
 
   render() {
-    {
-      this.loadWords();
-    }
+
     return (
+     
       <div className="ui center aligned grey container">
-        <Switch>
-          <Route
-            exact
-            path="/phonics/newgame"
-            render={() => (
+       
               <Gameboard
                 inSession={this.inSession}
                 dropzoneWord={this.state.dropzoneWord}
@@ -145,14 +137,7 @@ export default class Game extends React.Component {
                 handleOnHelperClick={this.handleOnHelperClick}
                 currentImg={this.state.currentImg}
               />
-            )}
-          />
-            <Route exact path="/phonics/newgame#level">
-                <SelectGameLevel />
-            </Route>
-          <Route exact path="/phonics/" render={() => <SelectGameType />} />
-        </Switch>
-      </div>
-    );
+        </div>
+    )
   }
 }
