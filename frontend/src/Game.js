@@ -21,6 +21,9 @@ export default class Game extends React.Component {
     this.handleOnNextRound = this.handleOnNextRound.bind(this);
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
   }
+  componentDidMount(){
+    this.props.handleSetOverlay();
+  }
 
   async loadWords () {
     try {
@@ -116,11 +119,11 @@ export default class Game extends React.Component {
   };
 
   handleOnHelperClick = () => {
-    this.setAlphabetData();
+
+    this.props.handleSetOverlay();
   };
 
   render() {
-
     return (
      
       <div className="ui center aligned grey container">

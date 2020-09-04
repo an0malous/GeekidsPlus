@@ -71,7 +71,7 @@ export default class App extends React.Component {
   }
 
   handleSetOverlay = () => {
-    console.log("inside setoverlay")
+    console.log("inside set overlay")
     this.setState({overlay: !this.state.overlay})
   }
   
@@ -91,7 +91,7 @@ export default class App extends React.Component {
         <Route path={"/"} admin={this.state.admin} updateUser={this.updateUser} exact component={Landing} />
         <Route exact path={"/register"} admin={this.state.admin} exact component={Register} />
         <Route exact path={"/login"} render={()=><Login updateUser={this.updateUser} />} />
-        <Route exact path={"/phonics"} handleSetOverlay={this.handleSetOverlay} exact component={Game} />
+        <Route exact path={"/phonics"} render={()=><Game handleSetOverlay={this.handleSetOverlay} /> } />
         <Route path={"/admin"} admin={this.state.admin} updateUser={this.updateUser} component={adminPanel} />
       </div>
       </div>
