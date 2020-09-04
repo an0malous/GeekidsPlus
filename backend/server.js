@@ -1,17 +1,20 @@
+require('dotenv').config();
+
 const express = require('express');
 const morgan = require('morgan');
 const session = require('express-session');
 const cors = require('cors');
+const passport = require('passport');
 const dbConnection = require('./database') ;
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
+
+
 
 
 
 phonicCard = require("./database/models/phonicCard.js")
 User = require("./database/models/user")
 
-require('dotenv').config();
 
 const app = express();
 const port = 3000;

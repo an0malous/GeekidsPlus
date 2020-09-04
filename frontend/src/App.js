@@ -71,6 +71,7 @@ export default class App extends React.Component {
   }
 
   handleSetOverlay = () => {
+    console.log("inside setoverlay")
     this.setState({overlay: !this.state.overlay})
   }
   
