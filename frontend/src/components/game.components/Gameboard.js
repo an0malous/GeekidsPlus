@@ -8,9 +8,6 @@ import { RoundBreakdown } from './RoundBreakdown'
 import { Thumbnail } from './Thumbnail'
 import { Button } from './Button';
 
-
-
-
 export default class Gameboard extends React.Component {
     constructor(props){
         super(props)
@@ -25,7 +22,6 @@ export default class Gameboard extends React.Component {
         this.props.difficultLetters.splice(deleteIndex)
         console.log("current difficult letters " + this.props.difficultLetters)
 
-      
      }
  
      checkCorrect (event) {
