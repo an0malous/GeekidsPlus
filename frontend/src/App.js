@@ -84,11 +84,12 @@ export default class App extends React.Component {
       background: "rgba(0, 0, 0, 0.8)"
     }
   }
+  
     return (
       <div>
         <Navbar loggedIn={this.state.loggedIn} admin={this.state.admin} username={this.state.username} handleLogout={this.handleLogout} />
         <div style={ this.state.overlay ? styles.overlay : null}>
-        <Route path={"/"} admin={this.state.admin} updateUser={this.updateUser} exact component={Landing} />
+        <Route path={"/"} render={()=><Landing handleSetOverlay={this.handleSetOverlay}/>}exact component={Landing} />
         <Route exact path={"/register"} admin={this.state.admin} exact component={Register} />
         <Route exact path={"/login"} render={()=><Login updateUser={this.updateUser} />} />
         <Route exact path={"/phonics"} render={()=><Game handleSetOverlay={this.handleSetOverlay} /> } />

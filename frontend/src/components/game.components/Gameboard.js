@@ -16,13 +16,7 @@ export default class Gameboard extends React.Component {
         this.checkCorrect = this.checkCorrect.bind(this)
     }
 
-    updateDifficultLetters (index) {
-        let regex = this.props.dropzoneWord[index]
-        let deleteIndex = new RegExp(regex, "g")
-        this.props.difficultLetters.splice(deleteIndex)
-        console.log("current difficult letters " + this.props.difficultLetters)
-
-     }
+   
  
      checkCorrect (event) {
          for(let i = 0; i < this.props.dropzoneWord.length; i++){
@@ -32,7 +26,7 @@ export default class Gameboard extends React.Component {
                ){
                        
                      event.target.classList.add("checkedCorrect");
-                     this.updateDifficultLetters(i)
+               
                      event.relatedTarget.classList.remove('draggable');
                      this.lettersCorrectCounter = this.lettersCorrectCounter + 1
                      console.log(this.lettersCorrectCounter)
@@ -79,7 +73,7 @@ export default class Gameboard extends React.Component {
 {this.props.inSession && 
     <Interact checkCorrect={ this.checkCorrect }>
         <Dropzone dropzoneWord={this.props.dropzoneWord} />
-        <Alphabet difficultLetters={this.props.difficultLetters} alphabet={this.props.alphabet} />
+        <Alphabet alphabet={this.props.alphabet} />
     </Interact>}
     </div>
     

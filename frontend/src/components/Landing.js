@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const Landing = ({ updateUser, admin }) => {
+export const Landing = ({ updateUser, admin, handleSetOverlay }) => {
+
     return (
         <div>
         <div></div>

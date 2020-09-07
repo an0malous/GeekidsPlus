@@ -15,6 +15,7 @@ export default class Game extends React.Component {
       displayNextRoundButton: false,
       displayDifficultWords: false,
     };
+    this.currentWords = '';
     this.inSession = false;
     this.currentWordsIndexCounter = 0;
     this.handleInit = this.handleInit.bind(this);
@@ -29,7 +30,7 @@ export default class Game extends React.Component {
     try {
         const response = await axios.get("http://localhost:3000/cards")
         console.log(response.data)
-        this.currentWords = response.data
+        this.currentWords = response.data;
       } catch (err) {
         console.log(err)
       }
@@ -70,23 +71,29 @@ export default class Game extends React.Component {
 
   setDropzoneData() {
     this.setState({
-      dropzoneWord: [...this.currentWords[this.currentWordsIndexCounter].name],
+      dropzoneWord: [...this.currentWords[this.currentWordsIndexCounter].name]
     });
   }
 
   setCurrentImgData() {
+
     this.setState({
-      currentImg: this.currentWords[this.currentWordsIndexCounter].img,
+      currentImg: this.currentWords[this.currentWordsIndexCounter].img
     });
   }
 
   //-- Game Controller Logic --\\
 
   async roundStart () {
+
     await this.loadWords();
     this.setDropzoneData();
     this.setAlphabetData();
+   
+   
     this.setCurrentImgData();
+ 
+    
   };
 
   roundComplete = () => {
@@ -124,15 +131,16 @@ export default class Game extends React.Component {
   };
 
   render() {
+    {console.log("ALPHABET INSIDE GAME: " + this.state.alphabet)}
     return (
-     
+
       <div className="ui center aligned grey container">
        
               <Gameboard
                 inSession={this.inSession}
                 dropzoneWord={this.state.dropzoneWord}
                 displayNextRoundButton={this.state.displayNextRoundButton}
-                difficultLetters={this.difficultLetters}
+              
                 handleInit={this.handleInit}
                 handleOnFinalCheckCorrect={this.handleOnFinalCheckCorrect}
                 handleOnNextRound={this.handleOnNextRound}
