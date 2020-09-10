@@ -1,44 +1,36 @@
 import React from 'react';
-import api from '../api';
+import auth from '../auth';
+import { Redirect } from 'react-router-dom';
 export default class Login extends React.Component {
     constructor(props){
         super(props)
-        this.state = {username: '', password: ''};
+        this.state = {username: '', password: '', redirectTo: null};
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
   
-    onSubmit = async event =>{
+    onSubmit = event =>{
         event.preventDefault()
-        console.log('handleSubmit')
-
         const { username, password } = this.state;
         if(username && password) {
-            try {
-                const payload = { username, password };
-                const response = await api.login(payload)
-                console.log('login response: ')
-                console.log(response)
-                if (response.status === 200) {
-                    this.props.updateUser({
-                        loggedIn: true,
-                        username: response.data.username,
-                        admin: response.data.admin
-                    })
+            auth.login(username, password, ({ username, admin })=>{
+                if(username, admin){
+                    this.props.updateUser({ loggedIn: true, username: username, admin: admin})
+                    this.setState({redirectTo: "/"})
                 }
-            } catch (err) {
-                console.log('login error: ')
-                console.log(err);
-            }
-        };
-	};
-
+            });
+        } else {
+            console.log("No username or password")
+        }
+    };
+    
     onChange = (event) =>{
         this.setState({[event.target.name]: event.target.value})
     }
 
     render(){
         return (
+            this.state.redirectTo ? (<Redirect to="/" />) : (
             <div>
                 <form className="ui form">
                     <div className="field">
@@ -52,6 +44,7 @@ export default class Login extends React.Component {
                     <button className="ui button" type="submit" onClick={this.onSubmit}>Login</button>
                </form>
             </div>
+            )
         )
     }
 }
