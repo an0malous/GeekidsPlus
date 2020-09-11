@@ -85,15 +85,10 @@ export default class Game extends React.Component {
   //-- Game Controller Logic --\\
 
   async roundStart () {
-
     await this.loadWords();
     this.setDropzoneData();
     this.setAlphabetData();
-   
-   
     this.setCurrentImgData();
- 
-    
   };
 
   roundComplete = () => {
@@ -131,16 +126,14 @@ export default class Game extends React.Component {
   };
 
   render() {
-    {console.log("ALPHABET INSIDE GAME: " + this.state.alphabet)}
-    return (
 
-      <div className="ui center aligned grey container">
-       
+    return (
+  
+      <div className="ui center aligned container">
               <Gameboard
                 inSession={this.inSession}
                 dropzoneWord={this.state.dropzoneWord}
                 displayNextRoundButton={this.state.displayNextRoundButton}
-              
                 handleInit={this.handleInit}
                 handleOnFinalCheckCorrect={this.handleOnFinalCheckCorrect}
                 handleOnNextRound={this.handleOnNextRound}
@@ -149,6 +142,7 @@ export default class Game extends React.Component {
                 currentImg={this.state.currentImg}
               />
         </div>
+
     )
   }
 }

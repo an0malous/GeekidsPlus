@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../database/models/user')
 const passport = require('../passport')
 
+
 router.post('/register', (req, res) => {
     console.log('user signup');
 
@@ -39,9 +40,9 @@ router.post(
     passport.authenticate('local', {session: true}),
     (req, res) => {
         console.log('logged in', req.user);
-        var userInfo = {
+        const userInfo = {
             username: req.user.username,
-            admin: req.user.admin
+            role: req.user.role
         };
         res.send(userInfo);
     }
@@ -50,10 +51,11 @@ router.post(
 router.get('/', (req, res, next) => {
     console.log('===== user!!======')
     console.log(req.user)
+  
     if (req.user) {
-        User.findOne(req.user._id, (err, user)=> {console.log("Admin " + user.admin), res.json({  
+        User.findOne(req.user._id, (err, userInfo)=> {res.json({  
             user: req.user,
-            admin: user 
+            role: userInfo.role
         })})
     } else {
         res.json({ user: null })

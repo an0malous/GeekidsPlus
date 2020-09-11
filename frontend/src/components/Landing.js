@@ -4,7 +4,6 @@ export const Landing = ({ updateUser, admin, handleSetOverlay }) => {
 
     return (
         <div>
-        <div></div>
             <div style={{
                 position: "absolute",
                 maxWidth: "600px",

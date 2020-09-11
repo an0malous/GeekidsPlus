@@ -18,13 +18,29 @@ class Auth {
     }
   };
 
-  logout(callback) {
+  async logout(callback) {
+      const response = await api.logout();
+      console.log(response)
+      if(callback){
+        callback();
+      }
     this.authenticated = false;
-    callback();
   }
 
-  isAuthenticated() {
+  isAuthenticated (callback) {
+      if(callback){
+            api.user().then((response)=>{
+                if(response.status === 200){
+                    this.authenticated = true;
+                    console.log(response)
+                    callback(response.data);
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })  
+        } else {
     return this.authenticated;
+        }
   }
 }
 export default new Auth();
@@ -32,7 +48,7 @@ export default new Auth();
 
 
 //   handleLogout() {
-//     if (!this.state.username && !this.state.loggedIn) {
+//     if (!this.state.loggedIn) {
 //       return (window.location = "/login");
 //     } else {
 //       axios.post("http://localhost:3000/user/logout").then(() => {

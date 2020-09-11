@@ -13,9 +13,9 @@ export default class Login extends React.Component {
         event.preventDefault()
         const { username, password } = this.state;
         if(username && password) {
-            auth.login(username, password, ({ username, admin })=>{
-                if(username, admin){
-                    this.props.updateUser({ loggedIn: true, username: username, admin: admin})
+            auth.login(username, password, ({ username, role })=>{
+                if(username, role){
+                    this.props.updateUser({ loggedIn: true, username: username, role: role})
                     this.setState({redirectTo: "/"})
                 }
             });

@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 const express = require('express');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -7,10 +8,6 @@ const cors = require('cors');
 const passport = require('passport');
 const dbConnection = require('./database') ;
 const MongoStore = require('connect-mongo')(session);
-
-
-
-
 
 phonicCard = require("./database/models/phonicCard.js")
 User = require("./database/models/user")
@@ -28,7 +25,8 @@ const corsConfig = {
 
 app.use(express.json());
 
-const user = require('./routes/user')
+const user = require('./routes/user');
+const e = require('express');
 
 // MIDDLEWARE
 app.use(morgan('dev'))
@@ -51,7 +49,12 @@ app.use(passport.session()) // calls the deserializeUser
 // Routes
 app.use('/user', user)
 
-
+const roles = {
+    admin: 3,
+    plus: 2,
+    student: 1,
+    guest: 0
+}
 //=============
 //===APP=======
 //=============
@@ -96,14 +99,14 @@ app.post("/cards/edit/:id", (req, res)=>{
     })
 })
 
-app.get("/cards", (req, res)=> {
+app.get("/cards", authenticated, (req, res)=> {
 
     phonicCard.find()
     .then((cards)=> res.json(cards))
     .catch(err=> res.status(400).json(`Error: ${err}`))
 })
 
-app.get("/users", (req, res)=> {
+app.get("/users", authenticated, (req, res)=> {
 
     User.find()
     .then((users)=> res.json(users))
@@ -121,8 +124,20 @@ app.delete("/cards/:id", (req, res)=> {
     .catch(err=> res.status(400).json(`Error: ${err}`))
 })
 
-
-
+function authenticated (req, res, next) {
+    if(req.isAuthenticated()){
+        User.findOne(req.user._id, (err, userInfo)=> {
+            console.log("USER INFO :" + userInfo) 
+            if(userInfo.role >= 4){
+                return next();
+            } else {
+                console.log("No access")
+            }
+        })
+       
+       
+    }
+}
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

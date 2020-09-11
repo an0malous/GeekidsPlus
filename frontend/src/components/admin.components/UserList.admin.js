@@ -55,7 +55,7 @@ export default class UserList extends React.Component {
                     </a>
                 </div>
                 <div className="ui relaxed divided list">
-                    {this.state.users !== [] ? this.state.users.map((user)=>(
+                    {this.state.users.length > 0 ? this.state.users.map((user)=>(
                         <div className="item">
                             <i className="large github middle aligned icon">asd</i>
                             <div className="content">

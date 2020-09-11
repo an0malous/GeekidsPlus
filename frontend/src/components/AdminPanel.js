@@ -12,16 +12,22 @@ import AddCard from './admin.components/AddCard.admin';
 import { Tabbar } from './admin.components/Tabbar';
 
 export default class AdminPanel extends React.Component {
-
+    constructor(props){
+        super(props)
+    }
+    componentDidMount (){
+        this.props.handleSetOverlay();
+      };
+    
     render(){
         
         return(
+       
             <div style={{background: "rgba(255, 255, 255, 0.85)"}} className="ui center aligned container">
                 <div className="ui grid">
                     <Sidebar />
                     <div class="twelve wide stretched column">
                         <div class="ui segment">
-               
                   <Switch>
                             <Route exact path="/admin/cards" >
                                 <Tabbar />
@@ -50,6 +56,7 @@ export default class AdminPanel extends React.Component {
                     </div>
                 </div>
             </div>
+          
         )
     }
 } 

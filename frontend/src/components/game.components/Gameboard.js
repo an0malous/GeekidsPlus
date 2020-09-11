@@ -55,28 +55,27 @@ export default class Gameboard extends React.Component {
             )
         }
         return (
-            <div>
+            <div style={{height: "100%"}} classNames="ui grid middle aligned">
                 <div style={{background: "orange", border: "solid black 1px", borderRadius: 15}} className="ui horizontal segments">
-                <div style={{border: "solid black 0px", borderRadius: 15, background: "orange"}} className="ui segment">
-                    {this.props.inSession && <Timer />}
-                </div>
-                <div style={{background: "#333333"}} className="ui segment">
-                    <button className="ui button" onClick={this.props.handleInit}>Start Game</button>
-                    <Thumbnail source={this.props.currentImg} standardWidth="150px" standardHeight="100px" />
-                
-                </div>
-                <div style={{background: "orange", border: "solid black 0px", borderRadius: 15}}className="ui segment">
-                    {this.props.inSession && <Button label='Helper' handler={this.props.handleOnHelperClick} />}
-                </div>
-            </div>
-
+                    <div style={{border: "solid black 0px", borderRadius: 15, background: "orange"}} className="ui segment">
+                        {this.props.inSession && <Timer />}
+                    </div>
+                    <div style={{background: "#333333"}} className="ui segment">
+                        <button className="ui button" onClick={this.props.handleInit}>Start Game</button>
+                        <Thumbnail source={this.props.currentImg} standardWidth="150px" standardHeight="100px" />
+                    
+                    </div>
+                    <div style={{background: "orange", border: "solid black 0px", borderRadius: 15}}className="ui segment">
+                        {this.props.inSession && <Button label='Helper' handler={this.props.handleOnHelperClick} />}
+                    </div>
+                    </div>
 {this.props.inSession && 
     <Interact checkCorrect={ this.checkCorrect }>
         <Dropzone dropzoneWord={this.props.dropzoneWord} />
         <Alphabet alphabet={this.props.alphabet} />
     </Interact>}
-    </div>
     
+    </div>
         )
     }
 }
