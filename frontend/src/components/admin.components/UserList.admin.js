@@ -10,7 +10,7 @@ export default class UserList extends React.Component {
     }
 
     componentDidMount(){
-        axios.get("http://localhost:3000/users")
+        axios.get("/admin/users")
         .then(response=>{
             this.setState({users: response.data})
             console.log('login response: ')
@@ -34,7 +34,7 @@ export default class UserList extends React.Component {
     }
 
     deleteItem = (id) => {
-        axios.delete("http://localhost:3000/users/" + id)
+        axios.delete("admin//users/" + id)
         .then((res)=>console.log(res.data),  window.location = "/admin/users")
         .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
     }

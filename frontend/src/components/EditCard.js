@@ -20,7 +20,7 @@ export default class EditCard extends React.Component {
     }
 
     componentDidMount () {
-        axios.get("http://localhost:3000/cards/edit/" + this.props.match.params.id)
+        axios.get("/admin/cards/edit/" + this.props.match.params.id)
         .then((res)=>{
             this.setState({
                 name: res.data.name,

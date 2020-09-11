@@ -29,7 +29,7 @@ export default class AddCard extends React.Component {
             img: this.state.img,
             audio: this.state.audio
         }
-        axios.post("http://localhost:3000/cards/add", newCard)
+        axios.post("/admin/cards/add", newCard)
         .then((res)=>console.log(`Post request Sent ${res.data}`), window.location = "/cards")
         .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
     }

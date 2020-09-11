@@ -20,7 +20,7 @@ export default class EditCardNew extends React.Component {
     }
 
     componentDidMount () {
-        axios.get("http://localhost:3000/admin/edit/" + this.props.id)
+        axios.get("/admin/cards/edit/" + this.props.id)
         .then((res)=>{
             this.setState({
                 name: res.data.name,
@@ -42,7 +42,7 @@ export default class EditCardNew extends React.Component {
             img: this.state.img,
             audio: this.state.audio
         }
-        axios.post("http://localhost:3000/cards/edit/" + this.props.id, editedCard)
+        axios.post("/admin/cards/edit/" + this.props.id, editedCard)
         .then((res)=>console.log(`Post request Sent ${res.data}`), window.location = "/cards")
         .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
     }
