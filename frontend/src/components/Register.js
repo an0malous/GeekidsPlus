@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../api";
+import api from "./api";
 
 export default class Register extends React.Component {
   constructor(props) {

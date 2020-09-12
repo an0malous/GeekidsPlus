@@ -4,9 +4,6 @@ import axios from 'axios'
 import { PrivateRoute } from './components/PrivateRoute';
 import { Navbar } from './components/Navbar';
 import Game from './Game'
-import adminPanel from './components/AdminPanel';
-import AddCard from './components/AddCard';
-import EditCard from './components/EditCard'
 import { Landing } from './components/Landing'
 import Register from './components/Register'
 import Login from './components/Login'

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Switch, Route } from 'react-router-dom'
 import Announcments from './admin.components/Announcments.admin';
 import UserList from './admin.components/UserList.admin';

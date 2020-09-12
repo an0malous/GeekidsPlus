@@ -1,10 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+import api from '../api';
+import { Redirect } from 'react-router-dom';
 
 export default class AddCard extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+            redirectTo: false,
             name: '',
             type: '',
             letter: '',
@@ -13,57 +15,46 @@ export default class AddCard extends React.Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onNameChange = this.onNameChange.bind(this);
-        this.onTypeChange = this.onTypeChange.bind(this);
-        this.onLetterChange = this.onLetterChange.bind(this);
-        this.onImgChange = this.onImgChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    onSubmit = (event) =>{
+    onSubmit = async event =>{
         event.preventDefault();
-        const newCard = {
-
-            name: this.state.name,
-            type: this.state.type,
-            letter: this.state.letter,
-            img: this.state.img,
-            audio: this.state.audio
-        }
-        axios.post("/admin/cards/add", newCard)
-        .then((res)=>console.log(`Post request Sent ${res.data}`), window.location = "/cards")
-        .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
+        const {name, type, letter, img, audio} = this.state;
+        if( name, type, letter, img){
+            try {
+                const payload = {name, type, letter, img, audio}
+                const res = await api.createCard(payload);
+                console.log(`Post request Sent ${res.data}`);
+                this.setState({redirectTo: true})
+            } catch (err){
+                console.log(`Sorry, the request could not be made. Error: ${err}`);
+            }
+        }  
     }
 
-    onNameChange =(event) =>{
-        
-        this.setState({name: event.target.value })
+    onChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
     }
-
-    onTypeChange = (event) => {
-      
-        this.setState({type: event.target.value })
-    }
-
-    onLetterChange = (event) => {
-     
-        this.setState({letter: event.target.value })
-    }
-
-    onImgChange = (event) => {
-        this.setState({img: event.target.value })
-    }
+    
     render(){
+        if(this.state.redirectTo){
+            return <Redirect to={{
+                pathname: "/admin/cards",
+                state: { from: this.props.location }
+              }} />
+        }
         return(
             <div>
                 <form className="ui form" onSubmit={this.onSubmit}>
                     <div className="field">
                         <label>Word Label</label>
-                        <input onSelect={this.onNameChange} type="text" name="name" placeholder="word name" />
+                        <input onSelect={this.onChange} type="text" name="name" placeholder="word name" />
                     </div>
                     <div className="two fields">
                         <div className="field">
                             <label>Type</label>
-                            <select onChange={this.onTypeChange} className="ui fluid dropdown">
+                            <select onChange={this.onChange} name="type" className="ui fluid dropdown">
                             <option value="" disabledSelect>Choose a Type</option>
                                 <option value="cvc">CVC</option>
                                 <option value="cvcAdd">CVC Add on</option>
@@ -72,7 +63,7 @@ export default class AddCard extends React.Component {
                         </div>
                         <div className="field">
                             <label>Letter</label>
-                            <select value={this.state.letter} onChange={this.onLetterChange} className="ui fluid dropdown">
+                            <select onChange={this.onChange} name="letter" className="ui fluid dropdown">
                                 <option value="" disabledSelect>Choose a Letter</option>
                                 <option value="a">a</option>
                                 <option value="e">e</option>
@@ -86,15 +77,9 @@ export default class AddCard extends React.Component {
                     </div>
                 
                 </div>
-
-
-
-
-
-
                     <div className="field">
                         <label>Image url</label>
-                        <input onChange={this.onImgChange}type="text" name="img" placeholder="image url" />
+                        <input onChange={this.onChange} type="text" name="img" placeholder="image url" />
                     </div>
                     <button className="ui button" type="submit">Submit</button>
                 </form>

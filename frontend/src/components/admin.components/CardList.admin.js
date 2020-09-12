@@ -1,47 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api';
+import { Redirect } from 'react-router-dom'
 import { DynamicListItem as ListItem } from './DynamicListItem'
 
-
-export default class CardList extends React.Component {
+export  default class CardList extends React.Component {
     constructor(props){
         super(props)
         this.state = {cards:[]}
         this.deleteItem = this.deleteItem.bind(this)
     }
 
-    componentDidMount(){
-        axios.get("/admin/cards")
-        .then(response=>{
-            this.setState({cards: response.data})
-            console.log('login response: ')
-            console.log(response)
-            if (response.status === 200) {
-                console.log(response.data.admin)
-                // update App.js state
-                this.props.updateUser({
-                    loggedIn: true,
-                    username: response.data.username,
-                    admin: response.data.admin
-                })
-                // update the state to redirect to home
-                
-            }
-        }).catch(error => {
-            console.log('login error: ')
-            console.log(error);
-            
-        })
+    getCards = async () => {
+        try{
+            const res = await api.getCards();
+            this.setState({cards: res.data})
+        } catch (err){
+            console.log(err);
+        } 
     }
 
-    deleteItem = (id) => {
-        axios.delete("/admin/cards/" + id)
-        .then((res)=>console.log(res.data),  window.location = "/admin/cards")
-        .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
+    componentDidMount(){
+        this.getCards();
+    }
+
+    deleteItem = async id => {
+        if(id){
+            try{
+                const res = await api.deleteCard(id)
+                console.log(res.data);  
+                this.getCards();
+            } catch(err){
+                console.log(`Sorry, the request could not be made. Error: ${err}`);
+            }
+        }
     }
 
     render(){
+
         return (
             <div>
                 <div className="ui relaxed divided list">
@@ -54,7 +49,6 @@ export default class CardList extends React.Component {
                         </thead>
                         {this.state.cards !== [] ? this.state.cards.map((card)=>(
                             <ListItem mappedItem={card} deleteItem={this.deleteItem} />
-                        
                     )) : null}
                     </table>
                 </div>

@@ -5,11 +5,7 @@ const phonicCard = require('../database/models/phonicCard')
 
 //Add a card
 router.post("/add", (req, res)=>{
-    const name = req.body.name;
-    const type = req.body.type;
-    const letter = req.body.letter;
-    const img = req.body.img;
-    const audio = req.body.audio;
+    const { name, type, letter, img, audio } = req.body;
 
     const newCard = new phonicCard({
         name,
