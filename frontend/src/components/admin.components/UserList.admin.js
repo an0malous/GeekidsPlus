@@ -34,7 +34,7 @@ export default class UserList extends React.Component {
     }
 
     deleteItem = (id) => {
-        axios.delete("admin//users/" + id)
+        axios.delete("/admin/users/" + id)
         .then((res)=>console.log(res.data),  window.location = "/admin/users")
         .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
     }
@@ -42,7 +42,6 @@ export default class UserList extends React.Component {
     render(){
         return (
             <div>
-                 
                 <div className="ui tabular menu">
                     <a className="item active">
                                 All Users
@@ -50,9 +49,9 @@ export default class UserList extends React.Component {
                     <a className="item">
                              Filter Users
                     </a>
-                    <a className="item">
-                             Add a User
-                    </a>
+                    <div className="item">
+                             <Link to="/admin/users/add">Add a User</Link>
+                    </div>
                 </div>
                 <div className="ui relaxed divided list">
                     {this.state.users.length > 0 ? this.state.users.map((user)=>(
@@ -61,7 +60,7 @@ export default class UserList extends React.Component {
                             <div className="content">
                                 <Link to={`/admin/users/${user._id}`}>{user.username}</Link> 
                                 <div className="description">
-                                <Link to={`/admin/edit/users/${user._id}`}>Edit</Link> |<a onClick={()=>{this.deleteItem(user._id)}}>Delete</a> | Access level: {user.admin ? "Admin" : "User"}
+                                <Link to={`/admin/users/edit/${user._id}`}>Edit</Link> |<a onClick={()=>{this.deleteItem(user._id)}}>Delete</a> | Access level: {user.role}
                                 </div>
                             </div>
                         </div>

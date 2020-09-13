@@ -21,21 +21,22 @@ router.post("/add", (req, res)=>{
 
 // Edit a card
 router.get("/edit/:id", (req, res)=>{
-    phonicCard.findByIdAndUpdate(req.params.id)
+    phonicCard.findById(req.params.id)
     .then((card)=>res.json(card))
 })
 
 //Update a card
 router.post("/edit/:id", (req, res)=>{
-phonicCard.findById(req.params.id)
-.then((phonicCard)=>{
-    phonicCard.name = req.body.name;
-    phonicCard.type = req.body.type;
-    phonicCard.letter = req.body.letter;
-    phonicCard.img = req.body.img;
-    phonicCard.audio = req.body.audio;
+phonicCard.findByIdAndUpdate(req.params.id)
+.then((card)=>{
+    const { name, type, letter, img, audio } = req.body
+    card.name = name;
+    card.type = type;
+    card.letter = letter;
+    card.img = img;
+    card.audio = audio;
 
-    phonicCard.save()
+    card.save()
     .then(()=>res.json('Card updated:' + phonicCard))
     .catch((err)=>req.json(`Sorry, ${err}`))
 })

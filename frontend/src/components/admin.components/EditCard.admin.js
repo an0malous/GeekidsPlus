@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import api from '../api';
 import { Redirect } from 'react-router-dom';
 
@@ -47,7 +46,7 @@ export default class EditCardNew extends React.Component {
                     img,
                     audio
                 }
-                const res = await api.updateCard(this.props.id, payload)
+                await api.updateCard(this.props.id, payload)
                 this.setState({redirect: true});
             } catch (err){
                 console.log(err)
