@@ -1,6 +1,5 @@
 import React from 'react';
 import api from '../api';
-import { Redirect } from 'react-router-dom'
 import { DynamicListItem as ListItem } from './DynamicListItem'
 
 export  default class CardList extends React.Component {
