@@ -26,7 +26,7 @@ router.get("/edit/:id", (req, res)=>{
 })
 
 //Update a card
-router.post("/edit/:id", (req, res)=>{
+router.post("/edit/:id", authenticated, (req, res)=>{
 phonicCard.findByIdAndUpdate(req.params.id)
 .then((card)=>{
     const { name, type, letter, img, audio } = req.body

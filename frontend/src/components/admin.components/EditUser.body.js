@@ -18,7 +18,7 @@ export const EditUserBody = (props) => {
                         <option value="" disabledSelect>Choose a Role</option>
                             <option value="2">Student</option>
                             <option value="3">Plus</option>
-                            <option  alue="4">Admin</option>
+                            <option value="4">Admin</option>
                         </select>
                     </div>
                 <button className="ui button" type="submit">Create User</button>

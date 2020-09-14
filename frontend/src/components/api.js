@@ -15,5 +15,5 @@ api.updateCard = (id, payload) => axios.post("/admin/cards/edit/" + id, payload)
 api.createUser = payload => axios.post('/admin/users/add', payload);
 api.editUser = id => axios.get('/admin/users/edit/' + id);
 api.updateUser = (id, payload) => axios.post('/admin/users/edit/' + id, payload);
-
+api.getUsers = () =>  axios.get("/admin/users");
 export default api

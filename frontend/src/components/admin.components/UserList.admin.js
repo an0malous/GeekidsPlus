@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import api from '../api';
 
 export default class UserList extends React.Component {
     constructor(props){
@@ -10,33 +11,21 @@ export default class UserList extends React.Component {
     }
 
     componentDidMount(){
-        axios.get("/admin/users")
-        .then(response=>{
-            this.setState({users: response.data})
-            console.log('login response: ')
-            console.log(response)
-            if (response.status === 200) {
-                console.log(response.data.admin)
-                // update App.js state
-                this.props.updateUser({
-                    loggedIn: true,
-                    username: response.data.username,
-                    admin: response.data.admin
-                })
-                // update the state to redirect to home
-                
-            }
-        }).catch(error => {
-            console.log('login error: ')
-            console.log(error);
-            
-        })
+      this.getUsers()
     }
 
+    async getUsers(){
+        try {
+        const res = await api.getUsers();
+        this.setState({users: res.data})
+        } catch (err){
+            console.log(err)
+        }
+    }
     deleteItem = (id) => {
         axios.delete("/admin/users/" + id)
-        .then((res)=>console.log(res.data),  window.location = "/admin/users")
-        .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`));
+        .then((res)=>this.getUsers())
+        .catch((err)=>console.log(`Sorry, the request could not be made. Error: ${err}`))
     }
 
     render(){
