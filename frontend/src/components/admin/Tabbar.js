@@ -10,9 +10,7 @@ export const Tabbar = (props) => {
                         <a className="item">
                             All Decks
                         </a>
-                        <a className="item">
-                             Add a Deck
-                        </a>
+                        <Link className="item" to="/admin/decks/add">Add a Deck</Link>
                 </div>
         </div>
     )
