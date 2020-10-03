@@ -1,4 +1,4 @@
-import api from "./components/api";
+import api from "./pages/api";
 
 class Auth {
   constructor() {

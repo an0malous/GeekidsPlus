@@ -1,10 +1,10 @@
 import React from "react";
-import { shuffle } from "./utils.js";
-import Gameboard from "./components/game.components/Gameboard";
+import { shuffle } from "../../utils.js";
+import Gameboard from "./components/Gameboard";
 import axios from "axios";
 import { Route, Switch } from "react-router-dom";
-import { SelectGameType } from "./components/game.components/SelectGameType";
-import { SelectGameLevel } from './components/game.components/SelectGameLevel'
+import { SelectGameType } from "./components/SelectGameType";
+import { SelectGameLevel } from './components/SelectGameLevel'
 export default class Game extends React.Component {
   constructor(props) {
     super(props);

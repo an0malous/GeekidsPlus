@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import api from '../api';
-import { EditUserBody } from './EditUser.body';
+import api from '../../api';
+import { UserForm } from './UserForm';
 
 export default class AddUser extends React.Component {
     constructor(props){
@@ -37,7 +37,7 @@ export default class AddUser extends React.Component {
         
     render () {
         return (
-        <EditUserBody username={this.state.username} password={this.state.password} role={this.state.role} handleOnChange={this.handleOnChange} onSubmit={this.onSubmit} />
+        <UserForm username={this.state.username} password={this.state.password} role={this.state.role} handleOnChange={this.handleOnChange} onSubmit={this.onSubmit} />
         )
     }
 }

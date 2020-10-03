@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const EditUserBody = (props) => {
+export const UserForm = (props) => {
     return(
         <div>
             <form className="ui form" onSubmit={props.onSubmit}>

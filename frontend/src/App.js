@@ -2,12 +2,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios'
 import { PrivateRoute } from './components/PrivateRoute';
-import { Navbar } from './components/Navbar';
-import Game from './Game'
-import { Landing } from './components/Landing'
-import Register from './components/Register'
-import Login from './components/Login'
-import AdminPanel from './components/AdminPanel';
+import { Navbar } from './Navbar';
+import Game from './pages/phonics-game/Game'
+import { Landing } from './pages/landing/Landing'
+import Register from './pages/register/Register'
+import Login from './pages/login/Login'
+import AdminDashboard from './pages/admin-dashboard/AdminDashboard';
 import auth from './auth';
 export default class App extends React.Component {
   constructor(props){
@@ -55,7 +55,7 @@ export default class App extends React.Component {
           <Route exact path="/register" admin={this.state.role} exact component={Register} />
           <Route exact path="/login" render={()=><Login updateUser={this.updateUser} />} />
           <Route exact path="/phonics" render={()=><Game handleSetOverlay={this.handleSetOverlay} /> } />
-          <PrivateRoute path="/admin" component={AdminPanel} role={this.state.role} loggedIn={this.state.loggedIn} accessLevel={4} handleSetOverlay={this.handleSetOverlay} />
+          <PrivateRoute path="/admin" component={AdminDashboard} role={this.state.role} loggedIn={this.state.loggedIn} accessLevel={4} handleSetOverlay={this.handleSetOverlay} />
         </div>
       </div>
     );

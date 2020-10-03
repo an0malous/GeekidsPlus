@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Annoucnments extends React.Component {
+export class AnnouncmentsIndex extends React.Component {
     constructor(props){
         super(props)
     }

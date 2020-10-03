@@ -1,6 +1,6 @@
 import React from 'react'
-import api from '../api';
-import { EditUserBody } from './EditUser.body';
+import api from '../../api';
+import { UserForm } from './UserForm';
 import { Redirect } from 'react-router-dom';
 
 export default class EditUser extends React.Component {
@@ -53,7 +53,7 @@ if(this.state.redirect){
         )
         }
         return (
-            <EditUserBody username={this.state.username} password={this.state.password} role={this.state.role} handleOnChange={this.handleOnChange} onSubmit={this.onSubmit} />
+            <UserForm username={this.state.username} password={this.state.password} role={this.state.role} handleOnChange={this.handleOnChange} onSubmit={this.onSubmit} />
         )
     };
 };

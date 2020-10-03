@@ -1,8 +1,8 @@
 import React from 'react';
-import api from '../api';
+import api from '../../api';
 import { Redirect } from 'react-router-dom';
 
-export default class EditCardNew extends React.Component {
+export default class EditCard extends React.Component {
     constructor(props){
         super(props)
         this.state = {
