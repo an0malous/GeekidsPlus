@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../api';
 import { Redirect } from 'react-router-dom';
-
+import { CardForm } from './CardForm'
 export default class AddCard extends React.Component {
     constructor(props){
         super(props)
@@ -15,7 +15,7 @@ export default class AddCard extends React.Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     onSubmit = async event =>{
@@ -33,7 +33,7 @@ export default class AddCard extends React.Component {
         }  
     }
 
-    onChange = (event) => {
+    handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value})
     }
     
@@ -44,46 +44,16 @@ export default class AddCard extends React.Component {
                 state: { from: this.props.location }
               }} />
         }
-        return(
-            <div>
-                <form className="ui form" onSubmit={this.onSubmit}>
-                    <div className="field">
-                        <label>Word Label</label>
-                        <input onSelect={this.onChange} type="text" name="name" placeholder="word name" />
-                    </div>
-                    <div className="two fields">
-                        <div className="field">
-                            <label>Type</label>
-                            <select onChange={this.onChange} name="type" className="ui fluid dropdown">
-                            <option value="" disabledSelect>Choose a Type</option>
-                                <option value="cvc">CVC</option>
-                                <option value="cvcAdd">CVC Add on</option>
-                                <option value="blends">Blends</option>
-                            </select>
-                        </div>
-                        <div className="field">
-                            <label>Letter</label>
-                            <select onChange={this.onChange} name="letter" className="ui fluid dropdown">
-                                <option value="" disabledSelect>Choose a Letter</option>
-                                <option value="a">a</option>
-                                <option value="e">e</option>
-                                <option value="i">i</option>
-                                <option value="o">o</option>
-                                <option value="u">u</option>
-                                <option value="y">y</option>
-                            </select>
-                            
-                    
-                    </div>
-                
-                </div>
-                    <div className="field">
-                        <label>Image url</label>
-                        <input onChange={this.onChange} type="text" name="img" placeholder="image url" />
-                    </div>
-                    <button className="ui button" type="submit">Submit</button>
-                </form>
-            </div>
+        return (
+          <CardForm
+          btnText="Create Card"
+          handleChange={this.handleChange}
+          onSubmit={this.onSubmit}            
+          name={this.state.name}
+          type={this.state.type}
+          letter={this.state.letter}
+          img={this.state.img}
+          audio={this.state.audio} />
         )
     }
 }

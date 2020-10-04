@@ -30,18 +30,7 @@ export default class UserList extends React.Component {
 
     render(){
         return (
-            <div>
-                <div className="ui tabular menu">
-                    <a className="item active">
-                                All Users
-                    </a>
-                    <a className="item">
-                             Filter Users
-                    </a>
-                    <div className="item">
-                             <Link to="/admin/users/add">Add a User</Link>
-                    </div>
-                </div>
+        
                 <div className="ui relaxed divided list">
                     {this.state.users.length > 0 ? this.state.users.map((user)=>(
                         <div className="item">
@@ -55,7 +44,6 @@ export default class UserList extends React.Component {
                         </div>
                     )) : null}
                 </div>
-            </div>
         )
     }  
 }

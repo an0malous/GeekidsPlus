@@ -6,6 +6,7 @@ import { DecksIndex as DeckSection } from './decks-section/DecksIndex';
 import { AnnouncmentsIndex as AnnouncmentSection } from './announcments-section/AnnouncmentsIndex';
 import { ScoreboardIndex as ScoreboardSection } from './scoreboard-section/ScoreboardIndex';
 import { Link } from 'react-router-dom';
+import { Tabbar } from '../../components/admin-dashboard/Tabbar'
 
 export default class AdminDashboard extends React.Component {
   constructor(props) {
@@ -24,22 +25,19 @@ export default class AdminDashboard extends React.Component {
         <div className="ui grid" style={{marginTop: '0rem'}}>
           <div class="four wide column">
             <div class="ui vertical fluid tabular menu">
-              <Link to="/admin/cards" className="item nav-link active">Cards</Link>
-              <Link to="/admin/users" className="item nav-link">Users</Link>
-              <Link to="/admin/announcments" className="item nav-link">Announcments</Link>
-              <Link to="/admin/scoreboard" className="item nav-link">Scoreboard</Link>
+            <Tabbar base={'/admin/'} classNames={"item nav-link"}tabs={[{name: "Cards", route: "cards"}, {name: "Users", route: "users"},{name: "Announcments", route: "announcments"}, {name: "Scoreboard", route: "scoareboard"}]}  />
             </div>
           </div>
           <div class="twelve wide stretched column">
             <div class="ui segment">
             <Switch>
-              <Route exact path="/admin/cards">
+              <Route path="/admin/cards">
                 <CardSection />
               </Route>
-              <Route exact path="/admin/users">
+              <Route path="/admin/users">
                 <UserSection />
               </Route>
-              <Route exact path="/admin/decks">
+              <Route path="/admin/decks">
                 <DeckSection />
               </Route>
               <Route path="/admin/announcments">
