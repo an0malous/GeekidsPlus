@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Landing = ({ updateUser, admin, handleSetOverlay }) => {
-
+export const Landing = (props) => {
+  
     return (
         <div>
             <div style={{

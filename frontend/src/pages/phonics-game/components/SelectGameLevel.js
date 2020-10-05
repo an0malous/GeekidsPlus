@@ -19,6 +19,7 @@ export const SelectGameLevel = (props) => {
         className="ui segment"
       >
         <div>InitSounds-Bronze</div>
+        </div>
         <div
           style={{
             fontSize: "2rem",
@@ -46,6 +47,7 @@ export const SelectGameLevel = (props) => {
           className="ui segment"
         >
           <div>CVC with simple Blends - gold</div>
+          </div>
           <div
             style={{
               fontSize: "2rem",
@@ -61,7 +63,6 @@ export const SelectGameLevel = (props) => {
             <div>CVC with difficult Blends - platnium</div>
           </div>
         </div>
-      </div>
-    </div>
+    
   );
 };

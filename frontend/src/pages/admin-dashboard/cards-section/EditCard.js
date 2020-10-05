@@ -15,7 +15,7 @@ export default class EditCard extends React.Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     async componentDidMount () {
@@ -55,7 +55,7 @@ export default class EditCard extends React.Component {
         };
     }
 
-    onChange = event => { 
+    handleChange = event => { 
         this.setState({[event.target.name]: event.target.value })
     }
 
@@ -71,14 +71,14 @@ export default class EditCard extends React.Component {
         return(
         
             <CardForm
-            btnText="Update Card"
-            handleChange={this.handleChange}
-            onSubmit={this.onSubmit}            
-            name={this.state.name}
-            type={this.state.type}
-            letter={this.state.letter}
-            img={this.state.img}
-            audio={this.state.audio} />
+                btnText="Update Card"
+                handleChange={this.handleChange}
+                onSubmit={this.onSubmit}            
+                name={this.state.name}
+                type={this.state.type}
+                letter={this.state.letter}
+                img={this.state.img}
+                audio={this.state.audio} />
           )
     }
 }

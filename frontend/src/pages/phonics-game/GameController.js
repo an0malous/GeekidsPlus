@@ -2,16 +2,20 @@ import React from "react";
 import { shuffle } from "../../utils.js";
 import Gameboard from "./components/Gameboard";
 import axios from "axios";
-import { Route, Switch } from "react-router-dom";
-import { SelectGameType } from "./components/SelectGameType";
+import { SelectGameType } from './components/SelectGameType'
 import { SelectGameLevel } from './components/SelectGameLevel'
-export default class Game extends React.Component {
+import { SelectGameMode } from './components/SelectGameMode'
+import { Switch, Route } from 'react-router-dom'
+export default class GameController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       alphabet: 0,
       dropzoneWord: "",
       currentImg: "",
+      gameType: '',
+      gameLevel: '',
+      gameMode: '',
       displayNextRoundButton: false,
       displayDifficultWords: false,
     };
@@ -22,13 +26,10 @@ export default class Game extends React.Component {
     this.handleOnNextRound = this.handleOnNextRound.bind(this);
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
   }
-  componentDidMount(){
-    this.props.handleSetOverlay();
-  }
 
   async loadWords () {
     try {
-        const response = await axios.get("http://localhost:3000/cards")
+        const response = await axios.get("http://localhost:3000/admin/cards")
         console.log(response.data)
         this.currentWords = response.data;
       } catch (err) {
@@ -129,8 +130,8 @@ export default class Game extends React.Component {
 
     return (
   
-      <div className="ui center aligned container">
-              <Gameboard
+      <div style={{marginTop: "-1rem"}} className="ui center aligned container">
+              this.state.inSession ? (<Gameboard
                 inSession={this.inSession}
                 dropzoneWord={this.state.dropzoneWord}
                 displayNextRoundButton={this.state.displayNextRoundButton}
@@ -140,7 +141,19 @@ export default class Game extends React.Component {
                 alphabet={this.state.alphabet}
                 handleOnHelperClick={this.handleOnHelperClick}
                 currentImg={this.state.currentImg}
-              />
+              />) : (
+                <Switch>
+            <Route exact path="/phonics">
+                <SelectGameType />
+            </Route>
+            <Route exact path="/phonics/select-level">
+                <SelectGameLevel />
+            </Route>
+            <Route exact path="/phonics/mode">
+                <SelectGameMode />
+            </Route>
+        </Switch>
+              )
         </div>
 
     )

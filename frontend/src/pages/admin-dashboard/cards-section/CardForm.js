@@ -15,9 +15,9 @@ export function CardForm({
         <div className="field">
           <label>Word Label</label>
           <input
-            onSelect={handleChange}
+            onChange={handleChange}
             type="text"
-            name={name}
+            name="name"
             value={name}
             placeholder="word name"
           />
@@ -27,7 +27,7 @@ export function CardForm({
             <label>Type</label>
             <select
               onChange={handleChange}
-              name={type}
+              name="type"
               value={type}
               className="ui fluid dropdown"
             >
@@ -43,7 +43,7 @@ export function CardForm({
             <label>Letter</label>
             <select
               onChange={handleChange}
-              name={letter}
+              name="letter"
               className="ui fluid dropdown"
               value={letter}
             >
@@ -64,7 +64,7 @@ export function CardForm({
           <input
             onChange={handleChange}
             type="text"
-            name={img}
+            name="img"
             value={img}
             placeholder="image url"
           />

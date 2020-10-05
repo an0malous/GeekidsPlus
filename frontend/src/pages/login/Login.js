@@ -31,7 +31,7 @@ export default class Login extends React.Component {
     render(){
         return (
             this.state.redirectTo ? (<Redirect to="/" />) : (
-            <div>
+            <div className="ui container aligned center">
                 <form className="ui form">
                     <div className="field">
                         <label>Username</label>

@@ -12,15 +12,12 @@ export default class AdminDashboard extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.props.handleSetOverlay();
-  }
 
   render() {
     return (
       <div
-        style={{ background: "rgba(255, 255, 255, 0.85)" }}
-        className="ui center aligned container"
+        style={{ background: "rgba(45, 45, 45, 0.85)" }}
+        className="ui center aligned container rounded-corners"
       >
         <div className="ui grid" style={{marginTop: '0rem'}}>
           <div class="four wide column">
@@ -29,7 +26,7 @@ export default class AdminDashboard extends React.Component {
             </div>
           </div>
           <div class="twelve wide stretched column">
-            <div class="ui segment">
+            <div style={{background: "#666"}} class="ui segment">
             <Switch>
               <Route path="/admin/cards">
                 <CardSection />

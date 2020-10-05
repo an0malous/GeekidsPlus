@@ -1,0 +1,13 @@
+#select1 {
+    background: orange;
+}
+#select2 {
+    background: orange;
+}
+#select1:hover {
+    background: rgb(105, 69, 3)
+}
+
+#select2:hover {
+    background: rgb(7, 218, 182)
+}

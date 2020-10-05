@@ -7,7 +7,7 @@ export const Navbar = ({ username, loggedIn, updateUser, role }) => {
     return (
         
         <div>
-            <div style={{background: "rgba(0,0,0,0.7)"}} className="ui pointing menu">
+            <div style={{background: "rgba(230, 152, 18,0.85)", color: "black"}} className="ui pointing menu">
                 <a className="active item">
                 <Link to={"/"} className="nav-link">Home</Link>
                 </a>
