@@ -10,6 +10,7 @@ export default class GameController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      inSession: false,
       alphabet: 0,
       dropzoneWord: "",
       currentImg: "",
@@ -131,7 +132,7 @@ export default class GameController extends React.Component {
     return (
   
       <div style={{marginTop: "-1rem"}} className="ui center aligned container">
-              this.state.inSession ? (<Gameboard
+              {this.state.inSession ? (<Gameboard
                 inSession={this.inSession}
                 dropzoneWord={this.state.dropzoneWord}
                 displayNextRoundButton={this.state.displayNextRoundButton}
@@ -154,6 +155,7 @@ export default class GameController extends React.Component {
             </Route>
         </Switch>
               )
+              }
         </div>
 
     )

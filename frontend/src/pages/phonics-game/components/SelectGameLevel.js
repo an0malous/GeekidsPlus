@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export const SelectGameLevel = (props) => {
   return (
@@ -18,7 +19,7 @@ export const SelectGameLevel = (props) => {
         }}
         className="ui segment"
       >
-        <div>InitSounds-Bronze</div>
+        <Link to="/phonics/select-mode">InitSounds-Bronze</Link>
         </div>
         <div
           style={{
@@ -32,7 +33,7 @@ export const SelectGameLevel = (props) => {
           }}
           className="ui segment"
         >
-          <div>CVC- silver</div>
+          <Link to="/phonics/select-mode">CVC- silver</Link>
         </div>
         <div
           style={{
@@ -46,7 +47,7 @@ export const SelectGameLevel = (props) => {
           }}
           className="ui segment"
         >
-          <div>CVC with simple Blends - gold</div>
+          <Link to="phonics/select-mode">CVC with simple Blends - gold</Link>
           </div>
           <div
             style={{
@@ -60,7 +61,7 @@ export const SelectGameLevel = (props) => {
             }}
             className="ui segment"
           >
-            <div>CVC with difficult Blends - platnium</div>
+            <Link to="phonics/select-mode">CVC with difficult Blends - platnium</Link>
           </div>
         </div>
     

@@ -22,6 +22,6 @@ export function SelectGameMode(props) {
                 <option value="sh">sh</option>
             </select>
             )
-        </div>
+        }</div>
     )
 }
