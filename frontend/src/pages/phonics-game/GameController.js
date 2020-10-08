@@ -12,8 +12,8 @@ export default class GameController extends React.Component {
     this.state = {
       inSession: false,
       alphabet: 0,
-      dropzoneWord: "",
-      currentImg: "",
+      dropzoneWord: [],
+      currentImg: '',
       gameType: '',
       gameLevel: '',
       gameMode: '',
@@ -28,11 +28,13 @@ export default class GameController extends React.Component {
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
   }
 
-  async loadWords () {
+  async loadWords (letter) {
     try {
+      console.log(letter)
         const response = await axios.get("http://localhost:3000/admin/cards")
         console.log(response.data)
-        this.currentWords = response.data;
+        this.currentWords = response.data.filter(words=>words.letter === letter)
+ 
       } catch (err) {
         console.log(err)
       }
@@ -75,6 +77,7 @@ export default class GameController extends React.Component {
     this.setState({
       dropzoneWord: [...this.currentWords[this.currentWordsIndexCounter].name]
     });
+    console.log(this.state.dropzoneWord + " INSIDE DROPZONE DATA")
   }
 
   setCurrentImgData() {
@@ -86,8 +89,9 @@ export default class GameController extends React.Component {
 
   //-- Game Controller Logic --\\
 
-  async roundStart () {
-    await this.loadWords();
+  async roundStart (letter) {
+    await this.loadWords(letter);
+    console.log("INSIDE ROUND START")
     this.setDropzoneData();
     this.setAlphabetData();
     this.setCurrentImgData();
@@ -97,15 +101,17 @@ export default class GameController extends React.Component {
     this.currentWordsIndexCounter = this.currentWordsIndexCounter + 1;
   };
 
-  init = () => {
+  init (letter) {
+    this.setState({inSession: true})
     this.lettersCorrectCounter = 0;
-    this.roundStart();
-    this.inSession = !this.inSession;
+    
+    this.roundStart(letter);
+   
   };
 
   //-- React Handlers --\\
-  handleInit = () => {
-    this.init();
+  handleInit = (letter) => {
+    this.init(letter);
   };
 
   handleOnNextRound = () => {
@@ -150,8 +156,8 @@ export default class GameController extends React.Component {
             <Route exact path="/phonics/select-level">
                 <SelectGameLevel />
             </Route>
-            <Route exact path="/phonics/mode">
-                <SelectGameMode />
+            <Route exact path="/phonics/select-mode">
+                <SelectGameMode  init={this.handleInit} />
             </Route>
         </Switch>
               )

@@ -54,8 +54,10 @@ export default class Gameboard extends React.Component {
         </div>
       );
     }
+    console.log(this.props.dropzoneWord)
     return (
-      <div style={{ height: "100%" }} classNames="ui grid middle aligned">
+
+      <div style={{ height: "100%" }} className="ui grid center aligned container">
         <div
           style={{
             background: "orange",
@@ -75,9 +77,6 @@ export default class Gameboard extends React.Component {
             <Timer />
           </div>
           <div style={{ background: "#333333" }} className="ui segment">
-            <button className="ui button" onClick={this.props.handleInit}>
-              Start Game
-            </button>
             <Thumbnail
               source={this.props.currentImg}
               standardWidth="150px"
@@ -93,13 +92,14 @@ export default class Gameboard extends React.Component {
             className="ui segment"
           >
             <Button label="Helper" handler={this.props.handleOnHelperClick} />
+            </div>
           </div>
           <Interact checkCorrect={this.checkCorrect}>
-            <Dropzone dropzo neWord={this.props.dropzoneWord} />
+            <Dropzone dropzoneWord={this.props.dropzoneWord} />
             <Alphabet alphabet={this.props.alphabet} />
           </Interact>
         </div>
-      </div>
+    
     );
   }
 }

@@ -2,7 +2,9 @@ import React from 'react';
 
 export function SelectGameMode(props) {
     return (
+        
         <div>
+        
         {props.gameLevel === "cvc" || "cvcAdd" ?
             (<select id="letter-selection">
                 <option value="" disabled selected>Letter</option>
@@ -13,7 +15,7 @@ export function SelectGameMode(props) {
                 <option value="o">short o</option>
                 <option value="u">short u</option>
             </select>) : (
-                <select>
+                <select id="letter-selection">
                 <option value="" disabled selected>Letter</option> 
                 <option value="ch" >ch</option>
                 <option value="ck">ck</option>
@@ -21,7 +23,11 @@ export function SelectGameMode(props) {
                 <option value="wh">wh</option>
                 <option value="sh">sh</option>
             </select>
-            )
-        }</div>
+           
+            )}
+            
+            <button onClick={()=>props.init(document.querySelector('#letter-selection').value)}>Start Game</button>
+        </div>
     )
+
 }
