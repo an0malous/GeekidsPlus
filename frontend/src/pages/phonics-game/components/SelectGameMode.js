@@ -1,13 +1,18 @@
 import React from 'react';
 
 export function SelectGameMode(props) {
+    console.log(props.gameLevel)
+    if(props.gameLevel === "initSounds"){
+        return props.init("random")          
+    }
+
     return (
-        
+       
         <div>
-        
-        {props.gameLevel === "cvc" || "cvcAdd" ?
+ 
+        {props.gameLevel === ('cvc' || 'cvcAdd') ?
             (<select id="letter-selection">
-                <option value="" disabled selected>Letter</option>
+                <option value="" disabled default>Letter</option>
                 <option value="random" >Random</option> 
                 <option value="a" >short a</option>
                 <option value="e">short e</option>
@@ -16,7 +21,7 @@ export function SelectGameMode(props) {
                 <option value="u">short u</option>
             </select>) : (
                 <select id="letter-selection">
-                <option value="" disabled selected>Letter</option> 
+                <option value="" disabled default>Letter</option> 
                 <option value="ch" >ch</option>
                 <option value="ck">ck</option>
                 <option value="th">th</option>

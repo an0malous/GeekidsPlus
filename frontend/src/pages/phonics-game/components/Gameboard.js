@@ -54,7 +54,7 @@ export default class Gameboard extends React.Component {
         </div>
       );
     }
-    console.log(this.props.dropzoneWord)
+
     return (
 
       <div style={{ height: "100%" }} className="ui grid center aligned container">

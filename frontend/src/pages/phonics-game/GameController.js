@@ -23,9 +23,10 @@ export default class GameController extends React.Component {
     this.currentWords = '';
     this.inSession = false;
     this.currentWordsIndexCounter = 0;
-    this.handleInit = this.handleInit.bind(this);
+    this.init = this.init.bind(this);
     this.handleOnNextRound = this.handleOnNextRound.bind(this);
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
+    this.setGameLevel = this.setGameLevel.bind(this);
   }
 
   async loadWords (letter) {
@@ -40,6 +41,10 @@ export default class GameController extends React.Component {
       }
   }
 
+  setGameLevel(level){
+    this.setState({gameLevel: level})
+    console.log("New game Level is " + this.state.gameLevel)
+  }
   setAlphabetData() {
     this.setState({
       alphabet: shuffle([
@@ -77,11 +82,9 @@ export default class GameController extends React.Component {
     this.setState({
       dropzoneWord: [...this.currentWords[this.currentWordsIndexCounter].name]
     });
-    console.log(this.state.dropzoneWord + " INSIDE DROPZONE DATA")
   }
 
   setCurrentImgData() {
-
     this.setState({
       currentImg: this.currentWords[this.currentWordsIndexCounter].img
     });
@@ -91,41 +94,39 @@ export default class GameController extends React.Component {
 
   async roundStart (letter) {
     await this.loadWords(letter);
-    console.log("INSIDE ROUND START")
     this.setDropzoneData();
     this.setAlphabetData();
     this.setCurrentImgData();
   };
 
   roundComplete = () => {
+    
     this.currentWordsIndexCounter = this.currentWordsIndexCounter + 1;
+    console.log(this.currentWordsIndexCounter)
   };
 
   init (letter) {
     this.setState({inSession: true})
     this.lettersCorrectCounter = 0;
-    
     this.roundStart(letter);
    
   };
 
   //-- React Handlers --\\
-  handleInit = (letter) => {
-    this.init(letter);
-  };
-
   handleOnNextRound = () => {
-    this.roundStart();
-    this.setState((state) => ({
-      displayNextRoundButton: !this.state.displayNextRoundButton,
-    }));
+    this.setDropzoneData();
+    this.setAlphabetData();
+    this.setCurrentImgData();
+    this.setState({
+      displayNextRoundButton: !this.state.displayNextRoundButton
+    });
   };
 
   handleOnFinalCheckCorrect = () => {
     this.roundComplete();
-    this.setState((state) => ({
+    this.setState({
       displayNextRoundButton: !this.state.displayNextRoundButton,
-    }));
+    });
   };
 
   handleOnHelperClick = () => {
@@ -154,10 +155,10 @@ export default class GameController extends React.Component {
                 <SelectGameType />
             </Route>
             <Route exact path="/phonics/select-level">
-                <SelectGameLevel />
+                <SelectGameLevel setGameLevel={this.setGameLevel}/>
             </Route>
             <Route exact path="/phonics/select-mode">
-                <SelectGameMode  init={this.handleInit} />
+                <SelectGameMode gameLevel={this.state.gameLevel} init={this.init} />
             </Route>
         </Switch>
               )
