@@ -44,10 +44,10 @@ export default class GameController extends React.Component {
   setGameLevel(level){
     this.setState({gameLevel: level})
   }
-  
+
   setAlphabetData() {
     const abc = []
-    for(let char = 0; char < 26; i++){
+    for(let i = 0; i < 26; i++){
         abc.push(97 + i);
     }  
     if(this.currentWords[this.currentWordsIndexCounter].type === "blends"){
