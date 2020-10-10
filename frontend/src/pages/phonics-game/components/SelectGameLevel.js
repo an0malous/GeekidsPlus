@@ -47,7 +47,7 @@ export const SelectGameLevel = (props) => {
           }}
           className="ui segment"
         >
-          <Link to="phonics/select-mode" onClick={()=>props.setGameLevel('cvcAdd')}>CVC with simple Blends - gold</Link>
+          <Link to="/phonics/select-mode" onClick={()=>props.setGameLevel('cvcAdd')}>CVC with simple Blends - gold</Link>
           </div>
           <div
             style={{
@@ -61,7 +61,7 @@ export const SelectGameLevel = (props) => {
             }}
             className="ui segment"
           >
-            <Link to="phonics/select-mode" onClick={()=>props.setGameLevel('blends')}>CVC with difficult Blends - platnium</Link>
+            <Link to="/phonics/select-mode" onClick={()=>props.setGameLevel('blends')}>CVC with difficult Blends - platnium</Link>
           </div>
         </div>
     

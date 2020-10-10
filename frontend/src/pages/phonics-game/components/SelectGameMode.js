@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function SelectGameMode(props) {
-    console.log(props.gameLevel)
+    console.log("INSIDE GAMEMODE", props.gameLevel)
     if(props.gameLevel === "initSounds"){
         return props.init("random")          
     }
@@ -10,7 +10,7 @@ export function SelectGameMode(props) {
        
         <div>
  
-        {props.gameLevel === ('cvc' || 'cvcAdd') ?
+        {props.gameLevel === 'cvc' || props.gameLevel === 'cvcAdd' ?
             (<select id="letter-selection">
                 <option value="" disabled default>Letter</option>
                 <option value="random" >Random</option> 

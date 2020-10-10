@@ -43,44 +43,34 @@ export default class GameController extends React.Component {
 
   setGameLevel(level){
     this.setState({gameLevel: level})
-    console.log("New game Level is " + this.state.gameLevel)
   }
+  
   setAlphabetData() {
+    const abc = []
+    for(let char = 0; char < 26; i++){
+        abc.push(97 + i);
+    }  
+    if(this.currentWords[this.currentWordsIndexCounter].type === "blends"){
+      abc.push(this.currentWords[this.currentWordsIndexCounter].letter);
+
+  } 
     this.setState({
-      alphabet: shuffle([
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-      ]),
+      alphabet: shuffle(abc),
     });
   }
 
   setDropzoneData() {
+    const currentWord = [...this.currentWords[this.currentWordsIndexCounter].name];
+    if (this.currentWords[this.currentWordsIndexCounter].type === "blends"){
+      const blend = [...this.currentWords[0].letter];
+      for(let i = 0; i < currentWord.length; i++){
+          if(currentWord[i] === blend[0] && currentWord[i + 1] === blend[1] ){
+              currentWord.splice(i, 2, this.currentWords[this.currentWordsIndexCounter].letter)
+          }
+        }
+      }
     this.setState({
-      dropzoneWord: [...this.currentWords[this.currentWordsIndexCounter].name]
+      dropzoneWord: currentWord
     });
   }
 
@@ -155,7 +145,7 @@ export default class GameController extends React.Component {
                 <SelectGameType />
             </Route>
             <Route exact path="/phonics/select-level">
-                <SelectGameLevel setGameLevel={this.setGameLevel}/>
+                <SelectGameLevel setGameLevel={this.setGameLevel} />
             </Route>
             <Route exact path="/phonics/select-mode">
                 <SelectGameMode gameLevel={this.state.gameLevel} init={this.init} />
