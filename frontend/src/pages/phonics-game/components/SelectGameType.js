@@ -13,7 +13,7 @@ export const SelectGameType = (props) => {
         </div>
         <div id="select2" style={{ fontSize: "4rem", display: "flex", width: "50%", height: "100%", justifyContent: "center", alignItems: "center"}} className="ui segment">
           <div>
-            <Link style={{color: "black"}} to="/phonics/select-level">competitive</Link>
+            <Link style={{color: "black"}} onClick={()=>props.setGameType('competitve')} to="/phonics/select-level">competitive</Link>
           </div>
         <div>
 </div>
