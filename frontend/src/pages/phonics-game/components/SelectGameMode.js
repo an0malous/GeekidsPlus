@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export function SelectGameMode(props) {
     console.log("INSIDE GAMEMODE", props.gameLevel)
     if(props.gameLevel === "initSounds"){
         return props.init("random")          
     }
-    if(props.gameType === 'competitve'){
+    if(props.gameType === 'competitive'){
         return (
             <div style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100vh"}}>
                 <div>
-                    Classic
+                    <Link onClick={()=>props.init('classic')} to="/phonics/play/competitive/classic">Classic</Link>
                 </div>
                 <div>
-                    Marathon
+                    <Link onClick={()=>props.init('marathon')} to="/phonics/play/competitive/marathon">Marathon</Link>
                 </div>
             </div>
         )
@@ -43,7 +44,7 @@ export function SelectGameMode(props) {
            
             )}
             
-            <button onClick={()=>props.init(document.querySelector('#letter-selection').value)}>Start Game</button>
+            <Link to="/phonics/play" onClick={()=>props.init(document.querySelector('#letter-selection').value)}>Start Game</Link>
         </div>
     )
 

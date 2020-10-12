@@ -26,16 +26,26 @@ export default class GameController extends React.Component {
     this.init = this.init.bind(this);
     this.handleOnNextRound = this.handleOnNextRound.bind(this);
     this.handleOnFinalCheckCorrect = this.handleOnFinalCheckCorrect.bind(this);
+    this.setGameType = this.setGameType.bind(this)
     this.setGameLevel = this.setGameLevel.bind(this);
+    this.setGameMode = this.setGameMode.bind(this);
   }
+
+
 
   async loadWords (letter) {
     try {
-      console.log(letter)
+     
         const response = await axios.get("http://localhost:3000/admin/cards")
-        console.log(response.data)
-        this.currentWords = response.data.filter(words=>words.letter === letter)
- 
+        console.log("*********************** " + this.state.gameMode)
+     
+        if (this.state.gameMode === 'classic' && this.state.gameType === 'competitive'){
+        this.currentWords = shuffle(response.data.filter(words=>words.type === this.state.gameLevel))
+        } else if (this.state.gameMode === 'marathon'){
+          this.currentWords = shuffle(response.data)
+        } else {
+          this.currentWords = shuffle(response.data.filter(words=>words.letter === this.state.gameMode))
+        }
       } catch (err) {
         console.log(err)
       }
@@ -45,10 +55,14 @@ export default class GameController extends React.Component {
     this.setState({gameLevel: level})
   }
 
+  setGameType(type){
+    this.setState({gameType: type})
+  }
+
   setAlphabetData() {
     const abc = []
     for(let i = 0; i < 26; i++){
-        abc.push(97 + i);
+        abc.push(String.fromCharCode(97 + i));
     }  
     if(this.currentWords[this.currentWordsIndexCounter].type === "blends"){
       abc.push(this.currentWords[this.currentWordsIndexCounter].letter);
@@ -82,8 +96,8 @@ export default class GameController extends React.Component {
 
   //-- Game Controller Logic --\\
 
-  async roundStart (letter) {
-    await this.loadWords(letter);
+  async roundStart () {
+    await this.loadWords();
     this.setDropzoneData();
     this.setAlphabetData();
     this.setCurrentImgData();
@@ -95,12 +109,17 @@ export default class GameController extends React.Component {
     console.log(this.currentWordsIndexCounter)
   };
 
-  init (letter) {
+  init (mode) {
+    this.setGameMode(mode)
     this.setState({inSession: true})
     this.lettersCorrectCounter = 0;
-    this.roundStart(letter);
+    this.roundStart();
    
   };
+
+  setGameMode(mode){
+    this.setState({gameMode: mode})
+  }
 
   //-- React Handlers --\\
   handleOnNextRound = () => {
@@ -113,6 +132,7 @@ export default class GameController extends React.Component {
   };
 
   handleOnFinalCheckCorrect = () => {
+    console.log("ONE FINAL CHECK CORRECT ****************************************************")
     this.roundComplete();
     this.setState({
       displayNextRoundButton: !this.state.displayNextRoundButton,
@@ -120,41 +140,47 @@ export default class GameController extends React.Component {
   };
 
   handleOnHelperClick = () => {
-
     this.props.handleSetOverlay();
   };
 
   render() {
 
+    if(this.state.inSession){
+      
+      return(
+        <div style={{marginTop: "-1rem"}} className="ui center aligned container">
+             <Gameboard
+               gameType={this.state.gameType}
+               gameMode={this.state.gameMode}
+               inSession={this.inSession}
+               dropzoneWord={this.state.dropzoneWord}
+               displayNextRoundButton={this.state.displayNextRoundButton}
+               handleInit={this.handleInit}
+               handleOnFinalCheckCorrect={this.handleOnFinalCheckCorrect}
+               handleOnNextRound={this.handleOnNextRound}
+               alphabet={this.state.alphabet}
+               handleOnHelperClick={this.handleOnHelperClick}
+               currentImg={this.state.currentImg}
+             />
+             </div>    
+      )
+    }
+
+     
     return (
-  
-      <div style={{marginTop: "-1rem"}} className="ui center aligned container">
-              {this.state.inSession ? (<Gameboard
-                inSession={this.inSession}
-                dropzoneWord={this.state.dropzoneWord}
-                displayNextRoundButton={this.state.displayNextRoundButton}
-                handleInit={this.handleInit}
-                handleOnFinalCheckCorrect={this.handleOnFinalCheckCorrect}
-                handleOnNextRound={this.handleOnNextRound}
-                alphabet={this.state.alphabet}
-                handleOnHelperClick={this.handleOnHelperClick}
-                currentImg={this.state.currentImg}
-              />) : (
+      
                 <Switch>
             <Route exact path="/phonics">
-                <SelectGameType />
+                <SelectGameType setGameType={this.setGameType} />
             </Route>
             <Route exact path="/phonics/select-level">
                 <SelectGameLevel setGameLevel={this.setGameLevel} />
             </Route>
             <Route exact path="/phonics/select-mode">
-                <SelectGameMode gameLevel={this.state.gameLevel} init={this.init} />
+                <SelectGameMode gameType={this.state.gameType} setGameMode={this.setGameMode} gameLevel={this.state.gameLevel} init={this.init} />
             </Route>
         </Switch>
-              )
-              }
-        </div>
-
+          
     )
   }
 }

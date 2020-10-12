@@ -11,10 +11,26 @@ import { Button } from "./Button";
 export default class Gameboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state ={totalSeconds: 0}
     this.totalPoints = 0;
     this.lettersCorrectCounter = 0;
     this.checkCorrect = this.checkCorrect.bind(this);
+    this.tick = this.tick.bind(this)
+    this.interval = undefined;
   }
+
+  componentDidMount () {
+    if(this.props.gameMode === 'classic'){
+      this.setState({totalSeconds: 600})
+    }
+   this.interval = setInterval (this.tick, 1000)
+   
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval)
+  }
+
   checkCorrect(event) {
     for (let i = 0; i < this.props.dropzoneWord.length; i++) {
       if (
@@ -36,6 +52,15 @@ export default class Gameboard extends React.Component {
     }
   }
 
+  tick = () => {
+    console.log("tick")
+       if(this.props.gameMode === 'classic'){
+           this.setState({totalSeconds: this.state.totalSeconds - 1}) 
+       } else {
+            this.setState({totalSeconds: this.state.totalSeconds + 1})
+       }
+   }
+
   pointCalc = (dropzoneWord) => {
     this.bonus = 6;
     this.round = Math.floor(dropzoneWord.length * 5 + this.bonus);
@@ -44,19 +69,16 @@ export default class Gameboard extends React.Component {
   };
 
   render() {
-    if (this.props.displayNextRoundButton) {
-      return (
-        <div>
-          <RoundBreakdown
-            handleOnNextRound={this.props.handleOnNextRound}
-            roundPoints={this.round}
-          />
-        </div>
-      );
-    }
-
     return (
 
+      this.props.displayNextRoundButton ? (
+      
+        <RoundBreakdown
+          handleOnNextRound={this.props.handleOnNextRound}
+          roundPoints={this.round}
+        />
+     ) : (
+       
       <div style={{ height: "100%" }} className="ui grid center aligned container">
         <div
           style={{
@@ -74,7 +96,7 @@ export default class Gameboard extends React.Component {
             }}
             className="ui segment"
           >
-            <Timer />
+            <Timer tick={this.tick} totalSeconds={this.state.totalSeconds}/>
           </div>
           <div style={{ background: "#333333" }} className="ui segment">
             <Thumbnail
@@ -98,8 +120,7 @@ export default class Gameboard extends React.Component {
             <Dropzone dropzoneWord={this.props.dropzoneWord} />
             <Alphabet alphabet={this.props.alphabet} />
           </Interact>
-        </div>
-    
+          </div>)
     );
   }
 }
