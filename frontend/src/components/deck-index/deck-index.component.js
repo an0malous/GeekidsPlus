@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeckIndex = () => {
+const DeckIndex = ( {currentWord} ) => {
 //redux logix to get current index
 
     return (

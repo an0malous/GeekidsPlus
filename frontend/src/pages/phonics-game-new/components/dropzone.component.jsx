@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Dropzone = ({ key, letter }) => {
+const Dropzone = ({ letter }, ...rest) => {
     return (
-        <div key={key}>{letter}</div>
+        <div {...rest}>{letter}</div>
     );
 };
 

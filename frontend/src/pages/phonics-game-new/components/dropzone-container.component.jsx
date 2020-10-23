@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './interact-dropzone-config';
 
 const DropzoneContainer = ({ currentWord: {name, type, letter} }) => {
 
@@ -19,7 +20,7 @@ const DropzoneContainer = ({ currentWord: {name, type, letter} }) => {
     return (
         <div>
             {
-               dropzones.map(zone => <Dropzone key={zone} letter={zone}  />) 
+               dropzones.map(zone => <Dropzone key={zone} letter={zone} className="inner-dropzone"  />) 
             }
         </div>
     );

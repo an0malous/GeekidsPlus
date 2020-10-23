@@ -12,7 +12,7 @@ const Timer = ({ initialClock = 0, countDown }) => {
         setTotalSeconds(totalSeconds = initialClock)
         setTimeout(tick, 1000);
     }, 
-    [initialClock, countDown]);
+    [initialClock]);
 
     const seconds = totalSeconds % 60;
     const minutes = parseInt(totalSeconds / 60);

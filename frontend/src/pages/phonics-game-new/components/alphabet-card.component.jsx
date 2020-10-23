@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AlphabetCard = ({ letter, key }) => {
+const AlphabetCard = ({ letter}, ...rest) => {
 
     return (
-        <div key={key}>
+        <div {...rest}>
             {letter}
         </div>
     );
