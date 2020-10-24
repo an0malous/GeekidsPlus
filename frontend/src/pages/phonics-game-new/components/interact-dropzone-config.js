@@ -33,11 +33,7 @@ interact(".inner-dropzone").dropzone({
       //event.relatedTarget.textContent = 'Dragged out'
     },
     ondrop: function (event) {
-      console.log("dropped");
-      console.log(event);
-      {
-        props.checkCorrect(event);
-      }
+  
     },
     ondropdeactivate: function (event) {
       // remove active dropzone feedback

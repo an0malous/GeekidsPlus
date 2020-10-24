@@ -4,8 +4,8 @@ const Timer = ({ initialClock = 0, countDown }) => {
     const [totalSeconds, setTotalSeconds] = useState(0);
 
     const tick = () => {
-        countDown ? setSeconds(seconds - 1)
-        : setSeconds(seconds + 1)
+        countDown ? setTotalSeconds(totalSeconds - 1)
+        : setTotalSeconds(totalSeconds + 1)
     };
 
     useEffect(()=>{

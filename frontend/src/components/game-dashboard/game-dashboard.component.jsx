@@ -4,6 +4,7 @@ import Thumbnail from '../thumbnail/thumbnail.component';
 import Timer from '../timer/timer.component';
 import DeckIndex from '../deck-index/deck-index.styles';
 import Button from '../button/button';
+import Points from '../points/points.component';
 
 const GameDashboard = () => {
     return (

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-const Button = ({ Icon, label}, ...rest) => {
+const Button = ({ icon: Icon , label}, ...rest) => {
     
     return ( 
         <Fragment>
             {
-                icon ? (<Icon {...rest} />) //font awesome icons and the like
+                Icon ? (<Icon {...rest} />) //font awesome icons and the like
 
                 : 
                 

@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import { shuffle } from '../../../utils';
 import './interact-draggable-config';
+import AlphabetCard from './alphabet-card.component';
 
-const AlphabetContainer = ({ currentWord }) => {
-    const alphabet = [a, b, c, d, e, f, g, h, i, j ,k , l, m, n, o, p, q, r, s, t, u , v, w, x, y, z];
+const AlphabetContainer = ({ currentWord: { letter, type } }) => {
+    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z'];
 
     useEffect(()=>{
-        if(currentWord.type === "blends"){
-            alphabet.push(currentWord.letter);
+        if(type === "blends"){
+            alphabet.push(letter);
         };
         shuffle(alphabet);
     });
@@ -16,10 +18,15 @@ const AlphabetContainer = ({ currentWord }) => {
     return (
         <div>
             {
-                alphabet.map(letter => <AlphabetCard key={letter} letter={letter} className="draggable" />)
+                alphabet.map(cardLetter => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />)
             }
         </div>
     );
 };
 
-export default AlphabetContainer;
+const mapStateToProps = state => {
+    const { currentWord } = state;
+    return { currentWord: currentWord }
+}
+
+export default connect(mapStateToProps)(AlphabetContainer);

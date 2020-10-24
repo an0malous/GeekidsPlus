@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import './interact-dropzone-config';
+import Dropzone from './dropzone.component';
+
+import { connect } from 'react-redux';
 
 const DropzoneContainer = ({ currentWord: {name, type, letter} }) => {
 
@@ -16,7 +19,7 @@ const DropzoneContainer = ({ currentWord: {name, type, letter} }) => {
         }
     });
 
-    const dropzones = [...currentWord.name];
+    const dropzones = [...name];
     return (
         <div>
             {
@@ -26,4 +29,9 @@ const DropzoneContainer = ({ currentWord: {name, type, letter} }) => {
     );
 };
 
-export default DropzoneContainer;
+const mapStateToProps = state => {
+    const { currentWord } = state;
+    return { currentWord: currentWord }
+}
+
+export default connect(mapStateToProps)(DropzoneContainer);
