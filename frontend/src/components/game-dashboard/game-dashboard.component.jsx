@@ -10,24 +10,24 @@ import Points from '../points/points.component';
 
 const GameDashboard = ({ currentWords, currentDeckIndex, currentWord }) => {
     
-return (
-    <div>
-        <h1>Game Dashboard</h1>
-        <div className="left">
-            <Timer />
-            <Points />
-            <DeckIndex currentDeckIndex={currentDeckIndex} currentDeckLength={currentWords.length}/>
+    return (
+        <div>
+            <h1>Game Dashboard</h1>
+            <div className="left">
+                <Timer />
+                <Points />
+                <DeckIndex currentDeckIndex={currentDeckIndex} currentDeckLength={currentWords.length}/>
+            </div>
+            <div className="thumbnail">
+                <Thumbnail src={currentWord.img} width="150" height="100" />
+            </div>
+            <div className="right">
+                <Button label="pause" />
+                <Button label="help" />
+                <Button label="listen" />
+            </div>
         </div>
-        <div className="thumbnail">
-            <Thumbnail src={currentWord.img} width="150" height="100" />
-        </div>
-        <div className="right">
-            <Button label="pause" />
-            <Button label="help" />
-            <Button label="listen" />
-        </div>
-    </div>
-    );
+        );
 };
 const mapStateToProps = state => {
     return { 

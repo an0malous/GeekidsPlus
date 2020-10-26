@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AlphabetCard = ({ letter}, ...rest) => {
+const AlphabetCard = ({ letter, ...rest}) => {
 
     return (
         <div {...rest}>

@@ -1,7 +1,7 @@
 import React from 'react';
-import './interact-dropzone-config';
-import Dropzone from './dropzone.component';
 
+import Dropzone from './dropzone.component';
+import Interact from './interact-dropzone-config';
 import { connect } from 'react-redux';
 
 const DropzoneContainer = ({ currentWord }) => {
@@ -25,12 +25,12 @@ const DropzoneContainer = ({ currentWord }) => {
     const dropzones = currentWord ? createDropzone(currentWord) : null
         
     return (
-        <div style={{display: "flex"}}>
+        <Interact>
             {
-               currentWord ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem"}} className="inner-dropzone" />))
+               currentWord ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
                : ("Loading Words...")
             }
-        </div>
+        </Interact>
     );
 };
 

@@ -1,5 +1,8 @@
 import interact from 'interactjs';
 
+import React, { Fragment } from 'react';
+
+const Interact = ({ children }) => {
 // enable draggables to be dropped into this
 interact(".inner-dropzone").dropzone({
     // only accept elements matching this CSS selector
@@ -33,7 +36,8 @@ interact(".inner-dropzone").dropzone({
       //event.relatedTarget.textContent = 'Dragged out'
     },
     ondrop: function (event) {
-  
+      event.stopImmediatePropagation()
+      console.log("************************", event)
     },
     ondropdeactivate: function (event) {
       // remove active dropzone feedback
@@ -41,4 +45,13 @@ interact(".inner-dropzone").dropzone({
       event.target.classList.remove("drop-target");
       event.target.classList.remove("drop-target");
     },
-  });
+  })
+
+  return (
+    <div style={{display: "flex"}}>
+      {children}
+    </div>
+  )
+}
+
+export default Interact
