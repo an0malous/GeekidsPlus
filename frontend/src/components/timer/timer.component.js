@@ -1,7 +1,7 @@
 import React, {  useState, useEffect  } from 'react';
 
-const Timer = ({ initialClock = 0, countDown }) => {
-    const [totalSeconds, setTotalSeconds] = useState(0);
+const Timer = ({ initialClock = 0, countDown = false }) => {
+    let [totalSeconds, setTotalSeconds] = useState(0);
 
     const tick = () => {
         countDown ? setTotalSeconds(totalSeconds - 1)

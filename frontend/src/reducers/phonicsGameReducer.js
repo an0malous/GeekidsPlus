@@ -33,7 +33,8 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                currentWords: action.payload
+                currentWords: action.payload,
+                currentWord: action.payload[state.currentDeckIndex]
             };
 
         case 'FETCH_CURRENT_WORDS_FAILURE':

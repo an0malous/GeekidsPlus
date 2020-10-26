@@ -25,7 +25,7 @@ const AlphabetContainer = ({ currentWord: { letter, type } }) => {
 };
 
 const mapStateToProps = state => {
-    const { currentWord } = state;
+    const { currentWord } = state.phonicsGameReducer;
     return { currentWord: currentWord }
 }
 

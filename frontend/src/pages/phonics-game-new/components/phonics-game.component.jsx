@@ -8,23 +8,25 @@ import { fetchCurrentWordsAsync } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 
 
-const PhonicsGame = ({ isFetching, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ isFetching, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
    useEffect(()=>{
        fetchCurrentWordsAsync();
    }, [])
     return (
-        <div>
+        fetchSuccessful ? 
+        (<div>
             <GameDashboard />
             <DropzoneContainer />
             <AlphabetContainer />
   
-        </div>
-    )
+        </div>) : ("NOTHING")
+        )
 };
 
 const mapStateToProps = state => ({
-    isFetching: state.phonicsGameReducer.isFetching
+    isFetching: state.phonicsGameReducer.isFetching,
+    fetchSuccessful: state.phonicsGameReducer.currentWords
 });
 
 const mapDispatchToProps = dispatch => ({
