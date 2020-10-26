@@ -12,6 +12,8 @@ const rootReducer = combineReducers ({
     phonicsGameReducer: phonicsGameReducer
 });
 
-const middlewares = [logger, thunk];
+const middlewares = [thunk, logger];
 
-export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+export default store;

@@ -2,10 +2,10 @@
 const INITIAL_STATE = {
     currentWords: [],
     currentWord: '',
-    isFetching: true,
+    isFetching: false,
     errorMessage: '',
-    currentDeckIndex: 0
-    
+    currentDeckIndex: 0,
+    message: "hi"
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -23,7 +23,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 currentWord: state.currentWords[state.currentDeckIndex]
             };
 
-        case 'FETCH_CURRENT_WORDS_SART':
+        case 'FETCH_CURRENT_WORDS_START':
             return {
                 ...state,
                 isFetching: true
@@ -41,6 +41,11 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 errorMessage: action.payload
             };
+        case 'TEST':
+        return {
+            ...state,
+            message: "bye"
+        }
 
         default: return state;
     };
