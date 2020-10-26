@@ -4,16 +4,16 @@ import GameDashboard from '../../../components/game-dashboard/game-dashboard.com
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
 
-import { getCurrentDeckIndex } from '../../../actions/phonicsGameActions';
-import { fetchCurrentWordsAsync } from '../../../actions/phonicsGameActions';
+import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
+import { internalTimer } from '../../../reducers/phonics-game-reducer/phonics-game.utils'
 
-
-const PhonicsGame = ({ isFetching, getCurrentDeckIndex, fetchSuccessful, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
-   useEffect(()=>{
-       fetchCurrentWordsAsync();
-       getCurrentDeckIndex();
+    useEffect( async ()=>{
+       await fetchCurrentWordsAsync();
+       onRoundStart();
+        internalTimer.start()
 
    }, [])
 
@@ -35,7 +35,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync()),
-    getCurrentDeckIndex: ()=>dispatch(getCurrentDeckIndex())
+    onRoundComplete: ()=>dispatch(onRoundComplete()),
+    onRoundStart: ()=>dispatch(onRoundStart())
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGame);

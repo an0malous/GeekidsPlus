@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import userReducer from './reducers/userReducer';
-import phonicsGameReducer from './reducers/phonicsGameReducer';
+import phonicsGameReducer from './reducers/phonics-game-reducer/phonicsGameReducer';
 
 const rootReducer = combineReducers ({
     user: userReducer,

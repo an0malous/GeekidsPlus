@@ -16,8 +16,15 @@ export const fetchCurrentWordsStart =()=> ({
 
 export const fetchCurrentWordsSuccess = (currentWords) => ({
     type: 'FETCH_CURRENT_WORDS_SUCCESS',
-    payload: currentWords
+    payload: currentWords,
+});
 
+export const onRoundStart = () => ({
+    type: `ON_ROUND_START`
+});
+
+export const onRoundComplete = () => ({
+    type: 'ON_ROUND_COMPLETE'
 });
 
 export const fetchCurrentWordsFailure = errorMessage => ({

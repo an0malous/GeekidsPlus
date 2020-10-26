@@ -1,8 +1,33 @@
 import interact from 'interactjs';
 
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-const Interact = ({ children }) => {
+import { onRoundComplete } from '../../../actions/phonicsGameActions'
+
+const Interact = ({ children, onRoundComplete, currentWord }) => {
+  const [correctLettersCount, setCorrectLettersCount ] = useState(0)
+  
+  const checkCorrect = ({ event, currentWord }) => {
+    for (let i = 0; i < currentWord.length; i++) {
+      if ( currentWord[i] === event.relatedTarget.innerText &&
+            event.relatedTarget.innertext === event.target.innertext &&
+            !event.target.classList.contains("checkedCorrect")
+          ) { event.target.classList.add("checkedCorrect");
+              setCorrectLettersCount(prevState => prevState + 1)
+              console.log("CORRECT LETTERS COUNT  :  " + correctLettersCount)
+      }
+    }
+
+    if (currentWord.length === correctLettersCount) {
+      console.log("************************", event)
+      onRoundComplete();
+      console.log("ROUND COMPELTED#####")
+
+    }
+  }
+  
+
 // enable draggables to be dropped into this
 interact(".inner-dropzone").dropzone({
     // only accept elements matching this CSS selector
@@ -37,7 +62,9 @@ interact(".inner-dropzone").dropzone({
     },
     ondrop: function (event) {
       event.stopImmediatePropagation()
-      console.log("************************", event)
+      console.log("************************ DROPPED")
+      checkCorrect(event, currentWord)
+
     },
     ondropdeactivate: function (event) {
       // remove active dropzone feedback
@@ -52,6 +79,14 @@ interact(".inner-dropzone").dropzone({
       {children}
     </div>
   )
-}
+};
 
-export default Interact
+const mapDispatchToProps = dispatch => ({
+  onRoundComplete: ()=>dispatch(onRoundComplete()),
+});
+
+const mapStateToProps = state => ({
+  currentWord: state.phonicsGameReducer.currentWord
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Interact);

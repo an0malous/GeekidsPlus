@@ -31,26 +31,7 @@ export default class Gameboard extends React.Component {
     clearInterval(this.interval)
   }
 
-  checkCorrect(event) {
-    for (let i = 0; i < this.props.dropzoneWord.length; i++) {
-      if (
-        this.props.dropzoneWord[i] === event.relatedTarget.textContent &&
-        event.relatedTarget.textContent === event.target.textContent &&
-        !event.target.classList.contains("checkedCorrect")
-      ) {
-        event.target.classList.add("checkedCorrect");
-
-        event.relatedTarget.classList.remove("draggable");
-        this.lettersCorrectCounter = this.lettersCorrectCounter + 1;
-        console.log(this.lettersCorrectCounter);
-      }
-    }
-    if (this.props.dropzoneWord.length === this.lettersCorrectCounter) {
-      this.pointCalc(this.props.dropzoneWord);
-      this.lettersCorrectCounter = 0;
-      this.props.handleOnFinalCheckCorrect();
-    }
-  }
+ 
 
   tick = () => {
     console.log("tick")
