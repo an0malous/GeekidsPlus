@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+const DeckIndex = ({ currentDeckIndex, currentDeckLength }) => {
 
-const DeckIndex = () => {
-//redux logix to get current index
 
     return (
-        <div>0/0</div>
+        <div>{currentDeckIndex}/{currentDeckLength}</div>
     );
 };
 
-export default DeckIndex;
+const mapStateToProps = state => {
+    return { 
+        currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
+        currentDeckLength: state.phonicsGameReducer.currentWords.length
+    };
+};
+
+export default connect(mapStateToProps)(DeckIndex);

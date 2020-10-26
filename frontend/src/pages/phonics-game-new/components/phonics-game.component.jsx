@@ -4,15 +4,19 @@ import GameDashboard from '../../../components/game-dashboard/game-dashboard.com
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
 
+import { getCurrentDeckIndex } from '../../../actions/phonicsGameActions';
 import { fetchCurrentWordsAsync } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 
 
-const PhonicsGame = ({ isFetching, fetchSuccessful, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ isFetching, getCurrentDeckIndex, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
    useEffect(()=>{
        fetchCurrentWordsAsync();
+       getCurrentDeckIndex();
+
    }, [])
+
     return (
         fetchSuccessful ? 
         (<div>
@@ -30,7 +34,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync())
+    fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync()),
+    getCurrentDeckIndex: ()=>dispatch(getCurrentDeckIndex())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGame);

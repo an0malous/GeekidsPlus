@@ -5,10 +5,10 @@ export const getCurrentWord = (currentWord) => ({
     payload: currentWord
 });
 
-export const getCurrentDeckIndex = (currentDeckIndex) => ({
-    type: 'GET_CURRENT_DECK_INDEX',
-    payload: currentDeckIndex
+export const getCurrentDeckIndex = () => ({
+    type: 'GET_CURRENT_DECK_INDEX'
 });
+
 
 export const fetchCurrentWordsStart =()=> ({
     type: 'FETCH_CURRENT_WORDS_START'
