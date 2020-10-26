@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import Thumbnail from '../thumbnail/thumbnail.component';
 import Timer from '../timer/timer.component';
 import DeckIndex from '../deck-index/deck-index.component';
 import Button from '../button/button';
 import Points from '../points/points.component';
 
-const GameDashboard = () => {
+const GameDashboard = ({ currentWords, currentDeckIndex, currentWord }) => {
     
 return (
     <div>
@@ -14,10 +16,10 @@ return (
         <div className="left">
             <Timer />
             <Points />
-            <DeckIndex />
+            <DeckIndex currentDeckIndex={currentDeckIndex} currentDeckLength={currentWords.length}/>
         </div>
         <div className="thumbnail">
-            <Thumbnail />
+            <Thumbnail src={currentWord.img} width="150" height="100" />
         </div>
         <div className="right">
             <Button label="pause" />
@@ -27,5 +29,11 @@ return (
     </div>
     );
 };
-
-export default GameDashboard;
+const mapStateToProps = state => {
+    return { 
+        currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
+        currentWords: state.phonicsGameReducer.currentWords,
+        currentWord: state.phonicsGameReducer.currentWord
+    };
+};
+export default connect(mapStateToProps)(GameDashboard);
