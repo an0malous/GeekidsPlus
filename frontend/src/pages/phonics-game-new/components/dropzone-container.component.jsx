@@ -4,8 +4,8 @@ import Dropzone from './dropzone.component';
 import Interact from './interact-dropzone-config';
 import { connect } from 'react-redux';
 
-const DropzoneContainer = ({ currentWord }) => {
-    
+const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
+    const currentWord = currentWords[currentDeckIndex];
     const createDropzone = currentWord => {
         const {name, type, letter } = currentWord;
         const blend = [...letter];
@@ -22,12 +22,12 @@ const DropzoneContainer = ({ currentWord }) => {
         return word;
     };
 
-    const dropzones = currentWord ? createDropzone(currentWord) : null
+    const dropzones = currentWords ? createDropzone(currentWord) : null
         
     return (
         <Interact>
             {
-               currentWord ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
+               currentWords ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
                : ("Loading Words...")
             }
         </Interact>
@@ -36,8 +36,9 @@ const DropzoneContainer = ({ currentWord }) => {
 
 const mapStateToProps = state => {
     return { 
-        currentWord: state.phonicsGameReducer.currentWord 
-    };
+        currentWords: state.phonicsGameReducer.currentWords,
+        currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
+        };
 };
 
 export default connect(mapStateToProps)(DropzoneContainer);

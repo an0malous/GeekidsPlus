@@ -1,28 +1,26 @@
 import React, { useEffect } from 'react';
 
-import GameDashboard from '../../../components/game-dashboard/game-dashboard.component';
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
-
+import GameDashboard from '../../../components/game-dashboard/new-game-dashboard';
 import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
-import { internalTimer } from '../../../reducers/phonics-game-reducer/phonics-game.utils'
 
 const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
     useEffect( async ()=>{
        await fetchCurrentWordsAsync();
-       onRoundStart();
-        internalTimer.start()
+       onRoundStart()
 
    }, [])
-
+{console.log("RENDER")}
     return (
-        fetchSuccessful ? 
+        fetchSuccessful.length > 1 ? 
         (<div>
             <GameDashboard />
             <DropzoneContainer />
             <AlphabetContainer />
+            
   
         </div>) : ("NOTHING")
         )

@@ -3,7 +3,6 @@ import { internalTimer, calculatePoints } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
-    currentWord: '',
     isFetching: false,
     errorMessage: '',
     currentDeckIndex: 0,
@@ -31,14 +30,12 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                currentWords: action.payload,
-                currentDeckIndex: 0,
+                currentWords: action.payload
             };
         case `ON_GAME_END`:
             return {
                 ...state,
                 currentWords: [],
-                currentWord: '',
                 currentDeckIndex: 0,
                 currentPoints: 0
 
@@ -53,7 +50,6 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
-                currentWord: state.currentWords[state.currentDeckIndex]
             }
         case 'ON_ROUND_COMPLETE':
             return {

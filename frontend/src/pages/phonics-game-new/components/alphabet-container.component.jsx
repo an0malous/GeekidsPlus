@@ -5,12 +5,13 @@ import { shuffle } from '../../../utils';
 import './interact-draggable-config';
 import AlphabetCard from './alphabet-card.component';
 
-const AlphabetContainer = ({ currentWord: { letter, type } }) => {
+const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
+    const currentWord = currentWords[currentDeckIndex]
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z'];
 
     useEffect(()=>{
-        if(type === "blends"){
-            alphabet.push(letter);
+        if(currentWord.type === "blends"){
+            alphabet.push(currentWord.letter);
         };
         shuffle(alphabet);
     });
@@ -26,7 +27,11 @@ const AlphabetContainer = ({ currentWord: { letter, type } }) => {
 
 const mapStateToProps = state => {
     const { currentWord } = state.phonicsGameReducer;
-    return { currentWord: currentWord }
+    return  { 
+                currentWords: state.phonicsGameReducer.currentWords,
+                currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
+
+            }
 }
 
 export default connect(mapStateToProps)(AlphabetContainer);
