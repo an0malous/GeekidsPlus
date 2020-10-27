@@ -32,7 +32,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isFetching: false,
                 currentWords: action.payload,
-                currentDeckIndex: 0
+                currentDeckIndex: 0,
             };
         case `ON_GAME_END`:
             return {
@@ -41,6 +41,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 currentWord: '',
                 currentDeckIndex: 0,
                 currentPoints: 0
+
             };
 
         case 'FETCH_CURRENT_WORDS_FAILURE':
@@ -52,7 +53,6 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
-
                 currentWord: state.currentWords[state.currentDeckIndex]
             }
         case 'ON_ROUND_COMPLETE':

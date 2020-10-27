@@ -6,27 +6,10 @@ import { connect } from 'react-redux';
 import { onRoundComplete } from '../../../actions/phonicsGameActions'
 
 const Interact = ({ children, onRoundComplete, currentWord }) => {
-  const [correctLettersCount, setCorrectLettersCount ] = useState(0)
-  
-  const checkCorrect = ({ event, currentWord }) => {
-    for (let i = 0; i < currentWord.length; i++) {
-      if ( currentWord[i] === event.relatedTarget.innerText &&
-            event.relatedTarget.innertext === event.target.innertext &&
-            !event.target.classList.contains("checkedCorrect")
-          ) { event.target.classList.add("checkedCorrect");
-              setCorrectLettersCount(prevState => prevState + 1)
-              console.log("CORRECT LETTERS COUNT  :  " + correctLettersCount)
-      }
-    }
 
-    if (currentWord.length === correctLettersCount) {
-      console.log("************************", event)
-      onRoundComplete();
-      console.log("ROUND COMPELTED#####")
 
-    }
-  }
   
+
 
 // enable draggables to be dropped into this
 interact(".inner-dropzone").dropzone({
@@ -61,9 +44,10 @@ interact(".inner-dropzone").dropzone({
       //event.relatedTarget.textContent = 'Dragged out'
     },
     ondrop: function (event) {
+      event.target.classList.add("dropped")
       event.stopImmediatePropagation()
       console.log("************************ DROPPED")
-      checkCorrect(event, currentWord)
+    
 
     },
     ondropdeactivate: function (event) {

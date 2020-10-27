@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 const DeckIndex = ({ currentDeckIndex, currentDeckLength }) => {
 
     return (
-        <div>{currentDeckIndex}/{currentDeckLength}</div>
+        <div>{currentDeckIndex + 1}/{currentDeckLength}</div>
     );
 };
 

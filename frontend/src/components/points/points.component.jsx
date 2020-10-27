@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Points = () => {
+const Points = ({ points }) => {
     return (
         <div>
-            This is the Points component
+            {points}
         </div>
     );
 };

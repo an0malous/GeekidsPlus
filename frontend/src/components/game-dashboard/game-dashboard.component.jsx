@@ -7,15 +7,16 @@ import Timer from '../timer/timer.component';
 import DeckIndex from '../deck-index/deck-index.component';
 import Button from '../button/button';
 import Points from '../points/points.component';
+import phonicsGameReducer from '../../reducers/phonics-game-reducer/phonicsGameReducer';
 
-const GameDashboard = ({ currentWords, currentDeckIndex, currentWord }) => {
+const GameDashboard = ({ currentWords, currentDeckIndex, currentWord, points }) => {
     
     return (
         <div>
             <h1>Game Dashboard</h1>
             <div className="left">
                 <Timer />
-                <Points />
+                <Points points={ points }/>
                 <DeckIndex currentDeckIndex={currentDeckIndex} currentDeckLength={currentWords.length}/>
             </div>
             <div className="thumbnail">
@@ -33,7 +34,8 @@ const mapStateToProps = state => {
     return { 
         currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
         currentWords: state.phonicsGameReducer.currentWords,
-        currentWord: state.phonicsGameReducer.currentWord
+        currentWord: state.phonicsGameReducer.currentWord,
+        points: state.phonicsGameReducer.currentPoints
     };
 };
 export default connect(mapStateToProps)(GameDashboard);
