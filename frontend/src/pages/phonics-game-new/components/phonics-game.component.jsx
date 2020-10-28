@@ -5,6 +5,7 @@ import AlphabetContainer from './alphabet-container.component'
 import GameDashboard from '../../../components/game-dashboard/new-game-dashboard';
 import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 
 const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
@@ -20,8 +21,6 @@ const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWo
             <GameDashboard />
             <DropzoneContainer />
             <AlphabetContainer />
-            
-  
         </div>) : ("NOTHING")
         )
 };

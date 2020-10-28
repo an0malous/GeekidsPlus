@@ -1,37 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react';
 import auth from './auth';
 
 export const Navbar = ({ username, loggedIn, updateUser, role }) => {
    
+   const [activeItem, setActiveItem] = useState('')
+    const handleItemClick = (e, { name }) => setActiveItem(name)
+
     return (
-        
-        <div>
-            <div style={{background: "rgba(230, 152, 18,0.85)", color: "black"}} className="ui pointing menu">
-                <a className="active item">
-                <Link to={"/"} className="nav-link">Home</Link>
-                </a>
-                <a className="item">
-                    FlashCards
-                </a>
-                <a className="item">
-                    <Link to="/phonics" className="nav-link">Phonics</Link>
-                </a>
-                {role === 4 ? (<a className="item">
-                <Link to={"/admin"} className="nav-link">Admin Panel</Link>
-                </a>): (null)}
-                <div>
-                    <div>{loggedIn ? `You're logged in as: ${username}` : "Not Logged in"} </div> {loggedIn ? (<div><button onClick={()=>auth.logout(()=>{ updateUser({loggedIn: false, username: '', role: 0}) })}>Logout</button></div>) : (null)}
-                </div>
-                <div className="right menu">
-                    <div className="item">
-                        <div className="ui transparent icon input">
-                            <input type="text" placeholder="Search..." />
-                            <i className="search link icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <Menu>
+        <Menu.Item
+          name='home'
+          active={activeItem === 'home'}
+          onClick={handleItemClick}
+        >
+          Home
+        </Menu.Item>
+
+        <Menu.Item
+          name='flashCards'
+          active={activeItem === 'flashCards'}
+          onClick={handleItemClick}
+        >
+          Flash Cards
+        </Menu.Item>
+
+        <Menu.Item
+          name='phonics'
+          active={activeItem === 'phonics'}
+          onClick={handleItemClick}
+        >
+          Phonics
+          </Menu.Item>
+          { updateUser ?
+          (
+            
+        <Menu.Item position="right"
+        name="Logout" >
+        {`Welcome back ${username}`}
+        </Menu.Item>) :
+        (<Menu.Item position="right"
+        name="Login" >
+        </Menu.Item>)
+        }
+       
+      </Menu>
     )
-}
+    }
+
+
+   
+    

@@ -8,7 +8,19 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points }) => {
     return (
         currentWords ?
         (
-           
+        <Grid>
+            <Grid.Row>
+                <Grid.Column>
+<div>1</div>
+                </Grid.Column>
+                <Grid.Column>
+                <Thumbnail />
+                    </Grid.Column>
+                    <Grid.Column>
+                    <div>1</div>
+                    </Grid.Column>
+            </Grid.Row>
+        </Grid>
         ): ("Loading Dashboard...")
         );
 };
