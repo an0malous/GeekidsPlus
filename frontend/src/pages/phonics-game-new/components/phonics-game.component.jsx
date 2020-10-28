@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
-import GameDashboard from '../../../components/game-dashboard/new-game-dashboard';
+import GameDashboard from '../../../components/game-dashboard/game-dashboard.component';
 import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
@@ -14,7 +14,7 @@ const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWo
        onRoundStart()
 
    }, [])
-{console.log("RENDER")}
+   
     return (
         fetchSuccessful.length > 1 ? 
         (<div>

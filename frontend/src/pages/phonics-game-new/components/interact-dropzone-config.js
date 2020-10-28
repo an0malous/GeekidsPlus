@@ -3,11 +3,30 @@ import interact from 'interactjs';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { onRoundComplete } from '../../../actions/phonicsGameActions'
+import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, onRoundComplete, currentWord }) => {
+const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex }) => {
+  const [correctCounter, incrementCorrectCounter] = useState(0);
 
-
+  const letterCorrect = (event) => {
+    const letters = [...currentWords[currentDeckIndex].name];
+    for(let i = 0; i < letters.length; i++){
+        if (letters[i] === event.relatedTarget.textContent && 
+            event.relatedTarget.textContent === event.target.textContent){
+                message.classList.add("correct");
+                event.target.classList.add("checkedCorrect");
+                event.relatedTarget.classList.remove('draggable');
+                incrementCorrectCounter(prevState=>prevState + 1)
+                setTimeout(()=>{
+                    message.classList.remove('correct');
+                }, 500);
+        }
+    }
+    if( letters.length === correctCounter ){
+       stopTimerAsync()
+       onRoundComplete()
+    }
+}
   
 
 
@@ -44,12 +63,14 @@ interact(".inner-dropzone").dropzone({
       //event.relatedTarget.textContent = 'Dragged out'
     },
     ondrop: function (event) {
-      event.target.classList.add("dropped")
-      event.stopImmediatePropagation()
-      console.log("************************ DROPPED")
-    
+      event.stopImmediatePropagation();
 
+      event.target.classList.add("dropped")
+      letterCorrect(event);
+  
+      onRoundComplete();
     },
+   
     ondropdeactivate: function (event) {
       // remove active dropzone feedback
       event.target.classList.remove("drop-active");
@@ -66,11 +87,13 @@ interact(".inner-dropzone").dropzone({
 };
 
 const mapDispatchToProps = dispatch => ({
-  onRoundComplete: ()=>dispatch(onRoundComplete()),
+  stopTimerAsync: ()=>dispatch(stopTimerAsync()),
+  onRoundComplete: ()=>dispatch(onRoundComplete())
 });
 
 const mapStateToProps = state => ({
-  currentWord: state.phonicsGameReducer.currentWord
-})
+  currentWords: state.phonicsGameReducer.currentWords,
+  currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Interact);

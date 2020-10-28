@@ -3,12 +3,15 @@ import { calculatePoints } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
+    currentWord: '',
     isFetching: false,
     errorMessage: '',
     currentDeckIndex: 0,
-    currentPoints: 0,
+    roundPoints: 0,
+    totalGamePoints: 0,
     currentElapsedTime: 0,
-    totalGameTime: 0
+    totalGameTime: 0,
+    openRoundBreakdown: false
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -17,7 +20,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case `GET_CURRENT_WORD`:
             return {
                 ...state,
-                
+                currentWord: state.currentWords[state.currentDeckIndex]
             };
 
         case 'FETCH_CURRENT_WORDS_START':
@@ -30,13 +33,15 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                currentWords: action.payload
+                currentWords: action.payload,
+                currentWord: state.currentWords[state.currentDeckIndex]
             };
 
         case 'ON_GAME_START':
             return {
                 ...state
-            }
+            };
+
         case 'ON_TIMER_START':
             return {
                 ...state
@@ -77,13 +82,17 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
-                currentDeckIndex: state.currentDeckIndex + 1
+                currentDeckIndex: state.currentDeckIndex + 1,
+                totalGamePoints: state.totalGamePoints + state.roundPoints,
+                roundPoints: 0
                 
-            }
+            };
+
         case 'ON_ROUND_COMPLETE':
             return {
                 ...state,
-                currentPoints: calculatePoints(state.currentPoints, state.currentWord, state.roundTime) 
+                roundPoints: calculatePoints(state.currentWord, state.roundTime),
+                openRoundBreakdown: !state.openRoundBreakdown 
             };
     
         default: return state;

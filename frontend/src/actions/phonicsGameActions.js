@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-export const getCurrentWord = (currentWord) => ({
-    type: 'GET_CURRENT_WORD',
-    payload: currentWord
+export const getCurrentWord = () => ({
+    type: 'GET_CURRENT_WORD'
 });
 
 export const getCurrentDeckIndex = () => ({
@@ -26,8 +25,8 @@ export const onRoundComplete = () => ({
     type: 'ON_ROUND_COMPLETE'
 });
 
-export const stopTimer = () => ({
-        type: 'ON_TIMER_TIMER'
+export const onStopTimer = () => ({
+        type: 'ON_STOP_TIMER'
 });
 
 export const startTimer = () => ({
@@ -56,7 +55,8 @@ export const fetchCurrentWordsAsync = () => {
         }
 
     };
-}
+};
+
 let timer = null
 export const startTimerAsync = () => {
     return dispatch => {
@@ -66,9 +66,9 @@ export const startTimerAsync = () => {
     };
 };
 
-export const stopTimerAsync = (timer) => {
+export const stopTimerAsync = () => {
     return dispatch =>{
-    dispatch(startTimer());
+    dispatch(onStopTimer());
     clearInterval(timer);
     };
 

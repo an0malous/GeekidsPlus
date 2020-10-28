@@ -1,47 +1,57 @@
 import React, { useEffect } from 'react';
-
 import { connect } from 'react-redux';
-
+import { Grid, Rail, Button, Container } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
-import Timer from '../timer/timer.component';
-import DeckIndex from '../deck-index/deck-index.component';
-import Button from '../button/button';
-import Points from '../points/points.component';
+import { startTimerAsync } from '../../actions/phonicsGameActions';
+import { stopTimerAsync } from '../../actions/phonicsGameActions';
 
-const GameDashboard = ({ currentWords, currentDeckIndex, points, time }) => {
+const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTimerAsync, stopTimerAsync}) => {
     const currentWord = currentWords[currentDeckIndex];
 
-    useEffect(()=>{
-        
-    })
-    return (
-        
 
+    useEffect(()=>{
+        startTimerAsync();    
+    }, [])
+
+    return (
         currentWords ?
-            (
-                <div><h1>Game Dashboard</h1>
-            <div className="left">
-                <Timer />
-                <Points points={ points } />
-                <DeckIndex currentDeckIndex={currentDeckIndex} currentDeckLength={currentWords.length}/>
-            </div>
-            <div className="thumbnail">
-                <Thumbnail src={currentWord.img} width="150" height="100" />
-            </div>  
-            <div className="right">
-                <Button label="pause" />
-                <Button label="help" />
-                <Button label="listen" />
-            </div>
+        (
         
-        </div>) : ("Loading Game Dashboard")
+        <Grid columns={3}>
+            <Grid.Row>
+                <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
+                    <div>{`Points: ${points}`}</div>
+                    <div>{`Time: ${parseInt(time / 60)} : ${time % 60}`}</div>
+                    <div>{`${currentDeckIndex} / ${currentWords.length}`}</div>
+                </Grid.Column> 
+
+                <Grid.Column width={6} style={{ textAlign: "center"}}>
+                    <Thumbnail src={currentWord.img} width="250" height="200" />
+                </Grid.Column>
+                
+                <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
+                    <Button label="pause"/>
+                    <Button label="Listen" />
+                    <Button label="Help" />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
+       
+        ): ("Loading Dashboard...")
         );
 };
+
+const mapDispatchToProps = dispatch => ({
+    startTimerAsync: ()=>dispatch(startTimerAsync()),
+    stopTimerAsync: ()=>dispatch(stopTimerAsync())
+});
+
 const mapStateToProps = state => {
     return { 
         currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
         currentWords: state.phonicsGameReducer.currentWords,
-        points: state.phonicsGameReducer.currentPoints
+        points: state.phonicsGameReducer.totalGamePoints,
+        time: state.phonicsGameReducer.currentElapsedTime
     };
 };
-export default connect(mapStateToProps)(GameDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(GameDashboard);
