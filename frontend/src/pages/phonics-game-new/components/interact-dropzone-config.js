@@ -59,7 +59,7 @@ interact(".inner-dropzone").dropzone({
   })
 
   return (
-    <div style={{display: "flex"}}>
+    <div >
       {children}
     </div>
   )

@@ -3,7 +3,7 @@ import React from 'react';
 const AlphabetCard = ({ letter, ...rest}) => {
 
     return (
-        <div {...rest}>
+        <div style={{padding: "20px", border: "1px solid black", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
             {letter}
         </div>
     );

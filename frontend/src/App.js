@@ -22,7 +22,6 @@ export default class App extends React.Component {
       role: 0
   }
     this.updateUser = this.updateUser.bind(this)
-    this.handleSetOverlay = this.handleSetOverlay.bind(this);
   }
 
   componentDidMount () {
@@ -35,19 +34,8 @@ export default class App extends React.Component {
     this.setState(userObject);
   }
 
-  handleSetOverlay = (condition) => {
-    this.setState({overlay: condition})
-  }
   
   render() {
-    const styles = {
-      overlay: {
-        width: "100%",
-        height: "calc(100vh - 30px)",
-        background: "rgba(75, 75, 75, 0.95)"
-      }
-    }
-
     return (
      <div>
         <Navbar loggedIn={this.state.loggedIn} role={this.state.role} username={this.state.username} updateUser={this.updateUser} />

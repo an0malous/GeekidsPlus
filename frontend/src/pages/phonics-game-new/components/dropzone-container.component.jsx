@@ -3,6 +3,7 @@ import React from 'react';
 import Dropzone from './dropzone.component';
 import Interact from './interact-dropzone-config';
 import { connect } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
 
 const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
     const currentWord = currentWords[currentDeckIndex];
@@ -26,10 +27,14 @@ const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
         
     return (
         <Interact>
+                <Grid>
+                <Grid.Row centered>
             {
                currentWords ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
                : ("Loading Words...")
             }
+            </Grid.Row>
+            </Grid>
         </Interact>
     );
 };

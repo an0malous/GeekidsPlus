@@ -8,19 +8,21 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points }) => {
     return (
         currentWords ?
         (
-        <Grid>
+        
+        <Grid columns={3}>
             <Grid.Row>
-                <Grid.Column>
-<div>1</div>
+                <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
+<p>sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
                 </Grid.Column>
-                <Grid.Column>
-                <Thumbnail />
-                    </Grid.Column>
-                    <Grid.Column>
-                    <div>1</div>
+                <Grid.Column width={6} style={{ textAlign: "center"}}>
+                    <Thumbnail src={currentWord.img} width="250" height="200" />
+                </Grid.Column>
+                    <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
+                    <p>sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
                     </Grid.Column>
             </Grid.Row>
         </Grid>
+       
         ): ("Loading Dashboard...")
         );
 };
