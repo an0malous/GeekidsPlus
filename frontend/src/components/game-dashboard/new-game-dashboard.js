@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { Grid, Segment, Rail, Button, Container } from 'semantic-ui-react';
+import { Grid, Rail, Button, Container } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
 const GameDashboard = ({ currentWords, currentDeckIndex, points }) => {
     const currentWord = currentWords[currentDeckIndex];
@@ -11,14 +10,19 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points }) => {
         
         <Grid columns={3}>
             <Grid.Row>
-                <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
-<p>sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-                </Grid.Column>
+                <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
+<div>{`Points: ${points}`}</div>
+<div>{`Time: ${time}`}</div>
+<div>{`${currentDeckIndex} / ${currentWords.length}`}</div>
+
+                </Grid.Column> 
                 <Grid.Column width={6} style={{ textAlign: "center"}}>
                     <Thumbnail src={currentWord.img} width="250" height="200" />
                 </Grid.Column>
                     <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
-                    <p>sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
+                    <Button label="pause"/>
+                    <Button label="Listen" />
+                    <Button label="Help" />
                     </Grid.Column>
             </Grid.Row>
         </Grid>
