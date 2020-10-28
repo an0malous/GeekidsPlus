@@ -1,23 +1,27 @@
 import React, {  useState, useEffect  } from 'react';
 
-const Timer = ({ initialClock = 0, countDown = false }) => {
+const Timer = ({prevElapsedTime, stop, countDown = false }) => {
   
-    const [totalSeconds, setTotalSeconds] = useState(initialClock);
-   
-    const tick = () => {
-      setTotalSeconds(prevState => prevState + 1)
-    };
+    const [roundTime, setRoundTime] = useState(0);
 
     useEffect(()=>{
-        setInterval(tick, 1000);
-    }, 
-    [initialClock]);
+        const tickInterval = setInterval(tick, 1000);
+        
+    },[])
+  
+    const tick = () => {
+      setRoundTime(prevState => prevState + 1)
+    };
 
-    let seconds = totalSeconds % 60;
-    let minutes = parseInt(totalSeconds / 60);
+    const stop = () => {
+        clearInterval(tickInterval);
+        getRoundTime(roundTime);
+    }
+
+    const seconds = roundTime + prevElapsedTime % 60;
+    const minutes = parseInt(roundTime + prevElapsedTime / 60);
 
     return (
-       
         <div>
         {`${minutes} : ${seconds}`}</div>    
     );

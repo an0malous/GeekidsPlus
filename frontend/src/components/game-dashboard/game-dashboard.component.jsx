@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 
@@ -8,8 +8,12 @@ import DeckIndex from '../deck-index/deck-index.component';
 import Button from '../button/button';
 import Points from '../points/points.component';
 
-const GameDashboard = ({ currentWords, currentDeckIndex, points }) => {
+const GameDashboard = ({ currentWords, currentDeckIndex, points, time }) => {
     const currentWord = currentWords[currentDeckIndex];
+
+    useEffect(()=>{
+        
+    })
     return (
         
 

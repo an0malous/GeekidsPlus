@@ -1,24 +1,3 @@
-class InternalTimer {
-    constructor(){
-        this.totalSeconds = 0;
-    }
-   
-    start = ()=> {
-        this.clearInterval = setInterval(this.tick, 1000)
-    }
-
-    tick = () => {
-        this.totalSeconds = this.totalSeconds + 1;
-    }
-
-    stop = ()=> {
-        this.clearInterval()
-        return this.totalSeconds;
-    }
-
-};
-
-export const internalTimer = new InternalTimer();
 
 const bonusCalc = (roundTime) => {
 

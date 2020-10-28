@@ -1,5 +1,5 @@
-import gameDashboardComponent from "../../components/game-dashboard/game-dashboard.component";
-import { internalTimer, calculatePoints } from './phonics-game.utils';
+
+import { calculatePoints } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
@@ -7,8 +7,8 @@ const INITIAL_STATE = {
     errorMessage: '',
     currentDeckIndex: 0,
     currentPoints: 0,
-    totalTime: 0
-
+    currentElapsedTime: 0,
+    totalGameTime: 0
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -32,12 +32,39 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 currentWords: action.payload
             };
-        case `ON_GAME_END`:
+
+        case 'ON_GAME_START':
+            return {
+                ...state
+            }
+        case 'ON_TIMER_START':
+            return {
+                ...state
+            };
+
+        case 'ON_TIMER_STOP':
+            return {
+                ...state,
+                totalGameTime: state.totalGameTime + state.currentElapsedTime,
+                currentElapsedTime: 0
+            }
+
+        case 'ON_TIMER_TICK':
+            return {
+                ...state,
+                currentElapsedTime: state.currentElapsedTime + 1
+            }
+
+        case 'ON_GAME_END':
             return {
                 ...state,
                 currentWords: [],
+                isFetching: false,
+                errorMessage: '',
                 currentDeckIndex: 0,
-                currentPoints: 0
+                currentPoints: 0,
+                currentElapsedTime: 0,
+                totalGameTime: 0
 
             };
 
@@ -50,12 +77,13 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
+                currentDeckIndex: state.currentDeckIndex + 1
+                
             }
         case 'ON_ROUND_COMPLETE':
             return {
                 ...state,
-                currentPoints: calculatePoints(state.currentPoints, state.currentWord, internalTimer.stop()),
-                currentDeckIndex: state.currentDeckIndex + 1
+                currentPoints: calculatePoints(state.currentPoints, state.currentWord, state.roundTime) 
             };
     
         default: return state;
