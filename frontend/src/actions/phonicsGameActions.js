@@ -25,12 +25,12 @@ export const onRoundComplete = () => ({
     type: 'ON_ROUND_COMPLETE'
 });
 
-export const onStopTimer = () => ({
-        type: 'ON_STOP_TIMER'
+export const onTimerStop = () => ({
+        type: 'ON_TIMER_STOP'
 });
 
-export const startTimer = () => ({
-    type: 'ON_START_TIMER'
+export const onTimerStart = () => ({
+    type: 'ON_TIMER_START'
 });
 
 export const fetchCurrentWordsFailure = errorMessage => ({
@@ -60,7 +60,7 @@ export const fetchCurrentWordsAsync = () => {
 let timer = null
 export const startTimerAsync = () => {
     return dispatch => {
-        dispatch(startTimer());
+        dispatch(onTimerStart());
         timer = setInterval(()=>dispatch(onTimerTick()), 1000)
         dispatch(onTimerTick());
     };
@@ -68,7 +68,7 @@ export const startTimerAsync = () => {
 
 export const stopTimerAsync = () => {
     return dispatch =>{
-    dispatch(onStopTimer());
+    dispatch(()=>onTimerStop());
     clearInterval(timer);
     };
 

@@ -1,32 +1,35 @@
 import interact from 'interactjs';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
 
 const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex }) => {
   const [correctCounter, incrementCorrectCounter] = useState(0);
+  const letters = [...currentWords[currentDeckIndex].name];
+  useEffect(()=>{
+    console.log("UPDATED")
+    if( letters.length === correctCounter ){
+      console.log("CORRECT COUNTER ON COMEPLTE", correctCounter)
+      console.log("LETTERS LENGTH", letters.length)
+       stopTimerAsync()
+       onRoundComplete()
+    };
+  }, [correctCounter])
+  
 
   const letterCorrect = (event) => {
-    const letters = [...currentWords[currentDeckIndex].name];
     for(let i = 0; i < letters.length; i++){
-        if (letters[i] === event.relatedTarget.textContent && 
-            event.relatedTarget.textContent === event.target.textContent){
-                message.classList.add("correct");
+        if (letters[i] == event.relatedTarget.innerText && 
+            event.relatedTarget.innerText == event.target.innerText){
+             console.log(currentDeckIndex, "DECK INDEX")
                 event.target.classList.add("checkedCorrect");
                 event.relatedTarget.classList.remove('draggable');
                 incrementCorrectCounter(prevState=>prevState + 1)
-                setTimeout(()=>{
-                    message.classList.remove('correct');
-                }, 500);
         }
     }
-    if( letters.length === correctCounter ){
-       stopTimerAsync()
-       onRoundComplete()
-    }
-}
+  }
   
 
 
@@ -68,7 +71,7 @@ interact(".inner-dropzone").dropzone({
       event.target.classList.add("dropped")
       letterCorrect(event);
   
-      onRoundComplete();
+  
     },
    
     ondropdeactivate: function (event) {
