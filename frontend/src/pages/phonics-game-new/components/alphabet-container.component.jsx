@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { shuffle } from '../../../utils';
@@ -6,13 +6,27 @@ import './interact-draggable-config';
 import AlphabetCard from './alphabet-card.component';
 import { Grid, Container } from 'semantic-ui-react';
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
-    const currentWord = currentWords[currentDeckIndex]
-    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z'];
-    if(currentWord.type === "blends"){
-        alphabet.push(currentWord.letter);
-    };
-    shuffle(alphabet);
+    const [alphabet, setAlphabet] = useState([])
 
+    const currentWord = currentWords[currentDeckIndex]
+    
+    useEffect(()=>{
+        
+        if(currentWord.type === "blends"){
+            setAlphabet(alphabet.push(currentWord.letter));
+        };
+
+        setAlphabet(shuffle(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z']));
+        console.log("ALPHABET CARDS RELOADED")
+            return function alphabetCardCleanUp () {
+                console.log("CLEANING UP")
+        setAlphabet([])
+        console.log(alphabet)
+      }
+    }, [currentDeckIndex])
+   
+  
+  
     return (
       
         <Grid>
@@ -20,7 +34,8 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
             <Grid.Row centered>
            
             {
-                alphabet.map(cardLetter => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />)
+                alphabet.length > 2 ? alphabet.map((cardLetter, i) => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />) : "Loading Alphabet Cards..."
+                
             }
            
             </Grid.Row>
