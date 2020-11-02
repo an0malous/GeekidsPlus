@@ -4,17 +4,18 @@ import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
 import GameDashboard from '../../../components/game-dashboard/game-dashboard.component';
 import RoundBreakdown from '../../../components/round-breakdown/round-breakdown';
-import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
+import { fetchCurrentWordsAsync, onRoundComplete, onGameStart, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 
-const PhonicsGame = ({ openRoundBreakdown, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ openRoundBreakdown, onGameStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
     useEffect( async ()=>{
        await fetchCurrentWordsAsync();
-       onRoundStart()
+       onGameStart()
 
    }, [])
+
    
     return (
         fetchSuccessful.length > 1 ? 
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync()),
     onRoundComplete: ()=>dispatch(onRoundComplete()),
-    onRoundStart: ()=>dispatch(onRoundStart())
+    onGameStart: ()=>dispatch(onGameStart())
 
 });
 

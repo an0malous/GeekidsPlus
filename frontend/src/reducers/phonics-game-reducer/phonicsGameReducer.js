@@ -1,10 +1,8 @@
-
-import { StatisticLabel } from 'semantic-ui-react';
-import { calculatePoints } from './phonics-game.utils';
+import { calculatePoints, createCurrentWordLetters } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
-    currentWord: '',
+    currentWordLetters: [],
     isFetching: false,
     errorMessage: '',
     currentDeckIndex: 0,
@@ -34,13 +32,13 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                currentWords: action.payload,
-                currentWord: state.currentWords[state.currentDeckIndex]
+                currentWords: action.payload
             };
 
         case 'ON_GAME_START':
             return {
-                ...state
+                ...state,
+                currentWordLetters: createCurrentWordLetters(state.currentWords[state.currentDeckIndex])
             };
 
         case 'ON_TIMER_START':
@@ -83,9 +81,10 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
+                currentWordLetters: createCurrentWordLetters(state.currentWords[state.currentDeckIndex + 1]),
                 openRoundBreakdown: !state.openRoundBreakdown,
-                currentDeckIndex: state.currentDeckIndex + 1,
-                roundPoints: 0 
+                roundPoints: 0,
+                currentDeckIndex: state.currentDeckIndex + 1 
             };
 
         case 'ON_ROUND_COMPLETE':

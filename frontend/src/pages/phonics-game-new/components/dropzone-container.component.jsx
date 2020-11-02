@@ -5,33 +5,17 @@ import Interact from './interact-dropzone-config';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 
-const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
-    const currentWord = currentWords[currentDeckIndex];
+const DropzoneContainer = ({ currentWordLetters }) => {
+    console.log(currentWordLetters)
+    const dropzones = currentWordLetters;
 
-    const createDropzone = currentWord => {
-        const {name, type, letter } = currentWord;
-        const blend = [...letter];
-        const word = [...name];
-
-        if (type === "blends"){
-            for(let i = 0; i < word.length; i++){
-                if(word[i] === blend[0] && word[i + 1] === blend[1]){
-                    word.splice(i, 2, letter)
-                }
-            };
-        };
-        return word;
-    };
-
-    const dropzones = currentWords ? createDropzone(currentWord) : null
-    
     return (
         <Interact>
                 <Grid>
                 <Grid.Row centered>
             {
-               currentWords ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
-               : ("Loading Words...")
+               currentWordLetters.length > 1 ? (dropzones.map(zone => <Dropzone key={zone} letter={zone} style={{color: "red", fontSize: "1.5rem", padding: "25px", border: "dotted black 2px"}} className="inner-dropzone" />))
+               : ("Loading Dropzone...")
             }
             </Grid.Row>
             </Grid>
@@ -39,11 +23,8 @@ const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return { 
-        currentWords: state.phonicsGameReducer.currentWords,
-        currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
-        };
-};
+const mapStateToProps = state => ({
+    currentWordLetters: state.phonicsGameReducer.currentWordLetters
+});
 
 export default connect(mapStateToProps)(DropzoneContainer);

@@ -21,4 +21,20 @@ export const calculatePoints = (currentWordLength, time) => {
     const roundPoints = Math.floor(currentWordLength * 5 + bonusCalc(time))
     console.log(roundPoints)
     return roundPoints
-}
+};
+
+export const createCurrentWordLetters = currentWord => {
+    console.log(currentWord, "******************************INSIDE UTILS FUNCTION")
+    const {name, type, letter } = currentWord;
+    const blend = [...letter];
+    const word = [...name];
+
+    if (type === "blends"){
+        for(let i = 0; i < word.length; i++){
+            if(word[i] === blend[0] && word[i + 1] === blend[1]){
+                word.splice(i, 2, letter)
+            }
+        };
+    };
+    return word;
+};

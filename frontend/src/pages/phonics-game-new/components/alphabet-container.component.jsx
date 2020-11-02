@@ -11,18 +11,16 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
     const currentWord = currentWords[currentDeckIndex]
     
     useEffect(()=>{
-        
+        const abcArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z'];
         if(currentWord.type === "blends"){
-            setAlphabet(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z', currentWord.letter]);
+            abcArr.push(currentWord.letter)
+            setAlphabet(shuffle(abcArr));
+        } else {
+            setAlphabet(shuffle(abcArr));
         };
-
-        setAlphabet(shuffle(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z']));
-        console.log("ALPHABET CARDS RELOADED")
-            return function alphabetCardCleanUp () {
-                console.log("CLEANING UP")
-        setAlphabet([])
-        console.log(alphabet)
-      }
+            return function alphabetCardCleanUp () {     
+                setAlphabet([])
+            }
     }, [currentDeckIndex, currentWord])
    
   
@@ -34,7 +32,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
             <Grid.Row centered>
            
             {
-                alphabet.length > 2 ? alphabet.map(cardLetter => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />) : "Loading Alphabet Cards..."
+                alphabet.length > 0 ? alphabet.map(cardLetter => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />) : "Loading Alphabet Cards..."
                 
             }
            

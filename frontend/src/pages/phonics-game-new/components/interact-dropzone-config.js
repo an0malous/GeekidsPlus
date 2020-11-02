@@ -5,19 +5,17 @@ import { connect } from 'react-redux';
 
 import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex }) => {
+const Interact = ({ children, currentWordLetters, onRoundComplete }) => {
   const [correctCounter, setCorrectCounter] = useState(0);
-  const [letters, setLetters] = useState([...currentWords[currentDeckIndex].name])
-  console.log(letters.length)
-  console.log(correctCounter)
+  const [letters, setLetters] = useState(currentWordLetters);
 
 let lettersRef = useRef(null)
 let correctCounterRef = useRef(null)
 
 useEffect(()=>{
-  setLetters([...currentWords[currentDeckIndex].name])
+  setLetters(currentWordLetters)
   setCorrectCounter(0)
-},[currentDeckIndex])
+},[currentWordLetters])
 
 lettersRef.current = letters
 correctCounterRef.current = correctCounter
@@ -31,8 +29,7 @@ correctCounterRef.current = correctCounter
           
                 event.relatedTarget.classList.remove('draggable');
                 setCorrectCounter(prev=>prev + 1)
-                console.log(lettersRef.current.length)
-                console.log(correctCounterRef.current)
+
                 if( lettersRef.current.length === correctCounterRef.current ){    
                   stopTimerAsync()
                   onRoundComplete()
@@ -103,8 +100,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  currentWords: state.phonicsGameReducer.currentWords,
-  currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
+  currentWordLetters: state.phonicsGameReducer.currentWordLetters
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Interact);
