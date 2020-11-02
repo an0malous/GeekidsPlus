@@ -13,7 +13,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
     useEffect(()=>{
         
         if(currentWord.type === "blends"){
-            setAlphabet(alphabet.push(currentWord.letter));
+            setAlphabet(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z', currentWord.letter]);
         };
 
         setAlphabet(shuffle(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ,'k' , 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u' , 'v', 'w', 'x', 'y', 'z']));
