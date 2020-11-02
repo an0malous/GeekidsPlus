@@ -11,7 +11,7 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTime
 
     useEffect(()=>{
         startTimerAsync();    
-    }, [])
+    }, [currentDeckIndex])
 
     return (
         currentWords ?

@@ -67,13 +67,15 @@ export const startTimerAsync = () => {
         dispatch(onTimerStart());
         timer = setInterval(()=>dispatch(onTimerTick()), 1000)
         dispatch(onTimerTick());
+        
     };
 };
 
 export const stopTimerAsync = () => {
+     clearInterval(timer);
     return dispatch =>{
-    dispatch(()=>onTimerStop());
-    clearInterval(timer);
+    dispatch(onTimerStop());
+   
     };
 
 };

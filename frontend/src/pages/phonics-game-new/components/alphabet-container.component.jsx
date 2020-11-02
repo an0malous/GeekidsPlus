@@ -43,13 +43,9 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
     );
 };
 
-const mapStateToProps = state => {
-    const { currentWord } = state.phonicsGameReducer;
-    return  { 
-                currentWords: state.phonicsGameReducer.currentWords,
-                currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
-
-            }
-}
+const mapStateToProps = state => ({
+    currentWords: state.phonicsGameReducer.currentWords,
+    currentDeckIndex: state.phonicsGameReducer.currentDeckIndex
+});
 
 export default connect(mapStateToProps)(AlphabetContainer);
