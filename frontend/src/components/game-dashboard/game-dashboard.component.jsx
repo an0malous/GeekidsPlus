@@ -22,7 +22,7 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTime
                 <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
                     <div>{`Points: ${points}`}</div>
                     <div>{`Time: ${parseInt(time / 60)} : ${time % 60}`}</div>
-                    <div>{`${currentDeckIndex} / ${currentWords.length}`}</div>
+                    <div>{`${currentDeckIndex + 1} / ${currentWords.length}`}</div>
                 </Grid.Column> 
 
                 <Grid.Column width={6} style={{ textAlign: "center"}}>

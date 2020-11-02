@@ -1,33 +1,42 @@
 import interact from 'interactjs';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
 
 const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex }) => {
-  const [correctCounter, incrementCorrectCounter] = useState(0);
-  const letters = [...currentWords[currentDeckIndex].name];
-  console.log(letters)
-  console.log(currentWords[currentDeckIndex])
-  useEffect(()=>{
- 
-    if( letters.length === correctCounter ){
-       stopTimerAsync()
-       onRoundComplete()
-    };
-  }, [correctCounter])
-  
+  const [correctCounter, setCorrectCounter] = useState(0);
+  const [letters, setLetters] = useState([...currentWords[currentDeckIndex].name])
+  console.log(letters.length)
+  console.log(correctCounter)
+
+let lettersRef = useRef(null)
+let correctCounterRef = useRef(null)
+
+useEffect(()=>{
+  setLetters([...currentWords[currentDeckIndex].name])
+  setCorrectCounter(0)
+},[currentDeckIndex])
+
+lettersRef.current = letters
+correctCounterRef.current = correctCounter
 
   const letterCorrect = (event) => {
-    for(let i = 0; i < letters.length; i++){
-      console.log(letters[i] === event.relatedTarget.textContent)
-        if (letters[i] === event.relatedTarget.innerText && 
+
+    for(let i = 0; i < lettersRef.current.length; i++){
+
+        if (lettersRef.current[i] === event.relatedTarget.innerText && 
             event.relatedTarget.innerText === event.target.innerText){
-             console.log(currentDeckIndex, "DECK INDEX")
-             
+          
                 event.relatedTarget.classList.remove('draggable');
-                incrementCorrectCounter(prevState=>prevState + 1)
+                setCorrectCounter(prev=>prev + 1)
+                console.log(lettersRef.current.length)
+                console.log(correctCounterRef.current)
+                if( lettersRef.current.length === correctCounterRef.current ){    
+                  stopTimerAsync()
+                  onRoundComplete()
+                }       
         }
     }
   }
@@ -68,8 +77,6 @@ interact(".inner-dropzone").dropzone({
     },
     ondrop: function (event) {
       event.stopImmediatePropagation();
-
-      event.target.classList.add("dropped")
       letterCorrect(event);
   
   
