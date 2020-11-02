@@ -8,11 +8,11 @@ import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameAct
 const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex }) => {
   const [correctCounter, incrementCorrectCounter] = useState(0);
   const letters = [...currentWords[currentDeckIndex].name];
+  console.log(letters)
+  console.log(currentWords[currentDeckIndex])
   useEffect(()=>{
-    console.log("UPDATED")
+ 
     if( letters.length === correctCounter ){
-      console.log("CORRECT COUNTER ON COMEPLTE", correctCounter)
-      console.log("LETTERS LENGTH", letters.length)
        stopTimerAsync()
        onRoundComplete()
     };
@@ -21,10 +21,11 @@ const Interact = ({ children, onRoundComplete, currentWords, currentDeckIndex })
 
   const letterCorrect = (event) => {
     for(let i = 0; i < letters.length; i++){
-        if (letters[i] == event.relatedTarget.innerText && 
-            event.relatedTarget.innerText == event.target.innerText){
+      console.log(letters[i] === event.relatedTarget.textContent)
+        if (letters[i] === event.relatedTarget.innerText && 
+            event.relatedTarget.innerText === event.target.innerText){
              console.log(currentDeckIndex, "DECK INDEX")
-                event.target.classList.add("checkedCorrect");
+             
                 event.relatedTarget.classList.remove('draggable');
                 incrementCorrectCounter(prevState=>prevState + 1)
         }

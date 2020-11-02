@@ -34,7 +34,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
             <Grid.Row centered>
            
             {
-                alphabet.length > 2 ? alphabet.map((cardLetter, i) => <AlphabetCard key={cardLetter} letter={cardLetter} className="draggable" />) : "Loading Alphabet Cards..."
+                alphabet.length > 2 ? alphabet.map(cardLetter => <AlphabetCard key={cardLetter} letter={cardLetter} currentDeckIndex={currentDeckIndex} className="draggable" />) : "Loading Alphabet Cards..."
                 
             }
            
