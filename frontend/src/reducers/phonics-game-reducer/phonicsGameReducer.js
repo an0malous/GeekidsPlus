@@ -1,4 +1,5 @@
 
+import { StatisticLabel } from 'semantic-ui-react';
 import { calculatePoints } from './phonics-game.utils';
 
 const INITIAL_STATE = {
@@ -84,15 +85,14 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 openRoundBreakdown: !state.openRoundBreakdown,
                 currentDeckIndex: state.currentDeckIndex + 1,
-                totalGamePoints: state.totalGamePoints + state.roundPoints,
-                roundPoints: 0
-                
+                roundPoints: 0 
             };
 
         case 'ON_ROUND_COMPLETE':
             return {
                 ...state,
-                roundPoints: calculatePoints(state.currentWord, state.roundTime),
+                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime),
+                totalGamePoints: state.totalGamePoints + state.roundPoints,
                 openRoundBreakdown: !state.openRoundBreakdown,
             };
     

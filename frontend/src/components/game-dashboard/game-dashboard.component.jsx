@@ -20,7 +20,7 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTime
         <Grid columns={3}>
             <Grid.Row>
                 <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
-                    <div>{`Points: ${points}`}</div>
+                    <div>Points: {points}</div>
                     <div>{`Time: ${parseInt(time / 60)} : ${time % 60}`}</div>
                     <div>{`${currentDeckIndex + 1} / ${currentWords.length}`}</div>
                 </Grid.Column> 
@@ -46,12 +46,11 @@ const mapDispatchToProps = dispatch => ({
     stopTimerAsync: ()=>dispatch(stopTimerAsync())
 });
 
-const mapStateToProps = state => {
-    return { 
-        currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
-        currentWords: state.phonicsGameReducer.currentWords,
-        points: state.phonicsGameReducer.totalGamePoints,
-        time: state.phonicsGameReducer.currentElapsedTime
-    };
-};
+const mapStateToProps = state => ({
+    currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
+    currentWords: state.phonicsGameReducer.currentWords,
+    points: state.phonicsGameReducer.roundPoints,
+    time: state.phonicsGameReducer.currentElapsedTime
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(GameDashboard);
