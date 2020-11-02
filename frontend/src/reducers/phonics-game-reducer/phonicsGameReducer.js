@@ -82,6 +82,8 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_START':
             return {
                 ...state,
+                openRoundBreakdown: !state.openRoundBreakdown,
+                currentDeckIndex: state.currentDeckIndex + 1,
                 totalGamePoints: state.totalGamePoints + state.roundPoints,
                 roundPoints: 0
                 
@@ -92,7 +94,6 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 roundPoints: calculatePoints(state.currentWord, state.roundTime),
                 openRoundBreakdown: !state.openRoundBreakdown,
-                currentDeckIndex: state.currentDeckIndex + 1,
             };
     
         default: return state;

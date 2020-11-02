@@ -3,11 +3,12 @@ import React, { useEffect } from 'react';
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component'
 import GameDashboard from '../../../components/game-dashboard/game-dashboard.component';
+import RoundBreakdown from '../../../components/round-breakdown/round-breakdown';
 import { fetchCurrentWordsAsync, onRoundComplete, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 
-const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ openRoundBreakdown, onRoundStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
     
     useEffect( async ()=>{
        await fetchCurrentWordsAsync();
@@ -18,16 +19,18 @@ const PhonicsGame = ({ isFetching, onRoundStart, fetchSuccessful, fetchCurrentWo
     return (
         fetchSuccessful.length > 1 ? 
         (<div>
+            {openRoundBreakdown ? <RoundBreakdown /> : null }
             <GameDashboard />
             <DropzoneContainer />
             <AlphabetContainer />
-        </div>) : ("NOTHING")
+        </div>) : ("Loading...")
         )
 };
 
 const mapStateToProps = state => ({
     isFetching: state.phonicsGameReducer.isFetching,
-    fetchSuccessful: state.phonicsGameReducer.currentWords
+    fetchSuccessful: state.phonicsGameReducer.currentWords,
+    openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown
 });
 
 const mapDispatchToProps = dispatch => ({

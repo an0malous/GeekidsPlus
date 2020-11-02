@@ -7,18 +7,16 @@ import { Grid } from 'semantic-ui-react';
 
 const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
     const currentWord = currentWords[currentDeckIndex];
+
     const createDropzone = currentWord => {
         const {name, type, letter } = currentWord;
         const blend = [...letter];
         const word = [...name];
-        console.log(name, word, "***********************************************")
+
         if (type === "blends"){
-            
             for(let i = 0; i < word.length; i++){
                 if(word[i] === blend[0] && word[i + 1] === blend[1]){
                     word.splice(i, 2, letter)
-                    return word
-                    
                 }
             };
         };
@@ -26,7 +24,7 @@ const DropzoneContainer = ({ currentWords, currentDeckIndex }) => {
     };
 
     const dropzones = currentWords ? createDropzone(currentWord) : null
-        console.log(dropzones, "*************************** DROPZONES")
+    
     return (
         <Interact>
                 <Grid>
