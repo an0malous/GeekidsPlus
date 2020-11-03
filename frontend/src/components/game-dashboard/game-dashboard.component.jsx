@@ -5,7 +5,7 @@ import Thumbnail from '../thumbnail/thumbnail.component';
 import { startTimerAsync } from '../../actions/phonicsGameActions';
 import { stopTimerAsync } from '../../actions/phonicsGameActions';
 
-const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTimerAsync, stopTimerAsync}) => {
+const GameDashboard = ({ currentWords, currentDeckIndex, totalGamePoints, time, startTimerAsync}) => {
     const currentWord = currentWords[currentDeckIndex];
 
 
@@ -20,7 +20,7 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTime
         <Grid columns={3}>
             <Grid.Row>
                 <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
-                    <div>Points: {points}</div>
+                    <div>Points: {totalGamePoints}</div>
                     <div>{`Time: ${parseInt(time / 60)} : ${time % 60}`}</div>
                     <div>{`${currentDeckIndex + 1} / ${currentWords.length}`}</div>
                 </Grid.Column> 
@@ -43,13 +43,12 @@ const GameDashboard = ({ currentWords, currentDeckIndex, points, time, startTime
 
 const mapDispatchToProps = dispatch => ({
     startTimerAsync: ()=>dispatch(startTimerAsync()),
-    stopTimerAsync: ()=>dispatch(stopTimerAsync())
 });
 
 const mapStateToProps = state => ({
     currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
     currentWords: state.phonicsGameReducer.currentWords,
-    points: state.phonicsGameReducer.roundPoints,
+    totalGamePoints: state.phonicsGameReducer.totalGamePoints,
     time: state.phonicsGameReducer.totalGameTime
 });
 

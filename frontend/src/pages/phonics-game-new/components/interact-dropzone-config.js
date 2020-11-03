@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, currentWordLetters, onRoundComplete }) => {
+const Interact = ({ children, stopTimerAsync, currentWordLetters, onRoundComplete }) => {
   const [correctCounter, setCorrectCounter] = useState(0);
   const [letters, setLetters] = useState(currentWordLetters);
 
