@@ -30,7 +30,7 @@ export const onRoundComplete = () => ({
 });
 
 export const onTimerStop = () => ({
-        type: 'ON_TIMER_STOP'
+    type: 'ON_TIMER_STOP'
 });
 
 export const onTimerStart = () => ({

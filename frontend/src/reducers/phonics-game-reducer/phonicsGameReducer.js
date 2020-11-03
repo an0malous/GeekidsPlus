@@ -49,14 +49,15 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_TIMER_STOP':
             return {
                 ...state,
-                totalGameTime: state.totalGameTime + state.currentElapsedTime,
+                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime),
                 currentElapsedTime: 0
             }
 
         case 'ON_TIMER_TICK':
             return {
                 ...state,
-                currentElapsedTime: state.currentElapsedTime + 1
+                currentElapsedTime: state.currentElapsedTime + 1,
+                totalGameTime: state.totalGameTime + 1
             }
 
         case 'ON_GAME_END':
@@ -90,8 +91,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_ROUND_COMPLETE':
             return {
                 ...state,
-                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime),
-                totalGamePoints: state.totalGamePoints + state.roundPoints,
+                totalGamePoints: state.roundPoints + state.totalGamePoints,
                 openRoundBreakdown: !state.openRoundBreakdown,
             };
     

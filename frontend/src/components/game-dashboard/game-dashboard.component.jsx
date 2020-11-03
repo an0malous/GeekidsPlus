@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
     currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
     currentWords: state.phonicsGameReducer.currentWords,
     points: state.phonicsGameReducer.roundPoints,
-    time: state.phonicsGameReducer.currentElapsedTime
+    time: state.phonicsGameReducer.totalGameTime
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDashboard);
