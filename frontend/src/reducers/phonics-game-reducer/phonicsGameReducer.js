@@ -1,3 +1,4 @@
+import { startTimerAsync } from '../../actions/phonicsGameActions';
 import { calculatePoints, createCurrentWordLetters } from './phonics-game.utils';
 
 const INITIAL_STATE = {
@@ -10,7 +11,8 @@ const INITIAL_STATE = {
     totalGamePoints: 0,
     currentElapsedTime: 0,
     totalGameTime: 0,
-    openRoundBreakdown: false
+    openRoundBreakdown: false,
+    gameType: {}
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -49,8 +51,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_TIMER_STOP':
             return {
                 ...state,
-                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime),
-                currentElapsedTime: 0
+                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime)
             }
 
         case 'ON_TIMER_TICK':
@@ -85,6 +86,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 currentWordLetters: createCurrentWordLetters(state.currentWords[state.currentDeckIndex + 1]),
                 openRoundBreakdown: !state.openRoundBreakdown,
                 roundPoints: 0,
+                currentElapsedTime: 0,
                 currentDeckIndex: state.currentDeckIndex + 1 
             };
 
@@ -93,6 +95,11 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 totalGamePoints: state.roundPoints + state.totalGamePoints,
                 openRoundBreakdown: !state.openRoundBreakdown,
+            };
+        case 'ON_SELECTION_COMPLETE':
+            return {
+                ...state,
+               gameType: action.payload
             };
     
         default: return state;
