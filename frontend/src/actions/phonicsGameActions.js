@@ -46,6 +46,11 @@ export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
 });
 
+export const onTypeSelect = (type) => ({
+    type: 'ON_TYPE_SELECT',
+    payload: type
+});
+
 export const fetchCurrentWordsAsync = () => {
     return async (dispatch)=> {
     

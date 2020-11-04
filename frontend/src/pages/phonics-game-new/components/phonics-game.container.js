@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import PhonicsGame from './phonics-game.component';
+import PhonicsGameStartMenu from './phonics-game-start-menu.component';
+import { connect } from 'react-redux';
 
-const PhonicsGameContainer = () => {
-    //Game Logic goes here
+
+const PhonicsGameContainer = ({ fetchSuccessful }) => {
+   
     return (
         <Container>
-            <PhonicsGame />
+            {
+                fetchSuccessful > 1 ? <PhonicsGame /> : <PhonicsGameStartMenu />
+            }
         </Container>
     )
 };
 
-export default PhonicsGameContainer;
+const mapStateToProps = state => ({
+    isFetching: state.phonicsGameReducer.isFetching,
+    fetchSuccessful: state.phonicsGameReducer.currentWords,
+    openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown
+});
+
+
+export default connect(mapStateToProps)(PhonicsGameContainer);

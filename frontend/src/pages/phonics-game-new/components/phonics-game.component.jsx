@@ -6,25 +6,17 @@ import GameDashboard from '../../../components/game-dashboard/game-dashboard.com
 import RoundBreakdown from '../../../components/round-breakdown/round-breakdown';
 import { fetchCurrentWordsAsync, onRoundComplete, onGameStart, onRoundStart } from '../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
 
-const PhonicsGame = ({ openRoundBreakdown, onGameStart, fetchSuccessful, fetchCurrentWordsAsync })=> {
+const PhonicsGame = ({ openRoundBreakdown })=> {
     
-    useEffect( async ()=>{
-       await fetchCurrentWordsAsync();
-       onGameStart()
-
-   }, [])
-
-   
     return (
-        fetchSuccessful.length > 1 ? 
-        (<div>
+       
+        <div>
             {openRoundBreakdown ? <RoundBreakdown /> : null }
             <GameDashboard />
             <DropzoneContainer />
             <AlphabetContainer />
-        </div>) : ("Loading...")
+        </div>
         )
 };
 
@@ -34,11 +26,5 @@ const mapStateToProps = state => ({
     openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown
 });
 
-const mapDispatchToProps = dispatch => ({
-    fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync()),
-    onRoundComplete: ()=>dispatch(onRoundComplete()),
-    onGameStart: ()=>dispatch(onGameStart())
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGame);
+export default connect(mapStateToProps)(PhonicsGame);

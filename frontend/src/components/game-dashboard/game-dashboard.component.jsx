@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Grid, Rail, Button, Container } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
 import { startTimerAsync } from '../../actions/phonicsGameActions';
-import { stopTimerAsync } from '../../actions/phonicsGameActions';
 
 const GameDashboard = ({ currentWords, currentDeckIndex, totalGamePoints, time, startTimerAsync}) => {
     const currentWord = currentWords[currentDeckIndex];
