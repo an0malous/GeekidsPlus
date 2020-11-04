@@ -10,14 +10,14 @@ const PhonicsGameStartMenu = ({ onGameStart, fetchCurrentWordsAsync }) => {
     const [gameType, setGameType] = useState(null)
     const [gameLevel, setGameLevel] = useState(null)
     const [gameMode, setGameMode] = useState(null)
-
+    
     return (
         <div>
-            { gameType && gameLevel && gameMode ? null : <SelectType setGameType={setGameType} /> }
+            { !gameType && !gameLevel && !gameMode ?  <SelectType setGameType={setGameType} /> : null }
         
             { gameType && !gameMode && !gameLevel ? <SelectLevel setGameLevel={setGameLevel} /> : null }
 
-            { gameType && gameMode ? <SelectMode setGameMode={setGameMode} /> : null }
+            { gameType && gameLevel ? <SelectMode setGameMode={setGameMode} /> : null }
             
         </div>
     );
