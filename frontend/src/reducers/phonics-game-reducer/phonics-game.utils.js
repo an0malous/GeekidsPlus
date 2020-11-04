@@ -23,6 +23,11 @@ export const calculatePoints = (currentWordLength, time) => {
     return roundPoints
 };
 
+export const filterCardData = (data, letter)=> {
+     const filteredData = data.filter(word=>word.letter === letter) 
+     return  filteredData
+};
+
 export const createCurrentWordLetters = currentWord => {
     console.log(currentWord, "******************************INSIDE UTILS FUNCTION")
     const {name, type, letter } = currentWord;

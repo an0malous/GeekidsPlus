@@ -1,5 +1,5 @@
-import { startTimerAsync } from '../../actions/phonicsGameActions';
-import { calculatePoints, createCurrentWordLetters } from './phonics-game.utils';
+
+import { calculatePoints, createCurrentWordLetters, filterCardData } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
@@ -34,7 +34,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                currentWords: action.payload
+                currentWords: filterCardData(action.payload, 'a')
             };
 
         case 'ON_GAME_START':

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 
-const CarouselMenu = ({ items, ...rest }) => {
+const CarouselMenu = ({ items, onClickItemTarget}) => {
     const [ currentItem, setCurrentItem ] = useState(0)
   
     return (
@@ -12,7 +12,7 @@ const CarouselMenu = ({ items, ...rest }) => {
                  </Grid.Column>
 
                  <Grid.Column>
-                     <div {...rest}>{items[currentItem]}</div>
+                     <div onClick={()=> onClickItemTarget(items[currentItem])}>{items[currentItem]}</div>
                  </Grid.Column>
 
                  <Grid.Column>

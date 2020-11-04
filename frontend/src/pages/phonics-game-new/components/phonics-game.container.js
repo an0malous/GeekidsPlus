@@ -10,7 +10,7 @@ const PhonicsGameContainer = ({ fetchSuccessful }) => {
     return (
         <Container>
             {
-                fetchSuccessful > 1 ? <PhonicsGame /> : <PhonicsGameStartMenu />
+                fetchSuccessful.length > 0 ? <PhonicsGame /> : <PhonicsGameStartMenu />
             }
         </Container>
     )
