@@ -1,44 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import SelectType from './select-type.component';
-import SelectLevel from './select-level.component';
-import SelectMode from './select-mode.component';
-import { fetchCurrentWordsAsync, onGameStart } from '../../../actions/phonicsGameActions';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import SelectType from "./select-type.component";
+import SelectLevel from "./select-level.component";
+import SelectMode from "./select-mode.component";
+import {
+  fetchCurrentWordsAsync,
+  getGameParams,
+  onGameStart,
+  setCurrentWords,
+} from "../../../actions/phonicsGameActions";
 
-const PhonicsGameStartMenu = ({ onGameStart, fetchCurrentWordsAsync }) => {
+const PhonicsGameStartMenu = ({
+  onGameStart,
+  fetchCurrentWordsAsync,
+  setCurrentWords,
+  getGameParams,
+}) => {
+  const [gameType, setGameType] = useState("");
+  const [gameLevel, setGameLevel] = useState('');
+  const [gameMode, setGameMode] = useState("");
 
-    const [gameType, setGameType] = useState(null)
-    const [gameLevel, setGameLevel] = useState(null)
-    const [gameMode, setGameMode] = useState(null)
+  const handleOnGameStart = async () => {
     
-    const handleOnGameStart = async() => {
-        await fetchCurrentWordsAsync(gameMode);
-        onGameStart();
-    }
-    if (gameMode){
-        return (
-            <div>
-                <button onClick={()=>handleOnGameStart()}>Start Game</button>
-            </div>
-        )
-    } else {return (
-        <div>
-        
-            { !gameType && !gameLevel && !gameMode ?  <SelectType setGameType={setGameType} /> : null }
-        
-            { gameType && !gameMode && !gameLevel ? <SelectLevel setGameLevel={setGameLevel} /> : null }
+    await fetchCurrentWordsAsync();
+    const gameInfo = {
+        gameLevel,
+        gameMode: gameMode || "random",
+      };
+      console.log(gameInfo)
+      getGameParams(gameLevel)
+      
 
-            { gameType && gameLevel && !gameMode ? <SelectMode setGameMode={setGameMode} /> : null }
-            
-        </div>
-    )};
-
+    setCurrentWords();
+    onGameStart();
+  };
+  return (
+    <div>
+      {!gameType ? (
+        <SelectType setGameType={setGameType} />
+        ) : !gameLevel ? (
+                <SelectLevel setGameLevel={setGameLevel} />
+            ) : (gameType === 'practice' && !gameMode) ||
+                    (gameType === 'pracitce' && gameLevel) ? (
+                    <SelectMode setGameMode={setGameMode} />
+                ) : (
+                        <button onClick={() => handleOnGameStart()}>Start Game</button>
+                    )};
+    </div>
+  );
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchCurrentWordsAsync: ()=>dispatch(fetchCurrentWordsAsync()),
-    onGameStart: ()=>dispatch(onGameStart())
-
+  fetchCurrentWordsAsync: () => dispatch(fetchCurrentWordsAsync()),
+  onGameStart: () => dispatch(onGameStart()),
+  getGameParams: () => dispatch(getGameParams()),
+  setCurrentWords: () => dispatch(setCurrentWords()),
 });
 
 export default connect(null, mapDispatchToProps)(PhonicsGameStartMenu);
