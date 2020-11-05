@@ -1,3 +1,5 @@
+import gameDashboardComponent from "../../components/game-dashboard/game-dashboard.component";
+import { shuffle } from '../../utils';
 
 const bonusCalc = (roundTime) => {
   
@@ -23,9 +25,15 @@ export const calculatePoints = (currentWordLength, time) => {
     return roundPoints
 };
 
-export const filterCardData = (data, letter)=> {
-     const filteredData = data.filter(word=>word.letter === letter) 
-     return  filteredData
+export const filterCardData = ( words, {gameLevel, gameMode, gameType} )=> {
+     const filteredData = shuffle(words.filter(word=> {
+        if(gameType === 'competitve'){
+            return word.type === gameLevel
+        } else {
+            return word.type === gameLevel && word.letter === gameMode
+        } 
+    }));
+     return  filteredData;
 };
 
 export const createCurrentWordLetters = currentWord => {

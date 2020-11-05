@@ -20,15 +20,17 @@ const PhonicsGameStartMenu = ({
   const [gameLevel, setGameLevel] = useState('');
   const [gameMode, setGameMode] = useState("");
 
+  const gameInfo = {
+    gameLevel,
+    gameType,
+    gameMode: gameMode || "random",
+  };
   const handleOnGameStart = async () => {
     
     await fetchCurrentWordsAsync();
-    const gameInfo = {
-        gameLevel,
-        gameMode: gameMode || "random",
-      };
-      console.log(gameInfo)
-      getGameParams(gameLevel)
+    
+
+      getGameParams(gameInfo)
       
 
     setCurrentWords();
@@ -40,9 +42,8 @@ const PhonicsGameStartMenu = ({
         <SelectType setGameType={setGameType} />
         ) : !gameLevel ? (
                 <SelectLevel setGameLevel={setGameLevel} />
-            ) : (gameType === 'practice' && !gameMode) ||
-                    (gameType === 'pracitce' && gameLevel) ? (
-                    <SelectMode setGameMode={setGameMode} />
+            ) : (gameLevel && !gameMode) ? (
+                    <SelectMode gameType={gameType} setGameMode={setGameMode} />
                 ) : (
                         <button onClick={() => handleOnGameStart()}>Start Game</button>
                     )};
@@ -53,7 +54,7 @@ const PhonicsGameStartMenu = ({
 const mapDispatchToProps = dispatch => ({
   fetchCurrentWordsAsync: () => dispatch(fetchCurrentWordsAsync()),
   onGameStart: () => dispatch(onGameStart()),
-  getGameParams: () => dispatch(getGameParams()),
+  getGameParams: gameInfo => dispatch(getGameParams(gameInfo)),
   setCurrentWords: () => dispatch(setCurrentWords()),
 });
 

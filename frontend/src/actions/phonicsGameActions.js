@@ -9,12 +9,16 @@ export const getCurrentDeckIndex = () => ({
 });
 
 export const fetchCurrentWordsStart =()=> ({
-    type: 'FETCH_CURRENT_WORDS_START'
+    type: 'FETCH_WORDS_START'
 });
 
-export const fetchCurrentWordsSuccess = (currentWords) => ({
-    type: 'FETCH_CURRENT_WORDS_SUCCESS',
-    payload: currentWords,
+export const fetchCurrentWordsSuccess = (Words) => ({
+    type: 'FETCH_WORDS_SUCCESS',
+    payload: Words,
+});
+
+export const setCurrentWords = () => ({
+    type: 'SET_CURRENT_WORDS'
 });
 
 export const onRoundStart = () => ({
@@ -38,7 +42,7 @@ export const onTimerStart = () => ({
 });
 
 export const fetchCurrentWordsFailure = errorMessage => ({
-    type: 'FETCH_CURRENT_WORDS_FAILURE',
+    type: 'FETCH_WORDS_FAILURE',
     payload: errorMessage
 })
 
@@ -46,9 +50,9 @@ export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
 });
 
-export const onTypeSelect = (type) => ({
-    type: 'ON_TYPE_SELECT',
-    payload: type
+export const getGameParams = (gameInfo) => ({
+    type: 'GET_GAME_PARAMS',
+    payload: gameInfo
 });
 
 export const fetchCurrentWordsAsync = () => {

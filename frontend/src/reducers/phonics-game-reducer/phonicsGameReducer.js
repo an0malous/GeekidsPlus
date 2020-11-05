@@ -3,6 +3,7 @@ import { calculatePoints, createCurrentWordLetters, filterCardData } from './pho
 
 const INITIAL_STATE = {
     currentWords: [],
+    words: [],
     currentWordLetters: [],
     isFetching: false,
     errorMessage: '',
@@ -12,7 +13,7 @@ const INITIAL_STATE = {
     currentElapsedTime: 0,
     totalGameTime: 0,
     openRoundBreakdown: false,
-    gameType: {}
+    gameParams: {}
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -24,18 +25,24 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 currentWord: state.currentWords[state.currentDeckIndex]
             };
 
-        case 'FETCH_CURRENT_WORDS_START':
+        case 'FETCH_WORDS_START':
             return {
                 ...state,
                 isFetching: true
             };
 
-        case 'FETCH_CURRENT_WORDS_SUCCESS':
+        case 'FETCH_WORDS_SUCCESS':
             return {
                 ...state,
                 isFetching: false,
-                currentWords: filterCardData(action.payload, 'a')
+                words: action.payload
             };
+        
+        case 'SET_CURRENT_WORDS':
+            return {
+                ...state,
+                currentWords: filterCardData(state.words, state.gameParams) 
+            }
 
         case 'ON_GAME_START':
             return {
@@ -45,7 +52,13 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 
         case 'ON_TIMER_START':
             return {
-                ...state
+                ...state,
+            };
+
+        case 'GET_GAME_PARAMS':
+            return {
+                ...state,
+                gameParams: action.payload
             };
 
         case 'ON_TIMER_STOP':
@@ -74,7 +87,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 
             };
 
-        case 'FETCH_CURRENT_WORDS_FAILURE':
+        case 'FETCH_WORDS_FAILURE':
             return {
                 ...state,
                 errorMessage: action.payload
