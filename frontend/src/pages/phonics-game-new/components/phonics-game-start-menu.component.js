@@ -23,6 +23,8 @@ const PhonicsGameStartMenu = ({
   const createGameParams = (gameType, gameLevel, gameMode, ...rest) => {
    
     const gameParams = {gameLevel, gameType, gameMode, ...rest}
+    gameParams.initialClock = 0;
+    gameParams.tick = 1
     if (gameMode === 'classic'){
       gameParams.initialClock = 600
       gameParams.tick = -1

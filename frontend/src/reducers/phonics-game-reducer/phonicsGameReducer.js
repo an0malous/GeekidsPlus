@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     totalGameTime: 0,
     openRoundBreakdown: false,
     gameParams: {},
-    tick: 0
+    tick: null
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -73,7 +73,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_TIMER_TICK':
             return {
                 ...state,
-                roundTime: state.roundTime + 1, //used for calculating points too
+                roundTime: state.gameParams.gameType !== 'practice' ? state.roundTime + 1 : 0, //used for calculating points too
                 totalGameTime: state.totalGameTime + state.tick
             }
 
