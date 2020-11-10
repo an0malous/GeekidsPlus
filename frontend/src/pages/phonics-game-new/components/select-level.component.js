@@ -7,7 +7,7 @@ const SelectLevel = ({ setGameLevel }) => (
         <Container>
             <Grid>
                 <Grid.Column width={4}>
-                    <div onClick={()=>setGameLevel('initial')} >Bronze - Initial Sounds</div>
+                    <div onClick={()=>setGameLevel('initialSounds')} >Bronze - Initial Sounds</div>
                 </Grid.Column>
 
                 <Grid.Column width={4}>

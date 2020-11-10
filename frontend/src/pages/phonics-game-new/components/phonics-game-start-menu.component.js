@@ -19,17 +19,22 @@ const PhonicsGameStartMenu = ({
   const [gameType, setGameType] = useState("");
   const [gameLevel, setGameLevel] = useState('');
   const [gameMode, setGameMode] = useState("");
-
-  const gameInfo = {
-    gameLevel,
-    gameType,
-    gameMode: gameMode || "random",
+  
+  const createGameParams = (gameType, gameLevel, gameMode, ...rest) => {
+   
+    const gameParams = {gameLevel, gameType, gameMode, ...rest}
+    if (gameMode === 'classic'){
+      gameParams.initialClock = 600
+      gameParams.tick = -1
+    }
+    return gameParams
   };
+
   const handleOnGameStart = async () => {
     
     await fetchCurrentWordsAsync();
     
-
+    const gameInfo = createGameParams(gameType, gameLevel, gameMode)
       getGameParams(gameInfo)
       
 

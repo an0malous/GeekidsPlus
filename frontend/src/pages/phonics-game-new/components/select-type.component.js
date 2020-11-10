@@ -8,7 +8,7 @@ const selectType = ({ setGameType }) => (
                 <div onClick={()=>setGameType('practice')}>Practice</div>
             </Grid.Column>
             <Grid.Column width={8} >
-            <div onClick={()=>setGameType('competitve')}>Competitive</div>
+            <div onClick={()=>setGameType('competitive')}>Competitive</div>
             </Grid.Column>
         </Grid>
     </Container>

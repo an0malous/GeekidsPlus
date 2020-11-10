@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios'
-import { PrivateRoute } from './components/PrivateRoute';
+
 import { Navbar } from './Navbar';
 import PhonicsGamePage from './pages/phonics-game-new/phonics-game.page';
 import { Landing } from './pages/landing/Landing'
@@ -44,7 +44,7 @@ export default class App extends React.Component {
           <Route exact path="/register" admin={this.state.role} exact component={Register} />
           <Route exact path="/login" render={()=><Login updateUser={this.updateUser} />} />
           <Route path="/phonics" component={PhonicsGamePage} />
-          <PrivateRoute path="/admin" component={AdminDashboard} role={this.state.role} loggedIn={this.state.loggedIn} accessLevel={4} />
+          <Route path="/admin" component={AdminDashboard}  />
        
         </div>
       

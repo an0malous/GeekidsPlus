@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CarouselMenu from '../../../components/carousel-menu/carousel-menu.component';
 import { Container } from 'semantic-ui-react';
-import { onGameStart } from '../../../actions/phonicsGameActions';
 
-const SelectMode = ({ gameType, gameLevel, setGameMode, handleFetchWordsAsync }) => {
+const SelectMode = ({ gameType, gameLevel, setGameMode }) => {
     const blends = ['ch', 'sh', 'wh', 'th', 'ck', 'random'];
     const cvc = ['a', 'e', 'i', 'o', 'u', 'random'];
 
     return (
         <Container>
         {
-        gameType === 'competitve' ? 
+        gameType === 'competitive' ? 
             <CarouselMenu 
                 onClickItemTarget={setGameMode} 
-                items={['Classic Mode', 'Marathon']} 
+                items={['classic', 'marathon']} 
             /> :
             <CarouselMenu 
                 onClickItemTarget={setGameMode} 

@@ -1,5 +1,5 @@
 
-import { calculatePoints, createCurrentWordLetters, filterCardData } from './phonics-game.utils';
+import { calculatePoints, createCurrentWordLetters, filterWordData } from './phonics-game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
@@ -10,10 +10,11 @@ const INITIAL_STATE = {
     currentDeckIndex: 0,
     roundPoints: 0,
     totalGamePoints: 0,
-    currentElapsedTime: 0,
+    roundTime: 0,
     totalGameTime: 0,
     openRoundBreakdown: false,
-    gameParams: {}
+    gameParams: {},
+    tick: 0
 }
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -41,12 +42,14 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'SET_CURRENT_WORDS':
             return {
                 ...state,
-                currentWords: filterCardData(state.words, state.gameParams) 
+                currentWords: filterWordData(state.words, state.gameParams) 
             }
 
         case 'ON_GAME_START':
             return {
                 ...state,
+                totalGameTime: state.gameParams.initialClock,
+                tick: state.gameParams.tick,
                 currentWordLetters: createCurrentWordLetters(state.currentWords[state.currentDeckIndex])
             };
 
@@ -64,14 +67,14 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
         case 'ON_TIMER_STOP':
             return {
                 ...state,
-                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.currentElapsedTime)
+                roundPoints: calculatePoints(state.currentWords[state.currentDeckIndex].name.length, state.roundTime)
             }
 
         case 'ON_TIMER_TICK':
             return {
                 ...state,
-                currentElapsedTime: state.currentElapsedTime + 1,
-                totalGameTime: state.totalGameTime + 1
+                roundTime: state.roundTime + 1, //used for calculating points too
+                totalGameTime: state.totalGameTime + state.tick
             }
 
         case 'ON_GAME_END':
@@ -99,7 +102,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
                 currentWordLetters: createCurrentWordLetters(state.currentWords[state.currentDeckIndex + 1]),
                 openRoundBreakdown: !state.openRoundBreakdown,
                 roundPoints: 0,
-                currentElapsedTime: 0,
+                roundTime: 0,
                 currentDeckIndex: state.currentDeckIndex + 1 
             };
 
