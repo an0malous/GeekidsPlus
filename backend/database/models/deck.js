@@ -6,7 +6,10 @@ const deckSchema = new Schema({
     name: String,
     type: String,
     flashcards: [{
-        id: String,
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Flashcard"
+        },
         name: String
     }],
     author: {
