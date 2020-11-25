@@ -14,7 +14,7 @@ import RenderDashboard from './HOC/RenderDashboard';
 import { connect } from 'react-redux';
 import { getCurrentUser } from './actions/userActions';
 
-const App = ({ getCurrentUser }) => {
+const App = ({ getCurrentUser, user: { loggedIn } }) => {
 	useEffect(async () => {
 		try {
 			const res = await api.user();
@@ -31,7 +31,8 @@ const App = ({ getCurrentUser }) => {
 	return (
 		<div>
 			<Navbar />
-			<Route path="/" exact component={Landing} />
+			
+			<Route path="/" exact render={()=> loggedIn ? <RenderDashboard /> : <Landing />} />
 			<Route exact path="/register" exact component={Register} />
 			<Route exact path="/login" component={Login} />
 			<Route path="/phonics" component={PhonicsGamePage} />
@@ -44,4 +45,8 @@ const mapDispatchToProps = (dispatch) => ({
 	getCurrentUser: (user) => dispatch(getCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = state => ({
+	user: state.userReducer.currentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

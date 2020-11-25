@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AdminDashboard from '../pages/admin-dashboard/AdminDashboard';
 import UserDashboard from '../components/user-dashboard/user-dashboard.component';
+import { connect } from 'react-redux';
 
-const RenderDashboard = ({loggedIn, role, accessLevel, ...rest }) => (
+const RenderDashboard = ({user: {loggedIn, role}, ...rest }) => (
     <Route
       {...rest}
       render={()=> {
@@ -17,4 +18,7 @@ const RenderDashboard = ({loggedIn, role, accessLevel, ...rest }) => (
     />
   );
 
-  export default RenderDashboard;
+  const mapStateToProps = state => ({
+    user: state.userReducer.currentUser
+  });
+  export default connect(mapStateToProps)(RenderDashboard);
