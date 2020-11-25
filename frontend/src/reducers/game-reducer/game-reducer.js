@@ -1,5 +1,5 @@
 
-import { calculatePoints, createCurrentWordLetters, filterWordData } from './phonics-game.utils';
+import { calculatePoints, createCurrentWordLetters, filterWordData } from './game.utils';
 
 const INITIAL_STATE = {
     currentWords: [],
@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     totalGameTime: 0,
     openRoundBreakdown: false,
     gameParams: {},
+    initialClock: null,
     tick: null
 }
 

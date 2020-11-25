@@ -1,8 +1,9 @@
-import api from "./pages/api";
+import api from "./api";
 
 class Auth {
   constructor() {
     this.authenticated = false;
+
   }
 
   async login(username, password, callback) {
@@ -10,8 +11,11 @@ class Auth {
       const payload = { username, password };
       const response = await api.login(payload);
       if (response.status === 200) {
-        this.authenticated = true;
-        callback(response.data);
+          const { username, role } = response.data;
+        if(username, role){
+          console.log(response.data)
+          getCurrentUser({ loggedIn: true, username: username, role: role})
+      }
       }
     } catch (error) {
       console.log(error);
@@ -31,9 +35,8 @@ class Auth {
       if(callback){
             api.user().then((response)=>{
                 if(response.status === 200){
-                    this.authenticated = true;
-                    console.log(response)
-                    callback(response.data);
+                    console.log(response.data);
+                    
                 }
             }).catch((err)=>{
                 console.log(err)
@@ -43,8 +46,9 @@ class Auth {
         }
   }
 }
-export default new Auth();
 
+
+export default new Auth(getCurrentUser)
 
 
 //   handleLogout() {

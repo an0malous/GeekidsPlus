@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 
 const PhonicsGameContainer = ({ fetchSuccessful }) => {
+ 
    
     return (
         <Container>

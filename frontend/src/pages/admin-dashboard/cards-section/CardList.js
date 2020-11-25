@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../../api';
+import api from '../../../api';
 import { DynamicListItem as ListItem } from '../components/DynamicListItem';
 
 export  default class CardList extends React.Component {

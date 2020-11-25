@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export const PrivateRoute = ({component: Component, loggedIn, role, accessLevel, ...rest }) => (
+const ProtectedRoute = ({component: Component, loggedIn, role, accessLevel, ...rest }) => (
     <Route
       {...rest}
       render={props => {
@@ -19,3 +19,5 @@ export const PrivateRoute = ({component: Component, loggedIn, role, accessLevel,
       }}
     />
   );
+
+  export default ProtectedRoute;

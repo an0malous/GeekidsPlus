@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react';
-import auth from './auth';
+import { connect } from 'react-redux';
 
-export const Navbar = ({ username, loggedIn, updateUser, role }) => {
-   
+const Navbar = ({ user, foo  }) => {
+  console.log(foo)
+
    const [activeItem, setActiveItem] = useState('')
     const handleItemClick = (e, { name }) => setActiveItem(name)
-
+   
     return (
       <Menu>
         <Menu.Item
@@ -33,12 +34,12 @@ export const Navbar = ({ username, loggedIn, updateUser, role }) => {
         >
           Phonics
           </Menu.Item>
-          { updateUser ?
+          { user.loggedIn ?
           (
             
         <Menu.Item position="right"
         name="Logout" >
-        {`Welcome back ${username}`}
+        {`Welcome back ${user.username}`}
         </Menu.Item>) :
         (<Menu.Item position="right"
         name="Login" >
@@ -47,7 +48,15 @@ export const Navbar = ({ username, loggedIn, updateUser, role }) => {
        
       </Menu>
     )
-    }
+  };
+
+    const mapStateToProps = state => ({
+      user: state.userReducer.currentUser,
+      foo: state.phonicsGameReducer.currentWords
+      
+  });
+
+  export default connect(mapStateToProps)(Navbar);
 
 
    

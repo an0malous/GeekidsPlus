@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../../api';
+import api from '../../../api';
 import { Redirect } from 'react-router-dom';
 import { CardForm } from './CardForm';
 export default class EditCard extends React.Component {

@@ -1,4 +1,5 @@
-import axios from 'axios';
+
+import api from '../api';
 
 export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
@@ -60,11 +61,11 @@ export const fetchCurrentWordsAsync = () => {
     
         dispatch(fetchCurrentWordsStart());
         try {
-       const res = await axios.get("http://localhost:3000/admin/cards")
+       const res = await api.getCards()
            console.log(res.data);
            dispatch(fetchCurrentWordsSuccess(res.data))
         } catch(error){
-            dispatch(fetchCurrentWordsFailure(`You fucked up ${error}`))
+            dispatch(fetchCurrentWordsFailure(`Sorry, ${error}`))
         }
 
     };

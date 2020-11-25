@@ -5,10 +5,10 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import userReducer from './reducers/userReducer';
-import phonicsGameReducer from './reducers/phonics-game-reducer/phonicsGameReducer';
+import phonicsGameReducer from './reducers/game-reducer/game-reducer';
 
 const rootReducer = combineReducers ({
-    user: userReducer,
+    userReducer: userReducer,
     phonicsGameReducer: phonicsGameReducer
 });
 

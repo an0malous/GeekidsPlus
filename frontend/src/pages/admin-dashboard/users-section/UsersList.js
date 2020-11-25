@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import api from '../../api';
+import api from '../../../api';
 
 export default class UserList extends React.Component {
     constructor(props){

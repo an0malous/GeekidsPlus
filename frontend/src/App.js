@@ -1,53 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import axios from 'axios'
-
-import { Navbar } from './Navbar';
+import axios from 'axios';
+import FlashCardsPage from './pages/flash-cards/flash-cards.page';
+import Navbar from './Navbar';
 import PhonicsGamePage from './pages/phonics-game-new/phonics-game.page';
-import { Landing } from './pages/landing/Landing'
-import Register from './pages/register/Register'
-import Login from './pages/login/Login'
+import { Landing } from './pages/landing/Landing';
+import ProtectedRoute from './HOC/ProtectedRoute';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
 import AdminDashboard from './pages/admin-dashboard/AdminDashboard';
-import auth from './auth';
+import api from './api';
+import RenderDashboard from './HOC/RenderDashboard';
+import { connect } from 'react-redux';
+import { getCurrentUser } from './actions/userActions';
 
-export default class App extends React.Component {
-  constructor(props){
-    super(props)
-    axios.defaults.withCredentials = true;
-    
-    this.state = {
-      overlay: true,
-      loggedIn: false,
-      username: "",
-      role: 0
-  }
-    this.updateUser = this.updateUser.bind(this)
-  }
+const App = ({ getCurrentUser }) => {
+	useEffect(async () => {
+		try {
+			const res = await api.user();
+			const {
+				role,
+				user: { username },
+			} = res.data;
+			getCurrentUser({ loggedIn: true, username, role });
+		} catch (err) {
+			console.log(err);
+		}
+	}, []);
 
-  componentDidMount () {
-    auth.isAuthenticated((data)=>{
-      this.setState({loggedIn: true, username: data.user.username, role: data.role})
-    })
-  }
+	return (
+		<div>
+			<Navbar />
+			<Route path="/" exact component={Landing} />
+			<Route exact path="/register" exact component={Register} />
+			<Route exact path="/login" component={Login} />
+			<Route path="/phonics" component={PhonicsGamePage} />
+			<Route path="/flashcards" component={FlashCardsPage} />
+		</div>
+	);
+};
 
-  updateUser(userObject) {
-    this.setState(userObject);
-  }
+const mapDispatchToProps = (dispatch) => ({
+	getCurrentUser: (user) => dispatch(getCurrentUser(user)),
+});
 
-  
-  render() {
-    return (
-     <div>
-        <Navbar loggedIn={this.state.loggedIn} role={this.state.role} username={this.state.username} updateUser={this.updateUser} />
-       
-          <Route path="/" render={()=><Landing handleSetOverlay={this.handleSetOverlay}/>}exact component={Landing} />
-          <Route exact path="/register" admin={this.state.role} exact component={Register} />
-          <Route exact path="/login" render={()=><Login updateUser={this.updateUser} />} />
-          <Route path="/phonics" component={PhonicsGamePage} />
-          <Route path="/admin" component={AdminDashboard}  />
-       
-        </div>
-      
-    );
-    }
-  }
+export default connect(null, mapDispatchToProps)(App);

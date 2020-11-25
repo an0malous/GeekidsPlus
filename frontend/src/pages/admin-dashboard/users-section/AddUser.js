@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import api from "../../api";
+import api from "../../../api";
 import { UserForm } from "./UserForm";
 
 export default class AddUser extends React.Component {
