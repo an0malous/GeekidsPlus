@@ -1,22 +1,19 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { CardsIndex as CardSection } from './cards-section/CardIndex';
-import { UsersIndex as UserSection } from './users-section/UsersIndex';
+import CardsIndex from './cards-section/CardIndex';
+import UsersIndex from './users-section/UsersIndex';
 import { DecksIndex as DeckSection } from './decks-section/DecksIndex';
 import { AnnouncmentsIndex as AnnouncmentSection } from './announcments-section/AnnouncmentsIndex';
 import { ScoreboardIndex as ScoreboardSection } from './scoreboard-section/ScoreboardIndex';
-import { Link } from 'react-router-dom';
 import Tab from '../../components/admin-dashboard/tab';
+import { useRouteMatch } from 'react-router-dom'; 
 
-export default class AdminDashboard extends React.Component {
-  constructor(props){
-    super(props)
-  }
 
-  
-  render() {
+const AdminDashboard= ({ props }) => {
+  const { url, path } = useRouteMatch();
+
     const arr = ["cards", "users", "announcments", "leaderboard"] 
-    console.log(this.props.location)
+   console.log(useRouteMatch())
     
     return (
       <div
@@ -32,11 +29,11 @@ export default class AdminDashboard extends React.Component {
           <div class="twelve wide stretched column">
             <div style={{background: "#666"}} class="ui segment">
             <Switch>
-              <Route path="/cards">
-                <CardSection />
+              <Route path={`${path}/cards`}>
+                <CardsIndex />
               </Route>
-              <Route path="/users">
-                <UserSection />
+              <Route path={`${path}/users`}>
+                <UsersIndex />
               </Route>
               <Route path="/decks">
                 <DeckSection />
@@ -54,4 +51,4 @@ export default class AdminDashboard extends React.Component {
       </div>
     );
   }
-}
+export default AdminDashboard;

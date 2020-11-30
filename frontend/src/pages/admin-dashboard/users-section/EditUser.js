@@ -2,10 +2,12 @@ import React from "react";
 import api from "../../../api";
 import { UserForm } from "./UserForm";
 import { Redirect } from "react-router-dom";
+import { withRouter } from 'react-router';
 
-export default class EditUser extends React.Component {
-  constructor(props) {
+class EditUser extends React.Component {
+  constructor({ props, location: { pathname } }) {
     super(props);
+    this.pathname = pathname;
     this.handleOnChange = this.handleOnChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
@@ -47,7 +49,7 @@ export default class EditUser extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/admin/users" />;
+      return <Redirect to={`${this.pathname}/users`} />;
     }
     return (
       <UserForm
@@ -60,4 +62,6 @@ export default class EditUser extends React.Component {
       />
     );
   }
-}
+};
+
+export default withRouter(EditUser)

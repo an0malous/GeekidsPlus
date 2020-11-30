@@ -40,7 +40,7 @@ export default class AddCard extends React.Component {
     render(){
         if(this.state.redirectTo){
             return <Redirect to={{
-                pathname: "/admin/cards",
+                pathname: "/cards",
                 state: { from: this.props.location }
               }} />
         }

@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import api from '../../../api';
 
-export default class UserList extends React.Component {
+ class UserList extends React.Component {
     constructor(props){
         super(props)
         this.state = {users:[]}
@@ -29,6 +30,7 @@ export default class UserList extends React.Component {
     }
 
     render(){
+     
         return (
         
                 <div className="ui relaxed divided list">
@@ -38,7 +40,7 @@ export default class UserList extends React.Component {
                             <div className="content">
                                 <Link to={`/admin/users/${user._id}`}>{user.username}</Link> 
                                 <div className="description">
-                                <Link to={`/admin/users/edit/${user._id}`}>Edit</Link> |<a onClick={()=>{this.deleteItem(user._id)}}>Delete</a> | Access level: {user.role}
+                                <Link to={`${this.props.match.url}/edit/${user._id}`}>Edit</Link> |<a onClick={()=>{this.deleteItem(user._id)}}>Delete</a> | Access level: {user.role}
                                 </div>
                             </div>
                         </div>
@@ -47,3 +49,5 @@ export default class UserList extends React.Component {
         )
     }  
 }
+
+export default withRouter(UserList)
