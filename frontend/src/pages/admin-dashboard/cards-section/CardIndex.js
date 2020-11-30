@@ -3,7 +3,7 @@ import CardList from './CardList';
 import EditCard from './EditCard';
 import AddCard from './AddCard'
 import { Switch, Route } from "react-router-dom";
-import { Tabbar } from '../../../components/admin-dashboard/Tabbar'
+import Tab from '../../../components/admin-dashboard/tab'
 import {Fragment} from 'react'
 
 export class CardsIndex extends React.Component {
@@ -16,13 +16,13 @@ export class CardsIndex extends React.Component {
         return (
             <Fragment>
             <div className="ui tabular menu">
-                <Tabbar base="/admin/cards/" classNames="item" tabs={[{name: "Manage", route: ''}, {name: "Add", route: "add"}]} />
+               
                </div>
                 <Switch>
-                    <Route exact path="/admin/cards/">
+                    <Route exact path="/cards/">
                         <CardList />
                     </Route>
-                    <Route exact path="/admin/cards/add">
+                    <Route exact path="/cards/add">
                         <AddCard />
                     </Route>
                     <Route

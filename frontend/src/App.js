@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
 import FlashCardsPage from './pages/flash-cards/flash-cards.page';
 import Navbar from './Navbar';
 import PhonicsGamePage from './pages/phonics-game-new/phonics-game.page';
 import { Landing } from './pages/landing/Landing';
-import ProtectedRoute from './HOC/ProtectedRoute';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
-import AdminDashboard from './pages/admin-dashboard/AdminDashboard';
 import api from './api';
 import RenderDashboard from './HOC/RenderDashboard';
 import { connect } from 'react-redux';
 import { getCurrentUser } from './actions/userActions';
 
-const App = ({ getCurrentUser, user: { loggedIn } }) => {
-	useEffect(async () => {
+const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
+	useEffect(() => {
+		const getUser = async ()=> {
 		try {
 			const res = await api.user();
 			const {
@@ -26,13 +24,14 @@ const App = ({ getCurrentUser, user: { loggedIn } }) => {
 		} catch (err) {
 			console.log(err);
 		}
+	}
+	getUser()
 	}, []);
 
 	return (
 		<div>
 			<Navbar />
-			
-			<Route path="/" exact render={()=> loggedIn ? <RenderDashboard /> : <Landing />} />
+			<Route path="/" render={(props)=> loggedIn ? <RenderDashboard {...props} /> : <Landing {...props} />} />
 			<Route exact path="/register" exact component={Register} />
 			<Route exact path="/login" component={Login} />
 			<Route path="/phonics" component={PhonicsGamePage} />

@@ -1,14 +1,13 @@
 import React from 'react';
-import { NavLink, Link} from 'react-router-dom';
-import { Item } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router'
 
 const Tab = ({match, items}) => {
-
+    console.log(match)
     return (
-             items.map(item=>{
+             items.map((item)=>{
                  return (
-                 <NavLink to={`${match.url}/${item}`} className="item nav-link" activeClassName="active">{item.toUpperCase()}</NavLink>
+                 <NavLink to={`/${item}`} className="item nav-link" activeClassName="active">{item.toUpperCase()}</NavLink>
              )})
        
     )

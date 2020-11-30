@@ -3,7 +3,7 @@ import UsersList from './UsersList'
 import AddUser from './AddUser';
 import EditUser from './EditUser';
 import { Switch, Route } from "react-router-dom";
-import { Tabbar } from '../../../components/admin-dashboard/Tabbar'
+import Tab from '../../../components/admin-dashboard/tab'
 
 export class UsersIndex extends React.Component {
     constructor(props){
@@ -14,19 +14,19 @@ export class UsersIndex extends React.Component {
         return (
             <Fragment>
             <div className="ui tabular menu">
-            <Tabbar base="/admin/users/" classNames="item" tabs={[{name: "Manage", route: ''}, {name: "Add", route: "add"}]} />
+           
             </div>
             <Switch>
             
-                <Route exact path="/admin/users">
+                <Route exact path="/users">
                     <UsersList />
                 </Route>
-                <Route exact path="/admin/users/add">
+                <Route exact path="/users/add">
                     <AddUser />
                 </Route>
                 <Route
                     exact
-                    path="/admin/users/edit/:id"
+                    path="/users/edit/:id"
                     render={({ match }) => <EditUser id={match.params.id} />}
                 />
             </Switch>

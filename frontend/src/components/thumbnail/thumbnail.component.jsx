@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { Modal, Button, Icon } from 'semantic-ui-react'
+import { Modal, Button, Icon } from 'semantic-ui-react';
+
 const Thumbnail = ({ src, alt, width, height }, ...rest) => {
 
-    const [inlarge, setInlarge] = useState(false);
-    const [open, setOpen] = useState(false)
-
-    const handleSetInlarge = () => {
-        setInlarge(!inlarge);
-    };
+    const [open, setOpen] = useState(false);
 
     return (
-       
-      
+        
 <Modal
       basic
       onClose={() => setOpen(false)}

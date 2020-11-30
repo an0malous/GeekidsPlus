@@ -7,9 +7,10 @@ import { connect } from 'react-redux';
 const RenderDashboard = ({user: {loggedIn, role}, ...rest }) => (
     <Route
       {...rest}
-      render={()=> {
+      render={({ match})=> {
         return loggedIn && role >= 3 ? (
-          <AdminDashboard {...rest}/>
+          
+          <AdminDashboard match={match}{...rest}/>
         ) : (
             <UserDashboard {...rest}/>
         );
