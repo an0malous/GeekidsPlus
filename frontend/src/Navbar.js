@@ -14,9 +14,9 @@ const Navbar = ({ user, foo  }) => {
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
-          onClick={handleItemClick}
+          
         >
-          Home
+          <Link to="/home">Home</Link>
         </Menu.Item>
 
         <Menu.Item
@@ -24,7 +24,7 @@ const Navbar = ({ user, foo  }) => {
           active={activeItem === 'flashCards'}
           onClick={handleItemClick}
         >
-          Flash Cards
+          <Link to="/flashcards">Flashcards</Link>
         </Menu.Item>
 
         <Menu.Item
@@ -32,7 +32,7 @@ const Navbar = ({ user, foo  }) => {
           active={activeItem === 'phonics'}
           onClick={handleItemClick}
         >
-          Phonics
+          <Link to="/phonics">Phonics</Link>
           </Menu.Item>
           { user.loggedIn ?
           (
