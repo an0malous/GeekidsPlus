@@ -1,49 +1,36 @@
-import axios from "axios";
-import React from "react";
-import api from "../../../api";
-import { UserForm } from "./UserForm";
+import axios from 'axios';
+import React from 'react';
+import api from '../../../api';
+import { UserForm } from './UserForm';
+import useInput from '../../../custom-hooks/use-Input';
 
-export default class AddUser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      username: "",
-      password: "",
-      role: 0,
-    };
-  }
+const AddUser = () => {
 
-  onSubmit = async (event) => {
-    event.preventDefault();
-    let { username, password, role } = this.state;
-    if ((username, password, role)) {
-      try {
-        const payload = { username, password, role };
-        const res = await api.createUser(payload);
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
+	const { inputs, handleInputChange, handleSubmit } = useInput(fetch);
 
-  handleOnChange(event) {
-    console.log(event.persist());
-    this.setState({ [event.target.name]: event.target.value });
-  }
+	const fetch = async (event) => {
+		let { username, password, role } = inputs;
+		if ((username, password, role)) {
+			try {
+				const payload = { username, password, role };
+				const res = await api.createUser(payload);
+				console.log(res);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	};
 
-  render() {
-    return (
-      <UserForm
-        btnText={"Create User"}
-        username={this.state.username}
-        password={this.state.password}
-        role={this.state.role}
-        handleOnChange={this.handleOnChange}
-        onSubmit={this.onSubmit}
-      />
-    );
-  }
-}
+	return (
+		<UserForm
+			btnText={'Create User'}
+			username={inputs.username}
+			password={inputs.password}
+			role={inputs.role}
+			handleOnChange={handleInputChange}
+			onSubmit={handleSubmit}
+		/>
+	);
+};
+
+export default AddUser;
