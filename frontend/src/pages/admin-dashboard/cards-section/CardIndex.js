@@ -2,40 +2,35 @@ import React from 'react';
 import CardList from './CardList';
 import EditCard from './EditCard';
 import AddCard from './AddCard'
-import { Switch, Route, withRouter, useRouteMatch } from "react-router-dom";
+import { Switch, Route, withRouter, useRouteMatch, useParams } from "react-router-dom";
 import {Fragment} from 'react'
 
-class CardsIndex extends React.Component {
-    constructor({ props, match: { pathname } }){
-        super(props)
-        this.pathname = pathname
-
-    }
-
-    render (){
-      console.log(this.props.location)
+const CardsIndex = (props) => {
+    const { path }  = useRouteMatch();
+    let { id } = useParams()
+    console.log(path)
+    console.log({id})
         return (
             <Fragment>
             <div className="ui tabular menu">
                
                </div>
                 <Switch>
-                    <Route path="/home/cards">
+                <Route exact path="/home/cards">
                         <CardList />
                     </Route>
-                    <Route exact path={`${this.pathname}/add`} >
+                    <Route exact path={`${path}/add`} >
                         <AddCard />
                     </Route>
                     <Route
                         exact
-                        path={`${this.pathname}/edit/:id`}
-                        render={({ match }) => <EditCard id={match.params.id} />}
+                        path={`${path}/edit/${id}`}
+                        render={(id) => <EditCard id={id} />}
                     />
                 </Switch>
             </Fragment>
         )
     }
-}
 
 export default withRouter(CardsIndex)
              
