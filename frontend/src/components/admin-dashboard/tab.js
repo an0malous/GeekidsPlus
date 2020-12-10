@@ -8,7 +8,7 @@ const Tab = ({match, location: { pathname }, items}) => {
     return (
              items.map((item)=>{
                  return (
-                 <NavLink to={`${path}/${item}`} className="item nav-link" activeClassName="active">{item.toUpperCase()}</NavLink>
+                 <NavLink to={`${url}/${item}`} className="item nav-link" activeClassName="active">{item.toUpperCase()}</NavLink>
              )})
        
     )
