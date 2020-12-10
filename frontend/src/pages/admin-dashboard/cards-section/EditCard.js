@@ -63,7 +63,7 @@ export default class EditCard extends React.Component {
         if(this.state.redirect){
             return (
                 <Redirect to={{
-                    pathname: "/admin/cards",
+                    pathname: "/cards",
                     state: { from: this.props.location }
                   }} />
             )

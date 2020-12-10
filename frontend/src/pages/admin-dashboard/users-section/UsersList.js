@@ -38,7 +38,7 @@ import api from '../../../api';
                         <div className="item">
                             <i className="large github middle aligned icon">asd</i>
                             <div className="content">
-                                <Link to={`/admin/users/${user._id}`}>{user.username}</Link> 
+                                <Link to={`${this.props.match.url}/users/${user._id}`}>{user.username}</Link> 
                                 <div className="description">
                                 <Link to={`${this.props.match.url}/edit/${user._id}`}>Edit</Link> |<a onClick={()=>{this.deleteItem(user._id)}}>Delete</a> | Access level: {user.role}
                                 </div>
