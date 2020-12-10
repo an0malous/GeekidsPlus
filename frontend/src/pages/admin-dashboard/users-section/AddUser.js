@@ -5,7 +5,6 @@ import { UserForm } from './UserForm';
 import useInput from '../../../custom-hooks/use-Input';
 
 const AddUser = () => {
-
 	const fetch = async (event) => {
 		let { username, password, role } = inputs;
 		if ((username, password, role)) {
@@ -19,8 +18,6 @@ const AddUser = () => {
 		}
 	};
 	const { inputs, handleInputChange, handleSubmit } = useInput(fetch);
-
-	
 
 	return (
 		<UserForm

@@ -31,11 +31,13 @@ const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
 	return (
 		<div>
 			<Navbar />
-			<Route path="/" render={(props)=> loggedIn ? <RenderDashboard {...props} /> : <Landing {...props} />} />
+			
+			<Route path="/home" render={(props)=> loggedIn ? <RenderDashboard {...props} /> : <Landing {...props} />} />
 			<Route exact path="/register" exact component={Register} />
 			<Route exact path="/login" component={Login} />
-			<Route path="/phonics" component={PhonicsGamePage} />
-			<Route path="/flashcards" component={FlashCardsPage} />
+			<Route exact path="/phonics" component={PhonicsGamePage} />
+			<Route exact path="/flashcards" component={FlashCardsPage} />
+			
 		</div>
 	);
 };

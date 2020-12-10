@@ -7,16 +7,14 @@ import {Fragment} from 'react'
 
 const CardsIndex = (props) => {
     const { path }  = useRouteMatch();
-    let { id } = useParams()
     console.log(path)
-    console.log({id})
         return (
             <Fragment>
             <div className="ui tabular menu">
                
                </div>
                 <Switch>
-                <Route exact path="/home/cards">
+                <Route exact path={`${path}`}>
                         <CardList />
                     </Route>
                     <Route exact path={`${path}/add`} >
@@ -24,8 +22,8 @@ const CardsIndex = (props) => {
                     </Route>
                     <Route
                         exact
-                        path={`${path}/edit/${id}`}
-                        render={(id) => <EditCard id={id} />}
+                        path={`${path}/edit/:editCardId`}
+                        render={match => <EditCard {...match}/>}
                     />
                 </Switch>
             </Fragment>

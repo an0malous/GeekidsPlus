@@ -20,7 +20,7 @@ class EditUser extends React.Component {
 
   async componentDidMount() {
     try {
-      const res = await api.editUser(this.props.id);
+      const res = await api.editUser(this.props.match.params.editUserId);
       const { username, password, role } = res.data;
       this.setState({ username: username, password: password, role: role });
     } catch (error) {

@@ -5,22 +5,22 @@ import EditUser from './EditUser';
 import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
 
 const UsersIndex = () => {
-	const { path, url } = useRouteMatch();
-	const { id } = useParams();
+	const { path } = useRouteMatch();
+
 	return (
 		<Fragment>
 			<div className="ui tabular menu"></div>
 			<Switch>
-				<Route exact path="/home/users">
+				<Route exact path={`${path}`}>
 					<UsersList />
 				</Route>
-				<Route exact path="/home/users/add">
+				<Route exact path={`${path}/add`}>
 					<AddUser />
 				</Route>
 				<Route
 					
-					path={`${path}/edit/:id`}
-					render={({ id }) => <EditUser id={id} />}
+					path={`${path}/edit/:editUserId`}
+					render={match => <EditUser {...match} />}
 				/>
 			</Switch>
 		</Fragment>

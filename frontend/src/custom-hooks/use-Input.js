@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
-const useInput = (cb) => {
+
+const useInput = (fetchData, location) => {
 	const [inputs, setInputs] = useState({});
 	const handleSubmit = (event) => {
 		if (event) {
          event.preventDefault();
-         cb()
+         fetchData()
+         
 		}
 		
 	};

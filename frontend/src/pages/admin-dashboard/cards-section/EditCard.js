@@ -20,7 +20,7 @@ export default class EditCard extends React.Component {
 
     async componentDidMount () {
         try{
-            const res = await api.editCard(this.props.id)
+            const res = await api.editCard(this.props.match.params.editCardId)
             const { name, type, letter, img, audio } = res.data;
             this.setState({
                 name: name,
@@ -46,7 +46,7 @@ export default class EditCard extends React.Component {
                     img,
                     audio
                 }
-                await api.updateCard(this.props.id, payload)
+                await api.updateCard(this.props.match.params.editCardId, payload)
                 this.setState({redirect: true});
             } catch (err){
                 console.log(err)
@@ -68,6 +68,7 @@ export default class EditCard extends React.Component {
                   }} />
             )
         }
+        console.log(this.props.id)
         return(
         
             <CardForm
