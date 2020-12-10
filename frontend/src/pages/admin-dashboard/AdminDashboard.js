@@ -12,9 +12,6 @@ import { useRouteMatch } from 'react-router-dom';
 const AdminDashboard= ({ props }) => {
   const { url, path } = useRouteMatch();
 
-    const arr = ["cards", "users", "announcments", "leaderboard"] 
-   console.log(useRouteMatch())
-    
     return (
       <div
         style={{ background: "rgba(45, 45, 45, 0.85)" }}
@@ -23,7 +20,7 @@ const AdminDashboard= ({ props }) => {
         <div className="ui grid" style={{marginTop: '0rem'}}>
           <div class="four wide column">
             <div class="ui vertical fluid tabular menu">
-            <Tab items={arr} />
+            <Tab items={["cards", "users", "announcments", "leaderboard"] } />
             </div>
           </div>
           <div class="twelve wide stretched column">
