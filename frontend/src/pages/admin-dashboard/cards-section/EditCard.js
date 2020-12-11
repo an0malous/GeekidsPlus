@@ -21,14 +21,13 @@ const EditCard = () => {
 						audio,
 					};
 					await api.updateCard(editCardId, payload);
-					this.setState({ redirect: true });
 				} catch (err) {
 					console.log(err);
 				}
 			}
 		}
 	);
-	
+
 	useEffect(() => {
 		async function fetchData() {
 			try {

@@ -1,67 +1,51 @@
-import React from "react";
-import api from "../../../api";
-import { UserForm } from "./UserForm";
-import { Redirect } from "react-router-dom";
+import React, { useEffect } from 'react';
+import api from '../../../api';
+import { UserForm } from './UserForm';
 import { withRouter } from 'react-router';
+import { useParams } from 'react-router';
+import useInput from '../../../custom-hooks/use-Input';
 
-class EditUser extends React.Component {
-  constructor({ props, location: { pathname } }) {
-    super(props);
-    this.pathname = pathname;
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      username: "",
-      password: "",
-      role: 0,
-      redirect: false,
-    };
-  }
+const EditUser = () => {
+	const { editUserId } = useParams();
 
-  async componentDidMount() {
-    try {
-      const res = await api.editUser(this.props.match.params.editUserId);
-      const { username, password, role } = res.data;
-      this.setState({ username: username, password: password, role: role });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+	const { inputs, setInputs, handleInputChange, handleSubmit } = useInput(
+		async (event) => {
+			event.preventDefault();
+			const { username, password, role } = inputs;
+			if ((username, password, role)) {
+				try {
+					const payload = { username, password, role };
+					await api.updateUser(editUserId, payload);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		}
+	);
 
-  onSubmit = async (event) => {
-    event.preventDefault();
-    const { username, password, role } = this.state;
-    if ((username, password, role)) {
-      try {
-        const payload = { username, password, role };
-        const res = await api.updateUser(this.props.id, payload);
-        this.setState({ redirect: true });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const res = await api.editUser(editUserId);
+				const { username, password, role } = res.data;
+				setInputs({ username, password, role });
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+	}, []);
 
-  handleOnChange(event) {
-    console.log(event.persist());
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  render() {
-    if (this.state.redirect) {
-      return <Redirect to={`${this.pathname}/users`} />;
-    }
-    return (
-      <UserForm
-        btText={"Update User"}
-        username={this.state.username}
-        password={this.state.password}
-        role={this.state.role}
-        handleOnChange={this.handleOnChange}
-        onSubmit={this.onSubmit}
-      />
-    );
-  }
+	return (
+		<UserForm
+			btText={'Update User'}
+			username={inputs.username}
+			password={inputs.password}
+			role={inputs.role}
+			handleOnChange={handleInputChange}
+			onSubmit={handleSubmit}
+		/>
+	);
 };
 
-export default withRouter(EditUser)
+export default withRouter(EditUser);
