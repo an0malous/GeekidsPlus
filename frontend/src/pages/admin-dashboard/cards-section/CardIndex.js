@@ -23,7 +23,7 @@ const CardsIndex = (props) => {
                     <Route
                         exact
                         path={`${path}/edit/:editCardId`}
-                        render={match => <EditCard {...match}/>}
+                        render={() => <EditCard />}
                     />
                 </Switch>
             </Fragment>

@@ -1,85 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import api from '../../../api';
-import { Redirect } from 'react-router-dom';
 import { CardForm } from './CardForm';
-export default class EditCard extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            redirect: false,
-            name: '',
-            type: '',
-            letter: '',
-            img: '',
-            audio: null
-        };
+import { useParams } from 'react-router';
+import useInput from '../../../custom-hooks/use-Input';
 
-        this.onSubmit = this.onSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+const EditCard = () => {
+	const { editCardId } = useParams();
 
-    async componentDidMount () {
-        try{
-            const res = await api.editCard(this.props.match.params.editCardId)
-            const { name, type, letter, img, audio } = res.data;
-            this.setState({
-                name: name,
-                type: type,
-                letter: letter,
-                img: img,
-                audio: audio
-            })
-        } catch(err){
-            console.log(err)
-        }
-    }
+	const { inputs, handleInputChange, handleSubmit, setInputs } = useInput(
+		async event => {
+			event.preventDefault();
+			const { name, type, letter, img, audio } = inputs;
+			if ((name, type, letter, img)) {
+				try {
+					const payload = {
+						name,
+						type,
+						letter,
+						img,
+						audio,
+					};
+					await api.updateCard(editCardId, payload);
+					this.setState({ redirect: true });
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		}
+	);
+	
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const res = await api.editCard(editCardId);
 
-    onSubmit = async event =>{
-        event.preventDefault();
-        const { name, type, letter, img, audio } = this.state;
-        if( name, type, letter, img ){
-            try {
-                const payload = {
-                    name,
-                    type,
-                    letter,
-                    img,
-                    audio
-                }
-                await api.updateCard(this.props.match.params.editCardId, payload)
-                this.setState({redirect: true});
-            } catch (err){
-                console.log(err)
-                
-            };
-        };
-    }
+				const { name, type, letter, img, audio } = res.data;
+				setInputs({ name, type, letter, img, audio: null });
+			} catch (err) {
+				console.log(err);
+			}
+		}
+		fetchData();
+	}, []);
 
-    handleChange = event => { 
-        this.setState({[event.target.name]: event.target.value })
-    }
+	return (
+		<CardForm
+			btnText="Update Card"
+			handleChange={handleInputChange}
+			onSubmit={handleSubmit}
+			name={inputs.name}
+			type={inputs.type}
+			letter={inputs.letter}
+			img={inputs.img}
+			audio={inputs.audio}
+		/>
+	);
+};
 
-    render(){
-        if(this.state.redirect){
-            return (
-                <Redirect to={{
-                    pathname: "/cards",
-                    state: { from: this.props.location }
-                  }} />
-            )
-        }
-        console.log(this.props.id)
-        return(
-        
-            <CardForm
-                btnText="Update Card"
-                handleChange={this.handleChange}
-                onSubmit={this.onSubmit}            
-                name={this.state.name}
-                type={this.state.type}
-                letter={this.state.letter}
-                img={this.state.img}
-                audio={this.state.audio} />
-          )
-    }
-}
+export default EditCard;

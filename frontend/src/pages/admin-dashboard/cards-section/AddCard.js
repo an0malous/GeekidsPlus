@@ -3,10 +3,9 @@ import api from '../../../api';
 import { CardForm } from './CardForm';
 import useInput from '../../../custom-hooks/use-Input';
 
-
 const AddCard = () => {
-   
-    fetch = async event =>{
+  
+    const postData = async event =>{
 
         const {name, type, letter, img, audio} = inputs;
         if( name, type, letter, img){
@@ -20,7 +19,7 @@ const AddCard = () => {
         }  
     }
 
-    const { inputs, handleInputChange, handleSubmit } = useInput(fetch, "/home");
+    const { inputs, handleInputChange, handleSubmit } = useInput(postData);
 
         return (
           <CardForm

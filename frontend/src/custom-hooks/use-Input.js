@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 
 
-const useInput = (fetchData, location) => {
+const useInput = fetchData => {
 	const [inputs, setInputs] = useState({});
 	const handleSubmit = (event) => {
 		if (event) {
          event.preventDefault();
          fetchData()
-         
-		}
-		
+		}	
 	};
 
 	const handleInputChange = (event) => {
@@ -19,7 +17,7 @@ const useInput = (fetchData, location) => {
 			[event.target.name]: event.target.value,
 		}));
 	}
-	return { handleSubmit, handleInputChange, inputs };
+	return { handleSubmit, handleInputChange, inputs, setInputs };
 	
 };
 
