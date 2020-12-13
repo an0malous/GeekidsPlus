@@ -10,9 +10,7 @@ export function CardForm({
   img,
   audio,
 }) {
-  {
-    console.log(type);
-  }
+
   return (
     <form className="ui form" onSubmit={onSubmit}>
       <div className="field">
