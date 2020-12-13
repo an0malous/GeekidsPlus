@@ -18,12 +18,12 @@ const AdminDashboard= ({ props }) => {
         className="ui center aligned container rounded-corners"
       >
         <div className="ui grid" style={{marginTop: '0rem'}}>
-          <div class="four wide column">
-            <div class="ui vertical fluid tabular menu">
+          <div className="four wide column">
+            <div className="ui vertical fluid tabular menu">
             <Tab items={["cards", "users", "announcments", "leaderboard"] } />
             </div>
           </div>
-          <div class="twelve wide stretched column">
+          <div className="twelve wide stretched column">
             <div style={{background: "#666"}} class="ui segment">
             <Switch>
               <Route path={`${path}/cards`}>

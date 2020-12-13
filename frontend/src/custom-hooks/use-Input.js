@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-const useInput = fetchData => {
+const useInput = postData => {
 	const [inputs, setInputs] = useState({});
 	const handleSubmit = (event) => {
 		if (event) {
          event.preventDefault();
-         fetchData()
+			postData()
 		}	
 	};
 

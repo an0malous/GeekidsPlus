@@ -2,7 +2,7 @@ import React from 'react';
 import CardList from './CardList';
 import EditCard from './EditCard';
 import AddCard from './AddCard'
-import { Switch, Route, withRouter, useRouteMatch, useParams } from "react-router-dom";
+import { Switch, Route, withRouter, useRouteMatch} from "react-router-dom";
 import {Fragment} from 'react'
 
 const CardsIndex = (props) => {
