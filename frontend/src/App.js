@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import FlashCardsPage from './pages/flash-cards/flash-cards.page';
 import Navbar from './Navbar';
 import PhonicsGamePage from './pages/phonics-game-new/phonics-game.page';
@@ -31,12 +31,14 @@ const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
 	return (
 		<div>
 			<Navbar />
-			
-			<Route path="/home" render={(props)=> loggedIn ? <RenderDashboard {...props} /> : <Landing {...props} />} />
-			<Route exact path="/register" exact component={Register} />
-			<Route exact path="/login" component={Login} />
-			<Route exact path="/phonics" component={PhonicsGamePage} />
-			<Route exact path="/flashcards" component={FlashCardsPage} />
+			<Switch>
+				<Route exact path="/register" exact component={Register} />
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/phonics" component={PhonicsGamePage} />
+				<Route exact path="/flashcards" component={FlashCardsPage} />
+				<Route path="/" render={()=> loggedIn ? <RenderDashboard /> : <Landing />} />
+			</Switch>
+		
 			
 		</div>
 	);
