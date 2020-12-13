@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../../api';
 import { UserForm } from './UserForm';
-import { withRouter } from 'react-router';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import useInput from '../../../custom-hooks/use-Input';
 
 const EditUser = () => {
 	const { editUserId } = useParams();
-
+	let history = useHistory()
 	const { inputs, setInputs, handleInputChange, handleSubmit } = useInput(
-		async (event) => {
-			event.preventDefault();
+		async event => {
+			
 			const { username, password, role } = inputs;
 			if ((username, password, role)) {
 				try {
 					const payload = { username, password, role };
 					await api.updateUser(editUserId, payload);
+					history.goBack()
 				} catch (err) {
 					console.log(err);
 				}
@@ -35,7 +35,7 @@ const EditUser = () => {
 		}
 		fetchData();
 	}, []);
-
+	
 	return (
 		<UserForm
 			btText={'Update User'}
@@ -45,7 +45,7 @@ const EditUser = () => {
 			handleOnChange={handleInputChange}
 			onSubmit={handleSubmit}
 		/>
-	);
+	)
 };
 
-export default withRouter(EditUser);
+export default EditUser;

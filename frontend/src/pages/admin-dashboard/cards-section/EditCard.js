@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import api from '../../../api';
 import { CardForm } from './CardForm';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import useInput from '../../../custom-hooks/use-Input';
 
 const EditCard = () => {
 	const { editCardId } = useParams();
-
+	let history = useHistory();
 	const { inputs, handleInputChange, handleSubmit, setInputs } = useInput(
 		async event => {
-			event.preventDefault();
 			const { name, type, letter, img, audio } = inputs;
 			if ((name, type, letter, img)) {
 				try {
@@ -21,6 +20,7 @@ const EditCard = () => {
 						audio,
 					};
 					await api.updateCard(editCardId, payload);
+					history.goBack()
 				} catch (err) {
 					console.log(err);
 				}
