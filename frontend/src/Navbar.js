@@ -12,7 +12,7 @@ const Navbar = ({ user }) => {
 		<Menu>
 			<Menu.Item
 				as={Link}
-				to="/"
+				to={user.loggedIn ? "/dashboard" : "/"}
 				name="home"
 				active={activeItem === 'home'}
 			>
@@ -39,11 +39,12 @@ const Navbar = ({ user }) => {
 				Phonics
 			</Menu.Item>
 			{user.loggedIn ? (
-				<Menu.Item position="right" name="Logout">
+				<Menu.Item position="right">
 					{`Welcome back ${user.username}`}
 				</Menu.Item>
 			) : (
-				<Menu.Item position="right" name="Login"></Menu.Item>
+				<Menu.Item position="right" name="Login" as={Link}
+				to="/login"></Menu.Item>
 			)}
 		</Menu>
 	);
