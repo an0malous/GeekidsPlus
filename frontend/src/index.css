@@ -1,33 +1,32 @@
-
 .draggable {
-  touch-action: none;
+	touch-action: none;
 }
 .pointing {
-  color: orange;
+	color: orange;
 }
 body {
-  background: rgba(100, 100, 100, 0.9);
-  color: black;
-  -webkit-user-select: none;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-      user-select: none;
-  margin: 0 auto;
-  /* background: url(./img/WEBTEST.png);
-  background-position: right center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;*/
-} 
-
-a {
-  color: orange;
+	background: rgba(100, 100, 100, 0.9);
+	color: black;
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: 0 auto;
+	background: url(./img/WEBTEST.png);
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
- a.nav-link {
-  color: black;
+a {
+	color: orange;
+}
+
+a.nav-link {
+	color: black;
 }
 
 .rounded-corners {
-  border-radius: 15px;
+	border-radius: 15px;
 }

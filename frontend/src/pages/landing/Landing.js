@@ -9,6 +9,7 @@ export const Landing = (props) => {
                 maxWidth: "600px",
                 height: "auto",
                 left: "3rem",
+                lineHeight: "1",
                 top: "35%",
                 Zindex: -1,
                 fontSize: "3rem",
