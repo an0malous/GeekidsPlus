@@ -7,7 +7,7 @@ import {Fragment} from 'react'
 
 const CardsIndex = (props) => {
     const { path }  = useRouteMatch();
-    console.log(path)
+    
         return (
             <Fragment>
             <div className="ui tabular menu">

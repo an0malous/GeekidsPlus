@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { useRouteMatch } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import api from './api';
+import { useHistory } from 'react-router';
+import { getCurrentUser } from './actions/userActions';
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, getCurrentUser }) => {
 	const [activeItem, setActiveItem] = useState('');
 	const handleItemClick = (e, { name }) => setActiveItem(name);
+
+	let history = useHistory();
+
+	async function logout () {
+		const res = await api.logout();
+		getCurrentUser({username: null })
+	};
 
 	return (
 		<Menu>
@@ -39,20 +48,29 @@ const Navbar = ({ user }) => {
 				Phonics
 			</Menu.Item>
 			{user.loggedIn ? (
-				<Menu.Item position="right">
+				<Fragment>
+				<Menu.Item onClick={logout} position="right" name="username">
 					{`Welcome back ${user.username}`}
 				</Menu.Item>
+			
+				<Menu.Item onClick={logout}>
+				Logout
+				</Menu.Item>
+				</Fragment>
 			) : (
 				<Menu.Item position="right" name="Login" as={Link}
-				to="/login"></Menu.Item>
+				to="/login" active={activeItem === 'login'}></Menu.Item>
 			)}
 		</Menu>
 	);
 };
 
 const mapStateToProps = (state) => ({
-	user: state.userReducer.currentUser,
-	foo: state.phonicsGameReducer.currentWords,
+	user: state.userReducer.currentUser
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch) => ({
+	getCurrentUser: (user) => dispatch(getCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
