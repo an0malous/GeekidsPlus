@@ -31,8 +31,9 @@ const App = ({ getCurrentUser , user: { username, loggedIn, role }}) => {
 
 	return (
 		<div>
+		
 			<Navbar />
-			<Overlay loggedIn={loggedIn} />
+			
 			<Switch>
 				<Route exact path="/register" exact component={Register} />
 				<Route exact path="/login" component={Login} />
@@ -40,10 +41,10 @@ const App = ({ getCurrentUser , user: { username, loggedIn, role }}) => {
 				<Route exact path="/flashcards" component={FlashCardsPage} />
 				<Route path="/" render={()=> loggedIn ? <RenderDashboard /> : <Landing />} />
 			</Switch>
+			<Overlay loggedIn={loggedIn} />	
+			</div>
 			
 		
-			
-		</div>
 	);
 };
 
