@@ -10,8 +10,9 @@ import api from './api';
 import RenderDashboard from './HOC/RenderDashboard';
 import { connect } from 'react-redux';
 import { getCurrentUser } from './actions/userActions';
+import { Overlay } from './app.styles';
 
-const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
+const App = ({ getCurrentUser , user: { username, loggedIn, role }}) => {
 	useEffect(() => {
 		const getUser = async ()=> {
 		try {
@@ -31,6 +32,7 @@ const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
 	return (
 		<div>
 			<Navbar />
+			<Overlay loggedIn={loggedIn} />
 			<Switch>
 				<Route exact path="/register" exact component={Register} />
 				<Route exact path="/login" component={Login} />
@@ -38,6 +40,7 @@ const App = ({ getCurrentUser, user: { loggedIn, role } }) => {
 				<Route exact path="/flashcards" component={FlashCardsPage} />
 				<Route path="/" render={()=> loggedIn ? <RenderDashboard /> : <Landing />} />
 			</Switch>
+			
 		
 			
 		</div>
@@ -50,6 +53,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = state => ({
 	user: state.userReducer.currentUser
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
