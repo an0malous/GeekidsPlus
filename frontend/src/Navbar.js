@@ -58,8 +58,7 @@ const Navbar = ({ user, getCurrentUser }) => {
 				</Menu.Item>
 				</Fragment>
 			) : (
-				<Menu.Item position="right" name="Login" as={Link}
-				to="/login" active={activeItem === 'login'}></Menu.Item>
+				null
 			)}
 		</Menu>
 	);
