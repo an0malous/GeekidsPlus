@@ -3,7 +3,7 @@ import axios from 'axios'
 const api = {};
 
 api.login = payload => axios.post('/user/login', payload);
-api.logout = () => axios.post("user/logout");
+api.logout = () => axios.post("/user/logout");
 api.register = payload => axios.post("/user/register", payload);
 api.user = () => axios.get('/user');
 api.createCard = payload => axios.post("/admin/cards/add", payload);
