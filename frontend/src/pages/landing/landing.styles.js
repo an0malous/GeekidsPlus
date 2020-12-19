@@ -9,7 +9,7 @@ padding: 20px;
 export const LandingContainer = styled.div`
 display: flex;
 margin-top: -60px;
-padding: 30px;
+padding-left: 80px;
 align-items: center;
 height: 100vh;
 `

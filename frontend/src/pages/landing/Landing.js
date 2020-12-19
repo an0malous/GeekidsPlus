@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { LandingContainer } from './landing.styles';
 import { useHistory } from 'react-router';
+import Login from '../login/login';
 export const Landing = (props) => {
 	let history = useHistory();
 	const handleButtonClick = (e) => {
@@ -9,13 +10,13 @@ export const Landing = (props) => {
 	};
 	return (
 		<LandingContainer>
-			<div>
+			<div >
 				<div
 					style={{
-						maxWidth: '600px',
+						maxWidth: '500px',
 						lineHeight: '1',
 						paddingBottom: '10px',
-						fontSize: '3rem',
+						fontSize: '3.5rem',
 						color: 'white',
 						textShadow: '2px 2px black',
 					}}
@@ -30,14 +31,7 @@ export const Landing = (props) => {
 				>
 					Get Started
 				</Button>
-				<Button
-					name="login"
-					onClick={handleButtonClick}
-					secondary
-					size="big"
-				>
-					Login
-				</Button>
+				<Login />
 			</div>
 		</LandingContainer>
 	);
