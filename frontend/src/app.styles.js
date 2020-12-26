@@ -8,17 +8,10 @@ const overlayIsActive = css`
 	z-index: -1;
 	width: 100%;
 	height: 100% ;
-	background: rgba(22, 22, 22, 0.8);
+	background: rgba(22, 22, 22, 0.95);
 `;
 
-const isLoggedIn = (props) => {
-	if (props.loggedIn) {
-		return overlayIsActive;
-	}
-
-	return 'display: none';
-};
 
 export const Overlay = styled.div`
-	${isLoggedIn}
+	${overlayIsActive}
 `;

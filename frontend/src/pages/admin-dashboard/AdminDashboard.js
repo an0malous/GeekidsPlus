@@ -7,9 +7,10 @@ import { AnnouncmentsIndex as AnnouncmentSection } from './announcments-section/
 import { ScoreboardIndex as ScoreboardSection } from './scoreboard-section/ScoreboardIndex';
 import Tab from '../../components/admin-dashboard/tab';
 import { useRouteMatch } from 'react-router-dom'; 
+import { connect } from 'react-redux';
+import { Overlay } from '../../app.styles';
 
-
-const AdminDashboard= ({ props }) => {
+const AdminDashboard= ({ props, user: { username } }) => {
   const { url, path } = useRouteMatch();
 
     return (
@@ -17,6 +18,7 @@ const AdminDashboard= ({ props }) => {
         style={{ background: "rgba(45, 45, 45, 0.85)" }}
         className="ui center aligned container rounded-corners"
       >
+      <Overlay />
         <div className="ui grid" style={{marginTop: '0rem'}}>
           <div className="four wide column">
             <div className="ui vertical fluid tabular menu">
@@ -41,11 +43,20 @@ const AdminDashboard= ({ props }) => {
               <Route path="/leaderboard">
                 <ScoreboardSection />
               </Route>
+              <Route path={`${path}`}>
+              This is the Admin Page.
+              You are {username}
+              </Route>
             </Switch>
             </div>
           </div>
         </div>
       </div>
     );
-  }
-export default AdminDashboard;
+  };
+
+  const mapStateToProps = (state) => ({
+    user: state.userReducer.currentUser
+  });
+  
+export default connect(mapStateToProps)(AdminDashboard);
