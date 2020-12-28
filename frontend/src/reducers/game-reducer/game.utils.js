@@ -19,10 +19,8 @@ const bonusCalc = (roundTime) => {
     } 
 };
 
-export const calculatePoints = (currentWordLength, time) => {
-    if(time === 0){
-        return 0
-    }
+export const calculatePoints = (currentWordLength = 0, time = 0) => {
+
     const roundPoints = Math.floor(currentWordLength * 5 + bonusCalc(time))
     return roundPoints
 };

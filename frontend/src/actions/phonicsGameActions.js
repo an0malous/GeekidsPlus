@@ -42,6 +42,10 @@ export const onTimerStop = () => ({
     type: 'ON_TIMER_STOP'
 });
 
+export const stopTimer = () => ({
+    type: 'STOP_TIMER'
+});
+
 export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });
@@ -85,11 +89,19 @@ export const startTimerAsync = () => {
     };
 };
 
-export const stopTimerAsync = () => {
-     clearInterval(timer);
-    return dispatch =>{
-    dispatch(onTimerStop());
-   
-    };
-
+export const stopTimer1 = () => {
+    clearInterval(timer);
+   return dispatch =>{
+   dispatch(stopTimer());
+  
+   };
 };
+
+   export const stopTimerAsync = () => {
+    clearInterval(timer);
+   return dispatch =>{
+   dispatch(stopTimer());
+  
+   };
+};
+

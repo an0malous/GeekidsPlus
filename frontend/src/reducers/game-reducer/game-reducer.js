@@ -123,7 +123,12 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				roundPoints: 0,
 				roundTime: 0,
 				currentDeckIndex: state.currentDeckIndex + 1,
-			};
+            };
+        
+        case 'STOP_TIMER':
+            return {
+                ...state
+            };
 
 		case 'ON_ROUND_COMPLETE':
 			return {
