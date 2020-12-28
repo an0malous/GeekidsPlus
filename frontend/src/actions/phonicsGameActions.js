@@ -34,6 +34,10 @@ export const onRoundComplete = () => ({
     type: 'ON_ROUND_COMPLETE'
 });
 
+export const onGameEnd = () => ({
+    type: 'ON_GAME_END'
+});
+
 export const onTimerStop = () => ({
     type: 'ON_TIMER_STOP'
 });

@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Rail, Button, Container } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
-import { startTimerAsync } from '../../actions/phonicsGameActions';
+import { startTimerAsync, onTimerStop, onGameEnd } from '../../actions/phonicsGameActions';
 
-const GameDashboard = ({ currentWords, currentDeckIndex, totalGamePoints, time, startTimerAsync}) => {
+const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time, startTimerAsync, onTimerStop }) => {
     const currentWord = currentWords[currentDeckIndex];
 
 
     useEffect(()=>{
-        startTimerAsync();    
+        startTimerAsync();
+        
     }, [currentDeckIndex])
 
     return (
@@ -29,7 +30,8 @@ const GameDashboard = ({ currentWords, currentDeckIndex, totalGamePoints, time, 
                 </Grid.Column>
                 
                 <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
-                    <Button label="pause"/>
+                    <Button label="Pause"/>
+                    <Button onClick={onGameEnd} label="New Game"/>
                     <Button label="Listen" />
                     <Button label="Help" />
                 </Grid.Column>
@@ -42,6 +44,8 @@ const GameDashboard = ({ currentWords, currentDeckIndex, totalGamePoints, time, 
 
 const mapDispatchToProps = dispatch => ({
     startTimerAsync: ()=>dispatch(startTimerAsync()),
+    onGameEnd: ()=>dispatch(onGameEnd()),
+    onTimerStop: ()=>dispatch(onTimerStop())
 });
 
 const mapStateToProps = state => ({

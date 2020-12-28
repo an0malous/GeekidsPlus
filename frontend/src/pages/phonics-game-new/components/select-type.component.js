@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Grid, Container } from 'semantic-ui-react';
 const selectType = ({ setGameType }) => {
-	let history = useHistory();
 
 	return (
 		<div>
@@ -12,7 +11,7 @@ const selectType = ({ setGameType }) => {
 						<div
 							onClick={() => {
 								setGameType('practice');
-								history.push('/practice');
+							
 							}}
 						>
 							Practice
@@ -22,7 +21,7 @@ const selectType = ({ setGameType }) => {
 						<div
 							onClick={() => {
 								setGameType('competitive');
-								history.push('/competitve');
+							
 							}}
 						>
 							Competitive
