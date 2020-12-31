@@ -14,7 +14,8 @@ const Navbar = ({ user, getCurrentUser }) => {
 
 	async function logout () {
 		const res = await api.logout();
-		getCurrentUser({username: null })
+		getCurrentUser({ username: null })
+		history.push('/')
 	};
 
 	return (

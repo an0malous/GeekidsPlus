@@ -12,17 +12,17 @@ const DropzoneContainer = ({ currentWordLetters }) => {
 	return (
 		<Interact>
 			<Grid>
-				<Grid.Row centered>
+				<Grid.Row style={{justifyContent: 'space-evenly'}}>
 					{currentWordLetters.length > 1
 						? dropzones.map((zone) => (
 								<Dropzone
 									key={zone}
 									letter={zone}
 									style={{
-										color: 'red',
+										color: 'rgba(0,0,0,0)',
 										fontSize: '1.5rem',
 										padding: '25px',
-										border: 'dotted black 2px',
+										border: 'dotted white 2px',
 									}}
 									className="inner-dropzone"
 								/>

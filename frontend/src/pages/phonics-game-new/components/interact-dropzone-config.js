@@ -19,7 +19,7 @@ useEffect(()=>{
 
 lettersRef.current = letters
 correctCounterRef.current = correctCounter
-
+console.log(letters, correctCounter)
   const letterCorrect = (event) => {
 
     for(let i = 0; i < lettersRef.current.length; i++){

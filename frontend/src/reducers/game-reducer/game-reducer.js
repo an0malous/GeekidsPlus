@@ -81,10 +81,8 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 		case 'ON_TIMER_TICK':
 			return {
 				...state,
-				roundTime:
-					state.gameParams.gameType !== 'practice'
-						? state.roundTime + 1
-						: 0, //used for calculating points too
+				roundTime: state.roundTime + 1,
+					//used for calculating points too
 				totalGameTime: state.totalGameTime + state.tick,
 			};
 

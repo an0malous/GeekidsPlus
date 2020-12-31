@@ -42,7 +42,7 @@ const Login = ({ getCurrentUser }) => {
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
 			trigger={
-				<Button secondary size="big">
+				<Button  color="black" size="big">
 					Login
 				</Button>
 			}

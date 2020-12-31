@@ -29,7 +29,7 @@ const RoundBreakdown = ({ onRoundStart, currentElapsedTime, roundPoints, totalGa
 const mapStateToProps = state => ({
     roundPoints: state.phonicsGameReducer.roundPoints,
     totalGamePoints: state.phonicsGameReducer.totalGamePoints,
-    currentElapsedTime: state.phonicsGameReducer.totalGameTime
+    currentElapsedTime: state.phonicsGameReducer.roundTime
   });
 
 const mapDispatchToProps = dispatch => ({

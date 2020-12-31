@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import PhonicsGameContainer from './components/phonics-game.container';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router'
 import { onGameEnd } from '../../actions/phonicsGameActions';
 
 const PhonicsGamePage = ({ onGameEnd }) => {
 	const [open, setOpen] = useState(true);
+	let history = useHistory();
 	return (
 		<Modal
 			basic
@@ -26,6 +28,7 @@ const PhonicsGamePage = ({ onGameEnd }) => {
 					onClick={() => {
 						setOpen(false);
 						onGameEnd();
+						history.push('/')
 					}}
 				>
 					<Icon name="remove" /> Exit Phonics

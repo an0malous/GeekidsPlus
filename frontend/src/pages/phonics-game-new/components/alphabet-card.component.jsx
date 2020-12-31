@@ -15,7 +15,7 @@ useEffect(()=>{
 })
 
     return (
-        <div ref={ref} style={{padding: "20px", border: "1px solid black", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
+        <div ref={ref} style={{padding: "20px", border: "1px solid black", color: "red", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
             {letter}
         </div>
     );

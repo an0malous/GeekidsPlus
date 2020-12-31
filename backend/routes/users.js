@@ -15,7 +15,7 @@ router.post("/add", authenticated, (req, res) =>{
     const newUser = new User({
         username,
         password,
-        role,
+        role
     });
     newUser.save()
     .then((res)=>res.json('New User added:' + newUser))
