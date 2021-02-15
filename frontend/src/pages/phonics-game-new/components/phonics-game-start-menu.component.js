@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import SelectType from "./select-type.component";
 import SelectLevel from "./select-level.component";
 import SelectMode from "./select-mode.component";
 import {
-  fetchCurrentWordsAsync,
+  fetchCurrentWords,
   getGameParams,
   onGameStart,
-  setCurrentWords,
 } from "../../../actions/phonicsGameActions";
 
 const PhonicsGameStartMenu = ({
   onGameStart,
-  fetchCurrentWordsAsync,
-  setCurrentWords,
+  fetchCurrentWords,
   getGameParams,
 }) => {
   const [gameType, setGameType] = useState("");
@@ -34,13 +32,11 @@ const PhonicsGameStartMenu = ({
 
   const handleOnGameStart = async () => {
     
-    await fetchCurrentWordsAsync();
+    await fetchCurrentWords();
     
     const gameInfo = createGameParams(gameType, gameLevel, gameMode)
       getGameParams(gameInfo)
       
-
-    setCurrentWords();
     onGameStart();
   };
   return (
@@ -59,10 +55,9 @@ const PhonicsGameStartMenu = ({
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchCurrentWordsAsync: () => dispatch(fetchCurrentWordsAsync()),
+  fetchCurrentWords: () => dispatch(fetchCurrentWords()),
   onGameStart: () => dispatch(onGameStart()),
-  getGameParams: gameInfo => dispatch(getGameParams(gameInfo)),
-  setCurrentWords: () => dispatch(setCurrentWords()),
+  getGameParams: gameInfo => dispatch(getGameParams(gameInfo))
 });
 
 export default connect(null, mapDispatchToProps)(PhonicsGameStartMenu);

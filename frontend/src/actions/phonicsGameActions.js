@@ -1,6 +1,3 @@
-
-import api from '../api';
-
 export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
 });
@@ -9,13 +6,8 @@ export const getCurrentDeckIndex = () => ({
     type: 'GET_CURRENT_DECK_INDEX'
 });
 
-export const fetchCurrentWordsStart =()=> ({
-    type: 'FETCH_WORDS_START'
-});
-
-export const fetchCurrentWordsSuccess = (Words) => ({
-    type: 'FETCH_WORDS_SUCCESS',
-    payload: Words,
+export const fetchCurrentWords =()=> ({
+    type: 'FETCH_WORDS'
 });
 
 export const setCurrentWords = () => ({
@@ -50,10 +42,7 @@ export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });
 
-export const fetchCurrentWordsFailure = errorMessage => ({
-    type: 'FETCH_WORDS_FAILURE',
-    payload: errorMessage
-})
+
 
 export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
@@ -63,21 +52,6 @@ export const getGameParams = (gameInfo) => ({
     type: 'GET_GAME_PARAMS',
     payload: gameInfo
 });
-
-export const fetchCurrentWordsAsync = () => {
-    return async (dispatch)=> {
-    
-        dispatch(fetchCurrentWordsStart());
-        try {
-       const res = await api.getCards()
-           console.log(res.data);
-           dispatch(fetchCurrentWordsSuccess(res.data))
-        } catch(error){
-            dispatch(fetchCurrentWordsFailure(`Sorry, ${error}`))
-        }
-
-    };
-};
 
 let timer = null
 export const startTimerAsync = () => {

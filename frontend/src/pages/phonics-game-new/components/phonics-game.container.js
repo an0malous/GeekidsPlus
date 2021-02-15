@@ -5,21 +5,20 @@ import PhonicsGameStartMenu from './phonics-game-start-menu.component';
 import { connect } from 'react-redux';
 
 
-const PhonicsGameContainer = ({ fetchSuccessful }) => {
+const PhonicsGameContainer = ({ currentWords }) => {
  
    
     return (
         <Container>
             {
-                fetchSuccessful.length > 0 ? <PhonicsGame /> : <PhonicsGameStartMenu />
+                currentWords.length > 0 ? <PhonicsGame /> : <PhonicsGameStartMenu />
             }
         </Container>
     )
 };
 
 const mapStateToProps = state => ({
-    isFetching: state.phonicsGameReducer.isFetching,
-    fetchSuccessful: state.phonicsGameReducer.currentWords,
+    currentWords: state.phonicsGameReducer.currentWords,
     openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown
 });
 

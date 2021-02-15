@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import DropzoneContainer from './dropzone-container.component';
 import AlphabetContainer from './alphabet-container.component';
@@ -18,8 +18,6 @@ const PhonicsGame = ({ openRoundBreakdown }) => {
 };
 
 const mapStateToProps = (state) => ({
-	isFetching: state.phonicsGameReducer.isFetching,
-	fetchSuccessful: state.phonicsGameReducer.currentWords,
 	openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown,
 });
 

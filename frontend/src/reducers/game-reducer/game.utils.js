@@ -38,6 +38,7 @@ export const filterWordData = ( words, {gameLevel, gameMode, gameType} )=> {
      return  filteredData;
 };
 
+
 export const createCurrentWordLetters = currentWord => {
     const {name, type, letter } = currentWord;
     const blend = [...letter];

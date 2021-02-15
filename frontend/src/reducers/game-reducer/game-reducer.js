@@ -1,3 +1,5 @@
+import words from '../../../public/words/wordlist'
+
 import {
 	calculatePoints,
 	createCurrentWordLetters,
@@ -29,23 +31,10 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				currentWord: state.currentWords[state.currentDeckIndex],
 			};
 
-		case 'FETCH_WORDS_START':
+		case 'FETCH_WORDS':
 			return {
 				...state,
-				isFetching: true,
-			};
-
-		case 'FETCH_WORDS_SUCCESS':
-			return {
-				...state,
-				isFetching: false,
-				words: action.payload,
-			};
-
-		case 'SET_CURRENT_WORDS':
-			return {
-				...state,
-				currentWords: filterWordData(state.words, state.gameParams),
+				currentWords: filterWordData(words, state.gameParams),
 			};
 
 		case 'ON_GAME_START':
@@ -103,12 +92,6 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				gameParams: {},
 				initialClock: null,
 				tick: null,
-			};
-
-		case 'FETCH_WORDS_FAILURE':
-			return {
-				...state,
-				errorMessage: action.payload,
 			};
 
 		case 'ON_ROUND_START':
