@@ -17,7 +17,7 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	margin: 0 auto;
-	background: url(./img/WEBTEST.png);
+	background: url(./asssets/img/bg.png);
 	background-position: right center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;

@@ -1,4 +1,4 @@
-import words from '../../../public/words/wordlist'
+import { wordList as words } from '../asssets/words/wordlist';
 
 import {
 	calculatePoints,

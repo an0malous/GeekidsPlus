@@ -1,9 +1,8 @@
 import React from 'react';
-import { Grid, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { LandingContainer } from './landing.styles';
 import { useHistory } from 'react-router';
-import Login from '../login/login';
-export const Landing = (props) => {
+const LandingPage = (props) => {
 	let history = useHistory();
 	const handleButtonClick = (e) => {
 		history.push(`/${e.target.name}`);
@@ -31,8 +30,9 @@ export const Landing = (props) => {
 				>
 					Get Started
 				</Button>
-				<Login />
 			</div>
 		</LandingContainer>
 	);
 };
+
+export default LandingPage;
