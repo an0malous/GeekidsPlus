@@ -53,7 +53,7 @@ export const getGameParams = (gameInfo) => ({
     payload: gameInfo
 });
 
-let timer = null
+let timer;
 export const startTimerAsync = () => {
     return dispatch => {
         dispatch(onTimerStart());

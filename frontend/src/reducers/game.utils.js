@@ -1,20 +1,4 @@
-const shuffle = (array) => {
-    var m = array.length, t, i;
-      
-    // While there remain elements to shuffle…
-    while (m) {
-      
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-      
-        // And swap it with the current element.
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-    }
-      
-    return array;
-    }
+import { shuffle } from '../utils';
 
 const bonusCalc = (roundTime) => {
   
@@ -41,9 +25,9 @@ export const calculatePoints = (currentWordLength = 0, time = 0) => {
 };
 
 export const filterWordData = ( words, {gameLevel, gameMode, gameType} )=> {
-   
+   console.log(gameLevel, gameMode, gameType)
      const filteredData = shuffle(words.filter(word=> {
-       
+   
         if(gameType === 'competitive'){
             return word.type === gameLevel
         } else {
@@ -52,6 +36,7 @@ export const filterWordData = ( words, {gameLevel, gameMode, gameType} )=> {
     }));
      return  filteredData;
 };
+
 
 
 export const createCurrentWordLetters = currentWord => {

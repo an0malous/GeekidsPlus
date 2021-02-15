@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container } from 'semantic-ui-react';
 import PhonicsGame from './phonics-game.component';
 import PhonicsGameStartMenu from './phonics-game-start-menu.component';

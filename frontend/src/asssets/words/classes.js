@@ -10,8 +10,8 @@ export class Short extends Vocabulary {
     constructor(name, letter){
         super(name, letter);
         this.type = "cvc";
-        this.audio = `./assets/audio/cvcShort/${letter}/${name}.m4a`;
-        this.img = `./assets/wordlist/img/cvcShort/${letter}/${name}.png`;
+        this.audio = `http://localhost:3000/assets/words/audio/cvcShort/${letter}/${name}.m4a`;
+        this.img = `img/cvcShort/${letter}/${name}.png`;
     }
 }
 

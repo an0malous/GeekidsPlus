@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
-import { shuffle } from '../utils';
+import { shuffle } from '../../../utils';
 import './interact-draggable-config';
 import AlphabetCard from './alphabet-card.component';
-import { Grid, Container } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	const [alphabet, setAlphabet] = useState([]);
 
@@ -43,7 +42,9 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			abcArr.push(currentWord.letter);
 			setAlphabet(shuffle(abcArr));
 		} else {
+			console.log(alphabet)
 			setAlphabet(shuffle(abcArr));
+			
 		}
 		return function alphabetCardCleanUp() {
 			setAlphabet([]);

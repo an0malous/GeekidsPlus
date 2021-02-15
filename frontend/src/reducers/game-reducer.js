@@ -4,6 +4,7 @@ import {
 	calculatePoints,
 	createCurrentWordLetters,
 	filterWordData,
+	timer
 } from './game.utils';
 
 const INITIAL_STATE = {

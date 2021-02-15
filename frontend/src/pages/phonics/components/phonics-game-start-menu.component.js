@@ -30,13 +30,11 @@ const PhonicsGameStartMenu = ({
     return gameParams
   };
 
-  const handleOnGameStart = async () => {
-    
-    await fetchCurrentWords();
-    
+  const handleOnGameStart = () => {
+  
     const gameInfo = createGameParams(gameType, gameLevel, gameMode)
       getGameParams(gameInfo)
-      
+      fetchCurrentWords();
     onGameStart();
   };
   return (

@@ -7,7 +7,6 @@ import { startTimerAsync, onGameEnd, stopTimer1 } from '../../actions/phonicsGam
 const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time, stopTimer1, startTimerAsync }) => {
     const currentWord = currentWords[currentDeckIndex];
 
-
     useEffect(()=>{
         startTimerAsync();
         return ()=> stopTimer1()
@@ -26,7 +25,7 @@ const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoi
                 </Grid.Column> 
 
                 <Grid.Column width={6} style={{ textAlign: "center"}}>
-                    <Thumbnail src={currentWord.img} width="250" height="200" />
+                    <Thumbnail src={require (`../../asssets/words/${currentWord.img}`)} width="250" height="200" />
                 </Grid.Column>
                 
                 <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
