@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Dropzone from './dropzone.component';
-import Interact from './interact-dropzone-config';
+import Dropzone from '../dropzone/dropzone.component';
+import Interact from '../interact-dropzone-config';
 import { Grid } from 'semantic-ui-react';
 
 const DropzoneContainer = ({ currentWordLetters }) => {
-	console.log(currentWordLetters);
+	
 	const dropzones = currentWordLetters;
 
 	return (

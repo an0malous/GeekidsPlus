@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
-import DropzoneContainer from './dropzone-container.component';
-import AlphabetContainer from './alphabet-container.component';
-import GameDashboard from '../../../components/game-dashboard/game-dashboard.component';
-import RoundBreakdown from '../../../components/round-breakdown/round-breakdown';
-import { startTimerAsync, onGameEnd, stopTimer1 } from '../../actions/phonicsGameActions';
+import DropzoneContainer from '../dropzone-container/dropzone-container.component';
+import AlphabetContainer from '../alphabetcard-container/alphabet-container.component';
+import GameDashboard from '../../../../components/game-dashboard/game-dashboard.component';
+import RoundBreakdown from '../../../../components/round-breakdown/round-breakdown';
+import { startTimerAsync, onGameEnd, stopTimer1 } from '../../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 
 const PhonicsGame = ({ openRoundBreakdown, currentWords, currentDeckIndex, currentWordLetters, onGameEnd, totalGamePoints, time }) => {

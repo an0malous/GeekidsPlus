@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
-import PhonicsGameContainer from './components/phonics-game.container';
+import PhonicsGameContainer from './components/phonics-game-container/phonics-game.container';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router'
 import { onGameEnd } from '../../actions/phonicsGameActions';

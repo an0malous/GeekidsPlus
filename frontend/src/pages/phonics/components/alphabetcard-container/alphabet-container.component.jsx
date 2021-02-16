@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { shuffle } from '../../../utils';
-import './interact-draggable-config';
-import AlphabetCard from './alphabet-card.component';
+import { shuffle } from '../../../../utils';
+import '../config/interact-draggable-config';
+import AlphabetCard from '../alphabet-card/alphabet-card.component';
 import { Grid } from 'semantic-ui-react';
 
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
@@ -44,7 +44,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 		} else {
 			console.log(alphabet)
 			setAlphabet(shuffle(abcArr));
-			
+
 		}
 		return function alphabetCardCleanUp() {
 			setAlphabet([]);
@@ -56,12 +56,12 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			<Grid.Row centered>
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (
-							<AlphabetCard
-								key={cardLetter}
-								letter={cardLetter}
-								className="draggable"
-							/>
-					  ))
+						<AlphabetCard
+							key={cardLetter}
+							letter={cardLetter}
+							className="draggable"
+						/>
+					))
 					: 'Loading Alphabet Cards...'}
 			</Grid.Row>
 		</Grid>

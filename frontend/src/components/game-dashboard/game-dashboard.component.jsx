@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Rail, Button, Container } from 'semantic-ui-react';
+import { Grid, Button } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
 
 const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time }) => {

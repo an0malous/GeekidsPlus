@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
-import PhonicsGame from './phonics-game.component';
-import PhonicsGameStartMenu from './phonics-game-start-menu.component';
+import PhonicsGame from '../phonics-game/phonics-game.component';
+import PhonicsGameStartMenu from '../start-menu/phonics-game-start-menu.component';
 import { connect } from 'react-redux';
 
 

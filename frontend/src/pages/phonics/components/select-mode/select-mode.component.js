@@ -1,5 +1,5 @@
 import React from 'react';
-import CarouselMenu from '../../../components/carousel-menu/carousel-menu.component';
+import CarouselMenu from '../../../../components/carousel-menu/carousel-menu.component';
 import { Container } from 'semantic-ui-react';
 
 const SelectMode = ({ gameType, gameLevel, setGameMode }) => {

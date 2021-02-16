@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import SelectType from "./select-type.component";
-import SelectLevel from "./select-level.component";
-import SelectMode from "./select-mode.component";
+import SelectType from "../select-type/select-type.component";
+import SelectLevel from "../select-level/select-level.component";
+import SelectMode from "../select-mode/select-mode.component";
 import {
   fetchCurrentWords,
   getGameParams,
   onGameStart,
-} from "../../../actions/phonicsGameActions";
+} from "../../../../actions/phonicsGameActions";
 
 const PhonicsGameStartMenu = ({
   onGameStart,

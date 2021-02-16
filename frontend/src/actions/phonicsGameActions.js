@@ -58,6 +58,7 @@ export const startTimerAsync = () => {
     return dispatch => {
         dispatch(onTimerStart());
         timer = setInterval(()=>dispatch(onTimerTick()), 1000)
+        console.log('TIMER STARTED')
         dispatch(onTimerTick());
         
     };
