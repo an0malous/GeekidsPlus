@@ -19,7 +19,6 @@ const PhonicsGameContainer = ({ currentWords }) => {
 
 const mapStateToProps = state => ({
     currentWords: state.phonicsGameReducer.currentWords,
-    openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown
 });
 
 

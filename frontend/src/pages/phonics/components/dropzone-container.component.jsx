@@ -2,7 +2,6 @@ import React from 'react';
 
 import Dropzone from './dropzone.component';
 import Interact from './interact-dropzone-config';
-import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 
 const DropzoneContainer = ({ currentWordLetters }) => {
@@ -34,8 +33,4 @@ const DropzoneContainer = ({ currentWordLetters }) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
-});
-
-export default connect(mapStateToProps)(DropzoneContainer);
+export default DropzoneContainer;

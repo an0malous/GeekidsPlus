@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { shuffle } from '../../../utils';
 import './interact-draggable-config';
 import AlphabetCard from './alphabet-card.component';
 import { Grid } from 'semantic-ui-react';
+
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	const [alphabet, setAlphabet] = useState([]);
 
@@ -68,9 +68,5 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	currentWords: state.phonicsGameReducer.currentWords,
-	currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
-});
 
-export default connect(mapStateToProps)(AlphabetContainer);
+export default AlphabetContainer;

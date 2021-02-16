@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "border": "1px solid black",
+      "borderRadius": "15%",
+      "color": "red",
+      "padding": "20px",
+    }
+  }
+/>
+`;

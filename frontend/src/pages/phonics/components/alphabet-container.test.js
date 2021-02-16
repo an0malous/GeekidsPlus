@@ -5,7 +5,6 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 
-
 const mockStore = configureStore([]);
 
 describe('My Connected React-Redux Component', () => {
@@ -15,12 +14,12 @@ describe('My Connected React-Redux Component', () => {
 	beforeEach(() => {
 		store = mockStore({
 			phonicsGameReducer: {
-            currentWords: [{name: "fun", type: "cvc", audio: null, img: null}, {name: "push", type: "blends", audio: null, img: null}],
-				currentDekcIndex: 5,
+            currentWords: [ {name: "push", type: "blends", audio: null, img: null}],
+				currentDeckIndex: 0
 			},
 		});
 
-		component = renderer.create(
+		component = renderer(
 			<Provider store={store}>
 				<AlphabetContainer />
 			</Provider>
@@ -28,12 +27,7 @@ describe('My Connected React-Redux Component', () => {
 	});
 
 	it('should render with given state from Redux store', () => {
-		expect(component).toMatchSnapshot();
+		expect(component).toMatchSnapShot();
    });
 
-
-  
-  it('matches even if received contains additional elements', () => {
-    expect(component).toHaveLength(26);
-  })
 })
