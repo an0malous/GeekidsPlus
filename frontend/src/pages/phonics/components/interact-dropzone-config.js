@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import interact from 'interactjs';
 
-import { onRoundComplete } from '../../../actions/phonicsGameActions'
+import { onCorrectLetter, onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, currentWordLetters, timer, onTimerStop, onRoundComplete }) => {
+const Interact = ({ children, currentWordLetters, timer, onTimerStop, onCorrectLetter, onRoundComplete }) => {
   const [correctCounter, setCorrectCounter] = useState(0);
   const [letters, setLetters] = useState(currentWordLetters);
 
@@ -18,13 +18,13 @@ useEffect(()=>{
 
 lettersRef.current = letters
 correctCounterRef.current = correctCounter
-  const letterCorrect = (event) => {
+  const checkIfLetterIsCorrect = (event) => {
 
     for(let i = 0; i < lettersRef.current.length; i++){
 
         if (lettersRef.current[i] === event.relatedTarget.innerText && 
             event.relatedTarget.innerText === event.target.innerText){
-          
+                onCorrectLetter();
                 event.relatedTarget.classList.remove('draggable');
                 setCorrectCounter(prev=>prev + 1)
 
@@ -72,7 +72,7 @@ interact(".inner-dropzone").dropzone({
     },
     ondrop: function (event) {
       event.stopImmediatePropagation();
-      letterCorrect(event);
+      checkIfLetterIsCorrect(event);
     },
    
     ondropdeactivate: function (event) {
@@ -91,7 +91,8 @@ interact(".inner-dropzone").dropzone({
 };
 
 const mapDispatchToProps = dispatch => ({
-  onRoundComplete: ()=>dispatch(onRoundComplete())
+  onRoundComplete: ()=>dispatch(onRoundComplete()),
+  onCorrectLetter: ()=>dispatch(onCorrectLetter())
 });
 
 const mapStateToProps = state => ({

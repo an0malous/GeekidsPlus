@@ -3,7 +3,8 @@ import { wordList as words } from '../asssets/words/wordlist';
 import {
 	calculatePoints,
 	createCurrentWordLetters,
-	filterWordData
+	filterWordData,
+	calculateLetterBonus
 } from './game.utils';
 
 const INITIAL_STATE = {
@@ -57,11 +58,16 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				gameParams: action.payload,
 			};
+		case 'ON_CORRECT_LETTER':
+			return {
+				...state,
+				totalGamePoints: state.totalGamePoints + calculateLetterBonus(state.roundTime)
+			}
 
 		case 'ON_TIMER_STOP':
 			return {
 				...state,
-				roundPoints: calculatePoints(
+				roundPoints: + calculatePoints(
 					state.currentWords[state.currentDeckIndex].name.length,
 					state.roundTime
 				),

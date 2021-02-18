@@ -35,6 +35,10 @@ export const onTimerStop = () => ({
     type: 'ON_TIMER_STOP'
 });
 
+export const onCorrectLetter = () => ({
+    type: 'ON_CORRECT_LETTER'
+});
+
 export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });

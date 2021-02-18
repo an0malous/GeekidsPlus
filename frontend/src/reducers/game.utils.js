@@ -18,11 +18,41 @@ const bonusCalc = (roundTime) => {
     } 
 };
 
-export const calculatePoints = (currentWordLength = 0, time = 0) => {
+export const calculateLetterBonus = (roundTime, helpActivated=false) => {
+  
+    let bonus = 0;
 
-    const roundPoints = Math.floor(currentWordLength * 5 + bonusCalc(time))
-    return roundPoints
-};
+    switch (true) {
+        case roundTime <= 2:
+             bonus = 100;
+             break;
+        case roundTime < 5:
+            bonus = 50;
+            break;
+
+        case roundTime < 10:
+            bonus = 40;
+            break;
+
+        case roundTime < 20:
+            bonus = 30;
+            break;
+
+        case roundTime < 30:
+            bonus = 20;
+            break;
+        default:
+            bonus = 10;
+            break;
+    }
+
+    return bonus
+
+}
+
+export const calculatePoints = (currentWordLength = 0, time = 0) => {
+    return Math.floor(currentWordLength * 5 + bonusCalc(time))
+}
 
 export const filterWordData = ( words, {gameLevel, gameMode, gameType} )=> {
    console.log(gameLevel, gameMode, gameType)
