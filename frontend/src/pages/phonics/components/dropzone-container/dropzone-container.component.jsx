@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import interact from 'interactjs';
 import Dropzone from '../dropzone/dropzone.component';
-
 import { Grid } from 'semantic-ui-react';
 
 import {
@@ -41,6 +40,7 @@ const DropzoneContainer = ({
 			) {
 				onCorrectLetter();
 				event.relatedTarget.classList.remove('draggable');
+				event.relatedTarget.classList.add('correct');
 				setCorrectCounter((prev) => prev + 1);
 
 				if (lettersRef.current.length === correctCounterRef.current) {
@@ -98,27 +98,27 @@ const DropzoneContainer = ({
 	});
 
 	return (
-    <Grid>
-				<Grid.Row style={{justifyContent: 'space-evenly'}}>
-					{currentWordLetters.length > 1
-						? currentWordLetters.map((zone) => (
-								<Dropzone
-									key={zone}
-									letter={zone}
-									style={{
-										color: 'rgba(0,0,0,0)',
-										fontSize: '1.5rem',
-										padding: '25px',
-										border: 'dotted white 2px',
-									}}
-									className="inner-dropzone"
-								/>
-						  ))
-						: 'Loading Dropzone...'}
-				</Grid.Row>
-			</Grid>
-  );
-}           
+		<Grid>
+			<Grid.Row style={{ justifyContent: 'space-evenly' }}>
+				{currentWordLetters.length > 1
+					? currentWordLetters.map((zone) => (
+							<Dropzone
+								key={zone}
+								letter={zone}
+								style={{
+									color: 'rgba(0,0,0,0)',
+									fontSize: '1.5rem',
+									padding: '25px',
+									border: 'dotted white 2px',
+								}}
+								className="inner-dropzone"
+							/>
+					  ))
+					: 'Loading Dropzone...'}
+			</Grid.Row>
+		</Grid>
+	);
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	onRoundComplete: () => dispatch(onRoundComplete()),
@@ -128,6 +128,5 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
 	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropzoneContainer);

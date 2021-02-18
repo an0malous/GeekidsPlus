@@ -3,9 +3,12 @@ import GameDashboard from '../../../../components/game-dashboard/game-dashboard.
 import { onGameEnd } from '../../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 
-const GameDashboardContainer = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time }) => (
-   <GameDashboard currentWords={currentWords} onGameEnd={onGameEnd} currentDeckIndex={currentDeckIndex} totalGamePoints={totalGamePoints} time={time}/>
-);
+const GameDashboardContainer = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time }) => {
+   
+
+   
+   return<GameDashboard helpHandler={helpHandler} currentWords={currentWords} onGameEndHandler={onGameEndHandler} currentDeckIndex={currentDeckIndex} totalGamePoints={totalGamePoints} time={time}/>
+};
 
 const mapStateToProps = (state) => ({
    time: state.phonicsGameReducer.totalGameTime,
@@ -15,7 +18,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	onGameEnd: ()=>dispatch(onGameEnd())
+	onGameEndHandler: ()=>dispatch(onGameEnd()),
+   helpHandler: ()=>dispatch(onHelp())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps )(GameDashboardContainer)

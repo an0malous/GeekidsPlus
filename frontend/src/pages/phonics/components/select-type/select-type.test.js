@@ -1,13 +1,13 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
-import AlphabetCard from './alphabet-card.component';
+import SelectType from './select-type.component';
 
 describe('AlphabetCard Component', () => {
    let component;
 
    beforeEach(() => {
      component = renderer
-     .create(<AlphabetCard />)
+     .create(<SelectType />)
      .toJSON()
    });
    

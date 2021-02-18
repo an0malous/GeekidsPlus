@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Alphabet Card Container renders without crashing 1`] = `
-<Grid>
-  <GridRow
-    centered={true}
+<div
+  className="ui grid"
+>
+  <div
+    className="centered row"
   >
     Loading Alphabet Cards...
-  </GridRow>
-</Grid>
+  </div>
+</div>
 `;

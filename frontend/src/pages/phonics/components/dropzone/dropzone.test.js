@@ -1,12 +1,12 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 import Dropzone from './dropzone.component';
 
 describe('Dropzoneu Component', () => {
    let component;
 
    beforeEach(() => {
-     component = shallow(<Dropzone />)
+     component = renderer.create(<Dropzone />).toJSON()
    });
    
    it('Renders', () => {

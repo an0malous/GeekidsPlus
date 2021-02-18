@@ -1,13 +1,13 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
-import AlphabetCard from './alphabet-card.component';
+import PhonicsGame from './phonics-game.component.jsx';
 
 describe('AlphabetCard Component', () => {
    let component;
 
    beforeEach(() => {
      component = renderer
-     .create(<AlphabetCard />)
+     .create(<PhonicsGame />)
      .toJSON()
    });
    

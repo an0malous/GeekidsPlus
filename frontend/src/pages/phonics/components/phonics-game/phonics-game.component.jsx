@@ -9,9 +9,7 @@ const PhonicsGame = ({
 	openRoundBreakdown,
 	currentWords,
 	currentDeckIndex,
-	onTimerTick,
-	currentWordLetters,
-	onTimerStop
+	onTimerTick
 }) => {
 	const timer = useRef(null);
 	useEffect(() => {
@@ -24,9 +22,7 @@ const PhonicsGame = ({
 			{openRoundBreakdown ? <RoundBreakdown /> : null}
 			<GameDashboardContainer />
 			<DropzoneContainer
-			onTimerStop={onTimerStop}
 				timer={timer}
-				currentWordLetters={currentWordLetters}
 			/>
 			<AlphabetContainer
 				currentWords={currentWords}

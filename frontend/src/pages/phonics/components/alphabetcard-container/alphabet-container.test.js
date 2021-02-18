@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import AlphabetContainer from './alphabet-container.component';
 
 describe('Alphabet Card Container', () => {
@@ -12,7 +12,9 @@ describe('Alphabet Card Container', () => {
 				currentDeckIndex: 0
 			}
 				const {currentDeckIndex, currentWords } = props
-		component = shallow(<AlphabetContainer currentDeckIndex={currentDeckIndex} currentWords={currentWords}/>)
+		component = renderer
+		.create(<AlphabetContainer currentDeckIndex={currentDeckIndex} currentWords={currentWords}/>)
+		.toJSON()
 	});
 
 	it('renders without crashing', () => {
@@ -20,3 +22,5 @@ describe('Alphabet Card Container', () => {
    });
 
 })
+
+

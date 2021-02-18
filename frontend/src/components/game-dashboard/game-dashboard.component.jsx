@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
 
-const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time }) => {
+const GameDashboard = ({ currentWords, onGameEndHandler, currentDeckIndex, totalGamePoints, time, helpHandler }) => {
     const currentWord = currentWords[currentDeckIndex];
     return (
         currentWords ?
@@ -22,9 +22,9 @@ const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoi
                 
                 <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
                     <Button label="Pause"/>
-                    <Button onClick={onGameEnd} label="New Game"/>
+                    <Button onClick={onGameEndHandler} label="New Game"/>
                     <Button label="Listen" />
-                    <Button label="Help" />
+                    <Button label="Help" onClick={helpHandler} />
                 </Grid.Column>
             </Grid.Row>
         </Grid>
