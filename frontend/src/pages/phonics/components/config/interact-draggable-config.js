@@ -48,4 +48,3 @@ interact(".draggable").draggable({
     target.setAttribute("data-x", x);
     target.setAttribute("data-y", y);
   };
-  

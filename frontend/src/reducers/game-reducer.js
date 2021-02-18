@@ -3,8 +3,7 @@ import { wordList as words } from '../asssets/words/wordlist';
 import {
 	calculatePoints,
 	createCurrentWordLetters,
-	filterWordData,
-	timer
+	filterWordData
 } from './game.utils';
 
 const INITIAL_STATE = {

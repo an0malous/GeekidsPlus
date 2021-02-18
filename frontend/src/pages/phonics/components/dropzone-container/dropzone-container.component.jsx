@@ -1,15 +1,14 @@
 import React from 'react';
-
 import Dropzone from '../dropzone/dropzone.component';
 import Interact from '../interact-dropzone-config';
 import { Grid } from 'semantic-ui-react';
 
-const DropzoneContainer = ({ currentWordLetters }) => {
+const DropzoneContainer = ({ currentWordLetters, timer }) => {
 	
 	const dropzones = currentWordLetters;
 
 	return (
-		<Interact>
+		<Interact timer={timer}>
 			<Grid>
 				<Grid.Row style={{justifyContent: 'space-evenly'}}>
 					{currentWordLetters.length > 1

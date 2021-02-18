@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
-import PhonicsGameContainer from './components/phonics-game-container/phonics-game.container';
+import PhonicsGame from './components/phonics-game/phonics-game.component';
+import PhonicsGameStartMenu from './components/start-menu/phonics-game-start-menu.component';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router';
 import { onGameEnd } from '../../actions/phonicsGameActions';
+import {
+	fetchCurrentWords,
+	getGameParams,
+	onGameStart,
+	onTimerTick,
+} from '../../actions/phonicsGameActions';
 
-const PhonicsGamePage = ({ onGameEnd }) => {
+const PhonicsGamePage = ({
+	onGameEnd,
+	currentDeckIndex,
+	currentWordLetters,
+	openRoundBreakdown,
+	currentWords,
+	fetchCurrentWords,
+	getGameParams,
+	onGameStart,
+	onTimerTick
+}) => {
 	const [open, setOpen] = useState(true);
 	let history = useHistory();
 	return (
@@ -18,7 +35,21 @@ const PhonicsGamePage = ({ onGameEnd }) => {
 		>
 			<Header icon>Phonics</Header>
 			<Modal.Content>
-				<PhonicsGameContainer />
+				{currentWords.length > 0 ? (
+					<PhonicsGame
+						onTimerTick={onTimerTick}
+						currentWordLetters={currentWordLetters}
+						openRoundBreakdown={openRoundBreakdown}
+						currentWords={currentWords}
+						currentDeckIndex={currentDeckIndex}
+					/>
+				) : (
+					<PhonicsGameStartMenu
+						onGameStart={onGameStart}
+						getGameParams={getGameParams}
+						fetchCurrentWords={fetchCurrentWords}
+					/>
+				)}
 			</Modal.Content>
 			<Modal.Actions>
 				<Button
@@ -28,7 +59,7 @@ const PhonicsGamePage = ({ onGameEnd }) => {
 					onClick={() => {
 						setOpen(false);
 						onGameEnd();
-						history.push('/')
+						history.push('/');
 					}}
 				>
 					<Icon name="remove" /> Exit Phonics
@@ -40,6 +71,17 @@ const PhonicsGamePage = ({ onGameEnd }) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	onGameEnd: () => dispatch(onGameEnd()),
+	fetchCurrentWords: () => dispatch(fetchCurrentWords()),
+	onGameStart: () => dispatch(onGameStart()),
+	getGameParams: (gameInfo) => dispatch(getGameParams(gameInfo)),
+	onTimerTick: ()=>dispatch(onTimerTick())
 });
 
-export default connect(null, mapDispatchToProps)(PhonicsGamePage);
+const mapStateToProps = (state) => ({
+	openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown,
+	currentWords: state.phonicsGameReducer.currentWords,
+	currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
+	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGamePage);

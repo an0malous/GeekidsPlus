@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import SelectType from "../select-type/select-type.component";
 import SelectLevel from "../select-level/select-level.component";
 import SelectMode from "../select-mode/select-mode.component";
-import {
-  fetchCurrentWords,
-  getGameParams,
-  onGameStart,
-} from "../../../../actions/phonicsGameActions";
 
 const PhonicsGameStartMenu = ({
   onGameStart,
@@ -52,10 +46,4 @@ const PhonicsGameStartMenu = ({
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchCurrentWords: () => dispatch(fetchCurrentWords()),
-  onGameStart: () => dispatch(onGameStart()),
-  getGameParams: gameInfo => dispatch(getGameParams(gameInfo))
-});
-
-export default connect(null, mapDispatchToProps)(PhonicsGameStartMenu);
+export default PhonicsGameStartMenu;

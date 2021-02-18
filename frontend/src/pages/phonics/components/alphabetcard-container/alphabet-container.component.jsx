@@ -6,7 +6,6 @@ import { Grid } from 'semantic-ui-react';
 
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	const [alphabet, setAlphabet] = useState([]);
-
 	const currentWord = currentWords[currentDeckIndex];
 
 	useEffect(() => {
@@ -42,16 +41,16 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			abcArr.push(currentWord.letter);
 			setAlphabet(shuffle(abcArr));
 		} else {
-			console.log(alphabet)
 			setAlphabet(shuffle(abcArr));
 
 		}
-		return function alphabetCardCleanUp() {
-			setAlphabet([]);
-		};
-	}, [currentDeckIndex, currentWord]);
-
+		return ()=> {
+				setAlphabet([]); 
+		}
+	}, [currentWord]);
+	
 	return (
+	
 		<Grid>
 			<Grid.Row centered>
 				{alphabet.length > 0
@@ -61,12 +60,17 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 							letter={cardLetter}
 							className="draggable"
 						/>
+				
 					))
 					: 'Loading Alphabet Cards...'}
 			</Grid.Row>
 		</Grid>
+		
 	);
+	
 };
+
+
 
 
 export default AlphabetContainer;

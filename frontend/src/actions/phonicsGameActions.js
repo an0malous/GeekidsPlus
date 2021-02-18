@@ -2,6 +2,7 @@ export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
 });
 
+
 export const getCurrentDeckIndex = () => ({
     type: 'GET_CURRENT_DECK_INDEX'
 });
@@ -42,8 +43,6 @@ export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });
 
-
-
 export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
 });
@@ -53,30 +52,4 @@ export const getGameParams = (gameInfo) => ({
     payload: gameInfo
 });
 
-let timer;
-export const startTimerAsync = () => {
-    return dispatch => {
-        dispatch(onTimerStart());
-        timer = setInterval(()=>dispatch(onTimerTick()), 1000)
-        console.log('TIMER STARTED')
-        dispatch(onTimerTick());
-        
-    };
-};
-
-export const stopTimer1 = () => {
-    clearInterval(timer);
-   return dispatch =>{
-   dispatch(stopTimer());
-  
-   };
-};
-
-   export const stopTimerAsync = () => {
-    clearInterval(timer);
-   return dispatch =>{
-   dispatch(stopTimer());
-  
-   };
-};
 

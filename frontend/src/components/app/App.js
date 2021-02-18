@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import PhonicsGamePage from '../../pages/phonics/phonics-game.page';

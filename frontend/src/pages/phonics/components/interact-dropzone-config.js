@@ -1,11 +1,10 @@
-import interact from 'interactjs';
-
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import interact from 'interactjs';
 
-import { stopTimerAsync, onRoundComplete } from '../../../actions/phonicsGameActions'
+import { onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, stopTimerAsync, currentWordLetters, onRoundComplete }) => {
+const Interact = ({ children, currentWordLetters, timer, onRoundComplete }) => {
   const [correctCounter, setCorrectCounter] = useState(0);
   const [letters, setLetters] = useState(currentWordLetters);
 
@@ -19,7 +18,6 @@ useEffect(()=>{
 
 lettersRef.current = letters
 correctCounterRef.current = correctCounter
-console.log(letters, correctCounter)
   const letterCorrect = (event) => {
 
     for(let i = 0; i < lettersRef.current.length; i++){
@@ -30,16 +28,15 @@ console.log(letters, correctCounter)
                 event.relatedTarget.classList.remove('draggable');
                 setCorrectCounter(prev=>prev + 1)
 
-                if( lettersRef.current.length === correctCounterRef.current ){    
-                  stopTimerAsync()
-                  onRoundComplete()
+                if( lettersRef.current.length === correctCounterRef.current ){
+                  
+                  clearInterval(timer.current)
+                  onRoundComplete();
                 }       
         }
     }
   }
   
-
-
 // enable draggables to be dropped into this
 interact(".inner-dropzone").dropzone({
     // only accept elements matching this CSS selector
@@ -75,8 +72,6 @@ interact(".inner-dropzone").dropzone({
     ondrop: function (event) {
       event.stopImmediatePropagation();
       letterCorrect(event);
-  
-  
     },
    
     ondropdeactivate: function (event) {
@@ -95,7 +90,6 @@ interact(".inner-dropzone").dropzone({
 };
 
 const mapDispatchToProps = dispatch => ({
-  stopTimerAsync: ()=>dispatch(stopTimerAsync()),
   onRoundComplete: ()=>dispatch(onRoundComplete())
 });
 

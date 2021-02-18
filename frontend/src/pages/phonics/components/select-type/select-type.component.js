@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { Grid, Container } from 'semantic-ui-react';
 const selectType = ({ setGameType }) => {
 
