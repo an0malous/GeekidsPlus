@@ -1,18 +1,107 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import interact from 'interactjs';
 import Dropzone from '../dropzone/dropzone.component';
-import Interact from '../interact-dropzone-config';
+
 import { Grid } from 'semantic-ui-react';
 
-const DropzoneContainer = ({ currentWordLetters, onTimerStop, timer }) => {
-	
-	const dropzones = currentWordLetters;
+import {
+	onCorrectLetter,
+	onRoundComplete,
+} from '../../../../actions/phonicsGameActions';
+
+const DropzoneContainer = ({
+	currentWordLetters,
+	timer,
+	onTimerStop,
+	onCorrectLetter,
+	onRoundComplete,
+}) => {
+	const [correctCounter, setCorrectCounter] = useState(0);
+	const [letters, setLetters] = useState(currentWordLetters);
+
+	let lettersRef = useRef(letters);
+	let correctCounterRef = useRef(correctCounter);
+
+	useEffect(() => {
+		setLetters(currentWordLetters);
+		setCorrectCounter(0);
+	}, [currentWordLetters]);
+
+	const checkIfLetterIsCorrect = (
+		event,
+		{ lettersRef, correctCounterRef }
+	) => {
+		lettersRef.current = letters;
+		correctCounterRef.current = correctCounter;
+		for (let i = 0; i < lettersRef.current.length; i++) {
+			if (
+				lettersRef.current[i] === event.relatedTarget.innerText &&
+				event.relatedTarget.innerText === event.target.innerText
+			) {
+				onCorrectLetter();
+				event.relatedTarget.classList.remove('draggable');
+				setCorrectCounter((prev) => prev + 1);
+
+				if (lettersRef.current.length === correctCounterRef.current) {
+					clearInterval(timer.current);
+					onTimerStop();
+					onRoundComplete();
+				}
+			}
+		}
+	};
+
+	// enable draggables to be dropped into this
+	interact('.inner-dropzone').dropzone({
+		// only accept elements matching this CSS selector
+		accept: '.draggable',
+		// Require a 75% element overlap for a drop to be possible
+		overlap: 0.75,
+
+		// listen for drop related events:
+
+		ondropactivate: function (event) {
+			// add active dropzone feedback
+			event.target.classList.add('drop-active');
+		},
+		ondragenter: function (event) {
+			var draggableElement = event.relatedTarget;
+			var dropzoneElement = event.target;
+
+			// feedback the possibility of a drop
+			dropzoneElement.classList.add('drop-target');
+			draggableElement.classList.add('can-drop');
+			//draggableElement.textContent = 'Dragged in'
+		},
+		ondragleave: function (event) {
+			// remove the drop feedback style
+
+			event.target.classList.remove('correct');
+			event.target.classList.remove('incorrect');
+			event.target.classList.remove('drop-target');
+			event.relatedTarget.classList.remove('can-drop');
+			event.target.classList.remove('test');
+			//event.relatedTarget.textContent = 'Dragged out'
+		},
+		ondrop: function (event) {
+			event.stopImmediatePropagation();
+			checkIfLetterIsCorrect(event, { correctCounterRef, lettersRef });
+		},
+
+		ondropdeactivate: function (event) {
+			// remove active dropzone feedback
+			event.target.classList.remove('drop-active');
+			event.target.classList.remove('drop-target');
+			event.target.classList.remove('drop-target');
+		},
+	});
 
 	return (
-		<Interact timer={timer} onTimerStop={onTimerStop}>
-			<Grid>
+    <Grid>
 				<Grid.Row style={{justifyContent: 'space-evenly'}}>
 					{currentWordLetters.length > 1
-						? dropzones.map((zone) => (
+						? currentWordLetters.map((zone) => (
 								<Dropzone
 									key={zone}
 									letter={zone}
@@ -28,8 +117,17 @@ const DropzoneContainer = ({ currentWordLetters, onTimerStop, timer }) => {
 						: 'Loading Dropzone...'}
 				</Grid.Row>
 			</Grid>
-		</Interact>
-	);
-};
+  );
+}           
 
-export default DropzoneContainer;
+const mapDispatchToProps = (dispatch) => ({
+	onRoundComplete: () => dispatch(onRoundComplete()),
+	onCorrectLetter: () => dispatch(onCorrectLetter()),
+});
+
+const mapStateToProps = (state) => ({
+	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropzoneContainer);
