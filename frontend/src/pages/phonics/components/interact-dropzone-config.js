@@ -4,7 +4,7 @@ import interact from 'interactjs';
 
 import { onRoundComplete } from '../../../actions/phonicsGameActions'
 
-const Interact = ({ children, currentWordLetters, timer, onRoundComplete }) => {
+const Interact = ({ children, currentWordLetters, timer, onTimerStop, onRoundComplete }) => {
   const [correctCounter, setCorrectCounter] = useState(0);
   const [letters, setLetters] = useState(currentWordLetters);
 
@@ -31,6 +31,7 @@ correctCounterRef.current = correctCounter
                 if( lettersRef.current.length === correctCounterRef.current ){
                   
                   clearInterval(timer.current)
+                  onTimerStop();
                   onRoundComplete();
                 }       
         }

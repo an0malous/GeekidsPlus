@@ -10,6 +10,7 @@ import {
 	getGameParams,
 	onGameStart,
 	onTimerTick,
+	onTimerStop
 } from '../../actions/phonicsGameActions';
 
 const PhonicsGamePage = ({
@@ -21,7 +22,8 @@ const PhonicsGamePage = ({
 	fetchCurrentWords,
 	getGameParams,
 	onGameStart,
-	onTimerTick
+	onTimerTick,
+	onTimerStop
 }) => {
 	const [open, setOpen] = useState(true);
 	let history = useHistory();
@@ -37,6 +39,7 @@ const PhonicsGamePage = ({
 			<Modal.Content>
 				{currentWords.length > 0 ? (
 					<PhonicsGame
+					onTimerStop={onTimerStop}
 						onTimerTick={onTimerTick}
 						currentWordLetters={currentWordLetters}
 						openRoundBreakdown={openRoundBreakdown}
@@ -74,7 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchCurrentWords: () => dispatch(fetchCurrentWords()),
 	onGameStart: () => dispatch(onGameStart()),
 	getGameParams: (gameInfo) => dispatch(getGameParams(gameInfo)),
-	onTimerTick: ()=>dispatch(onTimerTick())
+	onTimerTick: ()=>dispatch(onTimerTick()),
+	onTimerStop: ()=>dispatch(onTimerStop())
 });
 
 const mapStateToProps = (state) => ({

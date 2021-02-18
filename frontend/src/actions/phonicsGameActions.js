@@ -35,10 +35,6 @@ export const onTimerStop = () => ({
     type: 'ON_TIMER_STOP'
 });
 
-export const stopTimer = () => ({
-    type: 'STOP_TIMER'
-});
-
 export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });
