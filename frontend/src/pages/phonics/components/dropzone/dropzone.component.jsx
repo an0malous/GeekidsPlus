@@ -4,9 +4,9 @@ const Dropzone = ({ letter, handleDropzones, ...rest}) => {
     const ref= useRef(null)
 
     useEffect(()=>{
-        console.log(ref.current)
+        
         handleDropzones(ref)
-    },[ref.current])
+    }, [handleDropzones])
     return (
         <div ref={ref}{...rest}>{letter}</div>
     );

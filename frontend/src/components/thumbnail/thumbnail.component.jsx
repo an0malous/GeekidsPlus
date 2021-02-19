@@ -13,10 +13,10 @@ const Thumbnail = ({ src, alt, width, height }, ...rest) => {
       onOpen={() => setOpen(true)}
       open={open}
       size='small'
-      trigger={<img src={src} alt={alt} width={width} height={height} {...rest} />}
+      trigger={<img src={src} alt={alt} width={width} height={height} />}
     >
       <Modal.Content>
-      <img src={src} alt={alt} width="100%" height="100%" {...rest} />
+      <img src={src} alt={alt} width="100%" height="100%" />
       </Modal.Content>
     </Modal>
                 

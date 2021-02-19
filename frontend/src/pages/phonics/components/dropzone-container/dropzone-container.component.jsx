@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
 import interact from 'interactjs';
 import Dropzone from '../dropzone/dropzone.component';
@@ -31,9 +31,9 @@ const DropzoneContainer = ({
 	
 	}, [currentWordLetters]);
 	
-	const handleDropzones = (payload) => {
-		setDropzones((prev) => [...prev, payload.current]);
-	};
+	const handleDropzones = useCallback((payload) => {
+		return setDropzones((prev) => [...prev, payload.current]);
+	}, [setDropzones])
 
 	lettersRef.current = letters;
 	correctCounterRef.current = correctCounter;

@@ -51,7 +51,7 @@ export const onHelp =(currentWord, currentWordLetters, dropzone) => {
 	const difficultLetters = [];
 	
 	for (let i = 0; i < currentWord; i++) {
-		if (dropzone[i].classList.contains('correct') != true) {
+		if (dropzone[i].classList.contains('correct') !== true) {
 			difficultLetters.push(currentWordLetters[i]);
 		}
 		const alphabetSquares = document.querySelectorAll('.alphabet-card');
