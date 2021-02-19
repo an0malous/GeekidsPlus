@@ -7,7 +7,7 @@ const RoundBreakdown = ({ onRoundStart, currentElapsedTime, roundPoints, totalGa
     <div style={{position: "absolute", left: "0", top: "0", width: "100%", height: "100vh", background: "rgba(0, 0, 0, 0.9)", zIndex: "2"}}> </div>
         <Container style={{position: "relative", zIndex: "4", color: "white"}}>
             <Grid>
-                <Grid.Column centered>
+                <Grid.Column centered={true}>
                     <Grid.Row>
                         Congratulations you finished in {currentElapsedTime} seconds
                     </Grid.Row>

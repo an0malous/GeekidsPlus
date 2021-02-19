@@ -36,11 +36,10 @@ const PhonicsGameStartMenu = ({
 			) : !gameLevel ? (
 				<SelectLevel setGameLevel={setGameLevel} />
 			) : gameLevel && !gameMode ? (
-				<SelectMode gameType={gameType} setGameMode={setGameMode} />
+				<SelectMode gameType={gameType} gameLevel={gameLevel} setGameMode={setGameMode} />
 			) : (
 				<button onClick={() => handleOnGameStart()}>Start Game</button>
 			)}
-			;
 		</div>
 	);
 };

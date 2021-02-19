@@ -39,7 +39,7 @@ const PhonicsGamePage = ({
 			<Modal.Content>
 				{currentWords.length > 0 ? (
 					<PhonicsGame
-					onTimerStop={onTimerStop} // TODO: STOP PROP DRILLING THIS AND FIND A BETTER SOLUTION
+						onTimerStop={onTimerStop} // TODO: STOP PROP DRILLING THIS AND FIND A BETTER SOLUTION
 						onTimerTick={onTimerTick}
 						currentWordLetters={currentWordLetters}
 						openRoundBreakdown={openRoundBreakdown}

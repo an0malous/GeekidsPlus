@@ -2,7 +2,6 @@ export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
 });
 
-
 export const getCurrentDeckIndex = () => ({
     type: 'GET_CURRENT_DECK_INDEX'
 });
@@ -45,6 +44,10 @@ export const onTimerStart = () => ({
 
 export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
+});
+
+export const onHelp = () => ({
+    type: 'ON_HELP'
 });
 
 export const getGameParams = (gameInfo) => ({

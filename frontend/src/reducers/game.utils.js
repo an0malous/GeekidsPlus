@@ -47,7 +47,7 @@ export const calculateLetterBonus = (roundTime, helpActivated = false) => {
 	return bonus;
 };
 
-export const onHelp =(currentWord, currentWordLetters) => {
+export const onHelp =(currentWord, currentWordLetters, dropzone) => {
 	const difficultLetters = [];
 	
 	for (let i = 0; i < currentWord; i++) {

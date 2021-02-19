@@ -48,6 +48,11 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				),
 			};
 
+		case 'ON_HELP':
+			return {
+				...state
+			}
+
 		case 'ON_TIMER_START':
 			return {
 				...state,

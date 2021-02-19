@@ -3,9 +3,9 @@ import CarouselMenu from '../../../../components/carousel-menu/carousel-menu.com
 import { Container } from 'semantic-ui-react';
 
 const SelectMode = ({ gameType, gameLevel, setGameMode }) => {
-    const blends = ['ch', 'sh', 'wh', 'th', 'ck', 'random'];
+    const blends = ['ch', 'sh', 'wh', 'th', 'ck', 'e', 'random'];
     const cvc = ['a', 'e', 'i', 'o', 'u', 'random'];
-
+        console.log(gameLevel)
     return (
         <Container>
         {

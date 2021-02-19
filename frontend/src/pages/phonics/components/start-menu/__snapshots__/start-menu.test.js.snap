@@ -30,6 +30,5 @@ exports[`AlphabetCard Component Renders 1`] = `
       </div>
     </div>
   </div>
-  ;
 </div>
 `;

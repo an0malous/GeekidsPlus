@@ -7,6 +7,7 @@ import { Grid } from 'semantic-ui-react';
 import {
 	onCorrectLetter,
 	onRoundComplete,
+	onTimerStop,
 } from '../../../../actions/phonicsGameActions';
 
 const DropzoneContainer = ({
@@ -16,8 +17,9 @@ const DropzoneContainer = ({
 	onCorrectLetter,
 	onRoundComplete,
 }) => {
-	const [correctCounter, setCorrectCounter] = useState(0);
+	const [correctCounter, setCorrectCounter] = useState(2);
 	const [letters, setLetters] = useState(currentWordLetters);
+	const [dropzones, setDropzones] = useState([]);
 
 	let lettersRef = useRef(letters);
 	let correctCounterRef = useRef(correctCounter);
@@ -25,14 +27,21 @@ const DropzoneContainer = ({
 	useEffect(() => {
 		setLetters(currentWordLetters);
 		setCorrectCounter(0);
+		setDropzones([]);
+	
 	}, [currentWordLetters]);
+	
+	const handleDropzones = (payload) => {
+		setDropzones((prev) => [...prev, payload.current]);
+	};
 
+	lettersRef.current = letters;
+	correctCounterRef.current = correctCounter;
 	const checkIfLetterIsCorrect = (
 		event,
-		{ lettersRef, correctCounterRef }
+		{ lettersRef, correctCounterRef, dropzones }
 	) => {
-		lettersRef.current = letters;
-		correctCounterRef.current = correctCounter;
+		
 		for (let i = 0; i < lettersRef.current.length; i++) {
 			if (
 				lettersRef.current[i] === event.relatedTarget.innerText &&
@@ -86,7 +95,11 @@ const DropzoneContainer = ({
 		},
 		ondrop: function (event) {
 			event.stopImmediatePropagation();
-			checkIfLetterIsCorrect(event, { correctCounterRef, lettersRef });
+			checkIfLetterIsCorrect(event, {
+				correctCounterRef,
+				lettersRef,
+				dropzones,
+			});
 		},
 
 		ondropdeactivate: function (event) {
@@ -103,6 +116,7 @@ const DropzoneContainer = ({
 				{currentWordLetters.length > 1
 					? currentWordLetters.map((zone) => (
 							<Dropzone
+								handleDropzones={handleDropzones}
 								key={zone}
 								letter={zone}
 								style={{
@@ -123,6 +137,7 @@ const DropzoneContainer = ({
 const mapDispatchToProps = (dispatch) => ({
 	onRoundComplete: () => dispatch(onRoundComplete()),
 	onCorrectLetter: () => dispatch(onCorrectLetter()),
+	onTimerStop: () => dispatch(onTimerStop()),
 });
 
 const mapStateToProps = (state) => ({

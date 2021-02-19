@@ -17,7 +17,7 @@ const GameDashboard = ({ currentWords, onGameEndHandler, currentDeckIndex, total
                 </Grid.Column> 
 
                 <Grid.Column width={6} style={{ textAlign: "center"}}>
-                    <Thumbnail src={require (`../../asssets/words/${currentWord.img}`)} width="250" height="200" />
+                    <Thumbnail src={require (`../../asssets/words${currentWord.img}`)} width="250" height="200" />
                 </Grid.Column>
                 
                 <Grid.Column width={5} style={{ backgroundColor: "orange"}}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import GameDashboard from '../../../../components/game-dashboard/game-dashboard.component'
-import { onGameEnd } from '../../../../actions/phonicsGameActions';
+import { onGameEnd, onHelp } from '../../../../actions/phonicsGameActions';
 import { connect } from 'react-redux';
 
-const GameDashboardContainer = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time }) => {
+const GameDashboardContainer = ({ currentWords, helpHandler, onGameEndHandler, currentDeckIndex, totalGamePoints, time }) => {
    
 
    
