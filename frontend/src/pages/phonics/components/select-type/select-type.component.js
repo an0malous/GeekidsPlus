@@ -1,5 +1,7 @@
 import React from 'react';
 import { Grid, Container } from 'semantic-ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const selectType = ({ setGameType }) => {
 
 	return (
@@ -13,7 +15,8 @@ const selectType = ({ setGameType }) => {
 							
 							}}
 						>
-							Practice
+						<FontAwesomeIcon size="10x" icon="graduation-cap" />
+							
 						</div>
 					</Grid.Column>
 					<Grid.Column width={8}>
@@ -23,7 +26,8 @@ const selectType = ({ setGameType }) => {
 							
 							}}
 						>
-							Competitive
+						<FontAwesomeIcon size="10x" icon="medal" />
+							
 						</div>
 					</Grid.Column>
 				</Grid>

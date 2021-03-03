@@ -5,6 +5,16 @@ exports[`AlphabetCard Component Renders 1`] = `
   <div
     className="ui container"
   >
+    <h2
+      className="ui attached header"
+      style={
+        Object {
+          "backgroundColor": "rgb(223,181,7)",
+        }
+      }
+    >
+      Phonics
+    </h2>
     <div
       className="ui grid"
     >
@@ -14,7 +24,11 @@ exports[`AlphabetCard Component Renders 1`] = `
         <div
           onClick={[Function]}
         >
-          Bronze - Initial Sounds
+          <header
+            as="h3"
+          >
+            Bronze - Initial Sounds
+          </header>
         </div>
       </div>
       <div
@@ -23,7 +37,11 @@ exports[`AlphabetCard Component Renders 1`] = `
         <div
           onClick={[Function]}
         >
-          Silver - CVCs
+          <header
+            as="h3"
+          >
+            Silver - CVCs
+          </header>
         </div>
       </div>
       <div
@@ -32,7 +50,11 @@ exports[`AlphabetCard Component Renders 1`] = `
         <div
           onClick={[Function]}
         >
-          Silver - CVCsGold - CVC with easy blends
+          <header
+            as="h3"
+          >
+            Gold - CVC with easy blends
+          </header>
         </div>
       </div>
       <div
@@ -41,7 +63,11 @@ exports[`AlphabetCard Component Renders 1`] = `
         <div
           onClick={[Function]}
         >
-          Platnium - CVC with difficult blends
+          <header
+            as="h3"
+          >
+            Platnium - CVC with difficult blends
+          </header>
         </div>
       </div>
     </div>

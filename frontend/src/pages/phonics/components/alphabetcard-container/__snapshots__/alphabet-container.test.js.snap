@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Alphabet Card Container renders without crashing 1`] = `
+exports[`Alphabet Card Container matches Snapshot 1`] = `
 <div
   className="ui grid"
 >

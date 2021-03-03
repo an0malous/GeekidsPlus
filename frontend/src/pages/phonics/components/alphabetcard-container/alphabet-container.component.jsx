@@ -56,6 +56,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (
 						<AlphabetCard
+						data-testid="alphabet-card"
 							key={cardLetter}
 							letter={cardLetter}
 							className="draggable"

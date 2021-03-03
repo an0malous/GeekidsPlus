@@ -15,6 +15,11 @@ exports[`AlphabetCard Component Renders 1`] = `
       >
         <div
           onClick={null}
+          style={
+            Object {
+              "fontSize": "6rem",
+            }
+          }
         >
           ＜
         </div>
@@ -24,6 +29,11 @@ exports[`AlphabetCard Component Renders 1`] = `
       >
         <div
           onClick={[Function]}
+          style={
+            Object {
+              "fontSize": "6rem",
+            }
+          }
         >
           a
         </div>

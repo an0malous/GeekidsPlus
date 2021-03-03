@@ -14,18 +14,14 @@ exports[`AlphabetCard Component Renders 1`] = `
         >
           <div
             onClick={[Function]}
-          >
-            Practice
-          </div>
+          />
         </div>
         <div
           className="eight wide column"
         >
           <div
             onClick={[Function]}
-          >
-            Competitive
-          </div>
+          />
         </div>
       </div>
     </div>
