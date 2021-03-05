@@ -34,9 +34,9 @@ const Navbar = ({ onToggleClick }) => {
 			</Menu.Item>
 			<Menu.Item
 				as={Link}
-				to={"/geekidstv"}
-				name="geekidstv"
-				active={activeItem === 'geekidstv'}
+				to={"/concept"}
+				name="concept"
+				active={activeItem === 'concept'}
 				onClick={handleItemClick}
 			>
 				<LanguageToggle JpContent={()=><div>Concept<div style={{fontSize: "0.55rem"}}>コンセプト</div></div>} EngContent={()=>'Concept'} />

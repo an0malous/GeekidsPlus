@@ -6,7 +6,6 @@ import LandingPage from '../../pages/landing/Landing';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import Home from '../../pages/home/home.page';
-import GeekidsTv from '../../pages/geekids-tv/geekids-tv.page';
 import About from '../../pages/about/about.page';
 
 library.add(fas);
@@ -18,8 +17,7 @@ const App = () => (
 			<Route exact path="/" component={LandingPage} />
 			<Route exact path="/home" component={Home} />
 			<Route exact path="/phonics" component={PhonicsGamePage} />
-			<Route exact path="/about" component={About} />
-			<Route exact path="/geekidstv" component={GeekidsTv} />
+			<Route exact path="/concept" component={About} />
 		</Switch>
 	</div>
 );
