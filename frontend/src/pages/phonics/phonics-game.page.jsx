@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import { Button, Icon, Modal } from 'semantic-ui-react';
 import PhonicsGame from './components/phonics-game/phonics-game.component';
 import PhonicsGameStartMenu from './components/start-menu/phonics-game-start-menu.component';
 import { connect } from 'react-redux';
@@ -30,12 +30,13 @@ const PhonicsGamePage = ({
 	return (
 		<Modal
 			basic
+			closeOnDimmerClick={false}
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
+			style={{backgroundColor: "rgba(102,102,102, 0.9)", borderRadius: "15px"}}
 			open={open}
-			size="small"
+			size="huge"
 		>
-			<Header icon>Phonics</Header>
 			<Modal.Content>
 				{currentWords.length > 0 ? (
 					<PhonicsGame

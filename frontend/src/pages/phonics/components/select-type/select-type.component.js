@@ -1,38 +1,54 @@
-import React from 'react';
-import { Grid, Container } from 'semantic-ui-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { Fragment } from 'react';
+import { Grid, Header } from 'semantic-ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LanguageToggle from '../../../../components/language-display-container/language-toggle'
+
+const PracticeCaption = () => {
+	return (
+		<div><Header as="h3">Practice </Header>
+		Improve your weak areas and learn from your mistakes.
+		</div>
+
+		
+	)
+}
+
+const CompetitiveCaption = () => {
+	return (
+		<div><Header as="h3">Competitive </Header>
+		Test your skills and compete for the highest score.
+		</div>
+
+		
+	)
+}
 
 const selectType = ({ setGameType }) => {
-
 	return (
-		<div>
-			<Container>
-				<Grid centered>
-					<Grid.Column width={8}>
+			
+				<Grid stackable={true} container={true} centered={true}>
+					<Grid.Column textAlign="center" width={8}>
 						<div
 							onClick={() => {
 								setGameType('practice');
-							
 							}}
 						>
-						<FontAwesomeIcon size="10x" icon="graduation-cap" />
-							
+							<FontAwesomeIcon size="10x" icon="graduation-cap" />
+							<LanguageToggle EngContent={()=><PracticeCaption />}/>
 						</div>
 					</Grid.Column>
-					<Grid.Column width={8}>
+					<Grid.Column textAlign="center" width={8}>
 						<div
 							onClick={() => {
 								setGameType('competitive');
-							
 							}}
 						>
-						<FontAwesomeIcon size="10x" icon="medal" />
-							
+							<FontAwesomeIcon size="10x" icon="medal" />
+							<LanguageToggle EngContent={()=><CompetitiveCaption />}/>
 						</div>
 					</Grid.Column>
 				</Grid>
-			</Container>
-		</div>
+			
 	);
 };
 

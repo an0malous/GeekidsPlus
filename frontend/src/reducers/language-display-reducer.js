@@ -3,18 +3,12 @@ const INITIAL_STATE = {
    english: true
 };
 
-const languageDisplayeReducer = (state = INITIAL_STATE, action) => {
+const languageDisplayReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case `ON_JP_CLICK`:
+		case `ON_TOGGLE_CLICK`:
 			return {
 				...state,
-				english: false,
-			};
-
-		case 'ON_ENGLISH_CLICK':
-			return {
-				...state,
-				english: true,
+				english: !state.english,
 			};
 
 		default:
@@ -22,4 +16,4 @@ const languageDisplayeReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export default languageDisplayeReducer;
+export default languageDisplayReducer;
