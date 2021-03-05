@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Icon, Modal } from 'semantic-ui-react';
+import { Icon, Modal, Header } from 'semantic-ui-react';
 import PhonicsGame from './components/phonics-game/phonics-game.component';
 import PhonicsGameStartMenu from './components/start-menu/phonics-game-start-menu.component';
 import { connect } from 'react-redux';
@@ -26,6 +26,7 @@ const PhonicsGamePage = ({
 	onTimerStop
 }) => {
 	const [open, setOpen] = useState(true);
+	const [modalHeader, setModalHeader] = useState('Choose a Path')
 	let history = useHistory();
 	return (
 		<Modal
@@ -37,6 +38,12 @@ const PhonicsGamePage = ({
 			open={open}
 			size="huge"
 		>
+		<Modal.Header  style={{ display: "flex", justifyContent: "space-between"}}>
+		<Icon  color="red" onClick={()=>history.goBack()} name="close" />
+				<Header as="h2" style={{margin: 0}}>{modalHeader}</Header>
+				
+			
+			</Modal.Header>
 			<Modal.Content>
 				{currentWords.length > 0 ? (
 					<PhonicsGame
@@ -55,20 +62,6 @@ const PhonicsGamePage = ({
 					/>
 				)}
 			</Modal.Content>
-			<Modal.Actions>
-				<Button
-					basic
-					color="red"
-					inverted
-					onClick={() => {
-						setOpen(false);
-						onGameEnd();
-						history.push('/');
-					}}
-				>
-					<Icon name="remove" /> Exit Phonics
-				</Button>
-			</Modal.Actions>
 		</Modal>
 	);
 };
