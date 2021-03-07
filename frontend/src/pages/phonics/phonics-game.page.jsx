@@ -30,11 +30,12 @@ const PhonicsGamePage = ({
 	let history = useHistory();
 	return (
 		<Modal
+		centered={true}
 			basic
 			closeOnDimmerClick={false}
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
-			style={{backgroundColor: "rgba(102,102,102, 0.9)", borderRadius: "15px"}}
+			style={{margin: 0, padding: 0, backgroundColor: "rgba(102,102,102, 0.9)", borderRadius: "15px"}}
 			open={open}
 			size="huge"
 		>

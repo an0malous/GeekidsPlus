@@ -111,7 +111,7 @@ const DropzoneContainer = ({
 	});
 
 	return (
-		<Grid>
+		<Grid >
 			<Grid.Row style={{ justifyContent: 'space-evenly' }}>
 				{currentWordLetters.length > 1
 					? currentWordLetters.map((zone) => (
@@ -121,8 +121,7 @@ const DropzoneContainer = ({
 								letter={zone}
 								style={{
 									color: 'rgba(0,0,0,0)',
-									fontSize: '1.5rem',
-									padding: '25px',
+									width: "55px", height: "55px",
 									border: 'dotted white 2px',
 								}}
 								className="inner-dropzone"

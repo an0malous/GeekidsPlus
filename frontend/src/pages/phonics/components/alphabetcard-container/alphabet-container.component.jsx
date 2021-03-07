@@ -51,7 +51,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	
 	return (
 	
-		<Grid>
+		<Grid style={{marginTop: 0}}>
 			<Grid.Row centered>
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (

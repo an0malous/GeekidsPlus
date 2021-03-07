@@ -13,7 +13,7 @@ const AlphabetCard = ({ letter, ...rest}) => {
             } 
     })
     return (
-        <div ref={letterCardRef} style={{padding: "20px", border: "1px solid black", color: "red", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
+        <div ref={letterCardRef} style={{width: "55px", fontSize:"2.5rem", height: "55px", border: "1px solid black", color: "red", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
             {letter}
         </div>
     );

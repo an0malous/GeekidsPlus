@@ -30,7 +30,7 @@ const selectType = ({ setGameType }) => {
 						setGameType('practice');
 					}}
 				>
-					<FontAwesomeIcon color="orange" size="10x" icon="graduation-cap" />
+					<FontAwesomeIcon color="white" size="10x" icon="graduation-cap" />
 					<LanguageToggle EngContent={() => <PracticeCaption />} />
 				</div>
 			</Grid.Column>
@@ -40,7 +40,7 @@ const selectType = ({ setGameType }) => {
 						setGameType('competitive');
 					}}
 				>
-					<FontAwesomeIcon color="orange" size="10x" icon="medal" />
+					<FontAwesomeIcon color="white" size="10x" icon="medal" />
 					<LanguageToggle EngContent={() => <CompetitiveCaption />} />
 				</div>
 			</Grid.Column>
