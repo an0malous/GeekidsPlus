@@ -17,8 +17,8 @@ const DropzoneContainer = ({
 	onCorrectLetter,
 	onRoundComplete,
 }) => {
-	const [correctCounter, setCorrectCounter] = useState(2);
-	const [letters, setLetters] = useState(currentWordLetters);
+	const [correctCounter, setCorrectCounter] = useState(null);
+	const [letters, setLetters] = useState(null);
 	const [dropzones, setDropzones] = useState([]);
 
 	let lettersRef = useRef(letters);
@@ -26,8 +26,9 @@ const DropzoneContainer = ({
 
 	useEffect(() => {
 		setLetters(currentWordLetters);
-		setCorrectCounter(0);
+		setCorrectCounter();
 		setDropzones([]);
+
 	
 	}, [currentWordLetters]);
 	
@@ -39,7 +40,7 @@ const DropzoneContainer = ({
 	correctCounterRef.current = correctCounter;
 	const checkIfLetterIsCorrect = (
 		event,
-		{ lettersRef, correctCounterRef, dropzones }
+		{ lettersRef, correctCounterRef }
 	) => {
 		
 		for (let i = 0; i < lettersRef.current.length; i++) {

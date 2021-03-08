@@ -7,6 +7,7 @@ const PhonicsGameStartMenu = ({
 	onGameStart,
 	fetchCurrentWords,
 	getGameParams,
+	setModalHeader
 }) => {
 	const [gameType, setGameType] = useState('');
 	const [gameLevel, setGameLevel] = useState('');
@@ -23,25 +24,30 @@ const PhonicsGameStartMenu = ({
 		return gameParams;
 	};
 
-	const handleOnGameStart = () => {
+	const handleGameInit = (item) => {
+		setGameMode(item)
+		console.log('handleGameInit', gameMode)
+		setModalHeader(`${gameType} / ${gameLevel} - ${gameMode} mode`)
 		const gameInfo = createGameParams(gameType, gameLevel, gameMode);
 		getGameParams(gameInfo);
 		fetchCurrentWords();
 		onGameStart();
 	};
-	return (
-		<div>
-			{!gameType ? (
-				<SelectType setGameType={setGameType} />
-			) : !gameLevel ? (
-				<SelectLevel setGameLevel={setGameLevel} />
-			) : gameLevel && !gameMode ? (
-				<SelectMode gameType={gameType} gameLevel={gameLevel} setGameMode={setGameMode} />
-			) : (
-				<button onClick={() => handleOnGameStart()}>Start Game</button>
-			)}
-		</div>
-	);
+
+	if(gameMode){
+		handleGameInit()
+	}
+	
+	if(!gameType){
+		return <SelectType setGameType={setGameType} />;
+	}
+	if(!gameLevel){
+		setModalHeader('Select a level');
+		return <SelectLevel setGameLevel={setGameLevel} />;
+	} else {
+		setModalHeader('last one nigs');
+		return <SelectMode gameType={gameType} gameLevel={gameLevel} setGameMode={setGameMode}/>;
+	} 
 };
 
 export default PhonicsGameStartMenu;

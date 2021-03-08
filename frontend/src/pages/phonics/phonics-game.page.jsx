@@ -23,11 +23,13 @@ const PhonicsGamePage = ({
 	getGameParams,
 	onGameStart,
 	onTimerTick,
+	openGameOverScreen,
 	onTimerStop
 }) => {
 	const [open, setOpen] = useState(true);
 	const [modalHeader, setModalHeader] = useState('Choose a Path')
 	let history = useHistory();
+	console.log("PHONICS PAGE RENDERED")
 	return (
 		<Modal
 		centered={true}
@@ -40,7 +42,7 @@ const PhonicsGamePage = ({
 			size="huge"
 		>
 		<Modal.Header  style={{ display: "flex", justifyContent: "space-between"}}>
-		<Icon  color="red" onClick={()=>history.goBack()} name="close" />
+		<Icon  color="red" onClick={()=>{history.goBack(); onGameEnd()}} name="close" />
 				<Header as="h2" style={{margin: 0}}>{modalHeader}</Header>
 				
 			
@@ -48,6 +50,7 @@ const PhonicsGamePage = ({
 			<Modal.Content>
 				{currentWords.length > 0 ? (
 					<PhonicsGame
+					openGameOverScreen={openGameOverScreen}
 						onTimerStop={onTimerStop} // TODO: STOP PROP DRILLING THIS AND FIND A BETTER SOLUTION
 						onTimerTick={onTimerTick}
 						currentWordLetters={currentWordLetters}
@@ -60,6 +63,7 @@ const PhonicsGamePage = ({
 						onGameStart={onGameStart}
 						getGameParams={getGameParams}
 						fetchCurrentWords={fetchCurrentWords}
+						setModalHeader={setModalHeader}
 					/>
 				)}
 			</Modal.Content>
@@ -77,10 +81,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
+	openGameOverScreen: state.phonicsGameReducer.openGameOverScreen,
 	openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown,
 	currentWords: state.phonicsGameReducer.currentWords,
 	currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
-	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
+	currentWordLetters: state.phonicsGameReducer.currentWordLetters
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGamePage);

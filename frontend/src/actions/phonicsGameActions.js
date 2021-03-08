@@ -18,6 +18,11 @@ export const onRoundStart = () => ({
     type: 'ON_ROUND_START'
 });
 
+export const onGameOver = () => ({
+    type: 'ON_GAME_OVER'
+});
+
+
 export const onGameStart = () => ({
     type: 'ON_GAME_START'
 });

@@ -2,7 +2,6 @@ import React, {useEffect, useRef} from 'react';
 
 const AlphabetCard = ({ letter, ...rest}) => {
     const letterCardRef = useRef(null)
-    
     useEffect(()=>{
         const card = letterCardRef.current;
             return ()=>{
@@ -12,6 +11,7 @@ const AlphabetCard = ({ letter, ...rest}) => {
             card.classList.add('draggable') 
             } 
     })
+   
     return (
         <div ref={letterCardRef} style={{width: "55px", fontSize:"2.5rem", height: "55px", border: "1px solid black", color: "red", borderRadius: "15%", backgroundColor: "white"}} {...rest}>
             {letter}

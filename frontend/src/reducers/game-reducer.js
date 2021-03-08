@@ -19,9 +19,10 @@ const INITIAL_STATE = {
 	roundTime: 0,
 	totalGameTime: 0,
 	openRoundBreakdown: false,
+	openGameOverScreen: false,
 	gameParams: {},
 	initialClock: null,
-	tick: null,
+	tick: null
 };
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -86,23 +87,16 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				totalGameTime: state.totalGameTime + state.tick,
 			};
 
+		case 'ON_GAME_OVER': 
+			return {
+				...state,
+				openGameOverScreen: true
+			};
+
 		case 'ON_GAME_END':
 			return {
 				...state,
-				currentWords: [],
-				words: [],
-				currentWordLetters: [],
-				isFetching: false,
-				errorMessage: '',
-				currentDeckIndex: 0,
-				roundPoints: 0,
-				totalGamePoints: 0,
-				roundTime: 0,
-				totalGameTime: 0,
-				openRoundBreakdown: false,
-				gameParams: {},
-				initialClock: null,
-				tick: null,
+				...INITIAL_STATE
 			};
 
 		case 'ON_ROUND_START':
@@ -112,6 +106,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 					state.currentWords[state.currentDeckIndex + 1]
 				),
 				openRoundBreakdown: !state.openRoundBreakdown,
+				openGameOverScreen: false,
 				roundPoints: 0,
 				roundTime: 0,
 				currentDeckIndex: state.currentDeckIndex + 1,
