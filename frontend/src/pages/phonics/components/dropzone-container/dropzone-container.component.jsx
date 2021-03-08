@@ -17,41 +17,34 @@ const DropzoneContainer = ({
 	onCorrectLetter,
 	onRoundComplete,
 }) => {
-	const [correctCounter, setCorrectCounter] = useState(null);
-	const [letters, setLetters] = useState(null);
 	const [dropzones, setDropzones] = useState([]);
-
-	let lettersRef = useRef(letters);
-	let correctCounterRef = useRef(correctCounter);
-
+	const lettersRef = useRef([])
+	const correctCounterRef = useRef(0)
 	useEffect(() => {
-		setLetters(currentWordLetters);
-		setCorrectCounter();
-		setDropzones([]);
-
-	
+		lettersRef.current = currentWordLetters
 	}, [currentWordLetters]);
-	
+
 	const handleDropzones = useCallback((payload) => {
 		return setDropzones((prev) => [...prev, payload.current]);
 	}, [setDropzones])
 
-	lettersRef.current = letters;
-	correctCounterRef.current = correctCounter;
 	const checkIfLetterIsCorrect = (
-		event,
-		{ lettersRef, correctCounterRef }
+		event
 	) => {
-		
+
+		console.log("INSIDE CHECKIFCORRECT")
 		for (let i = 0; i < lettersRef.current.length; i++) {
+
 			if (
+				
 				lettersRef.current[i] === event.relatedTarget.innerText &&
 				event.relatedTarget.innerText === event.target.innerText
 			) {
 				onCorrectLetter();
 				event.relatedTarget.classList.remove('draggable');
 				event.relatedTarget.classList.add('correct');
-				setCorrectCounter((prev) => prev + 1);
+				correctCounterRef.current = correctCounterRef.current + 1;
+				console.log('new correct counter', correctCounterRef.current)
 
 				if (lettersRef.current.length === correctCounterRef.current) {
 					clearInterval(timer.current);
@@ -96,11 +89,8 @@ const DropzoneContainer = ({
 		},
 		ondrop: function (event) {
 			event.stopImmediatePropagation();
-			checkIfLetterIsCorrect(event, {
-				correctCounterRef,
-				lettersRef,
-				dropzones,
-			});
+			console.log('letter dropped')
+			checkIfLetterIsCorrect(event);
 		},
 
 		ondropdeactivate: function (event) {
