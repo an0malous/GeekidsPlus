@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import PhonicsGamePage from './pages/phonics-game-new/phonics-game.page';
 import { Landing } from './pages/landing/Landing';
 import Register from './pages/register/Register';
-import Login from './pages/login/login';
+import Login from './pages/login/Login';
 import api from './api';
 import RenderDashboard from './HOC/RenderDashboard';
 import { connect } from 'react-redux';

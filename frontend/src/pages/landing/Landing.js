@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { LandingContainer } from './landing.styles';
 import { useHistory } from 'react-router';
-import Login from '../login/login';
+import Login from '../login/Login';
 export const Landing = (props) => {
 	let history = useHistory();
 	const handleButtonClick = (e) => {
