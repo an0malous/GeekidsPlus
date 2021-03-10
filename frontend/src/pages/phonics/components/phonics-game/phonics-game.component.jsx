@@ -15,51 +15,54 @@ const PhonicsGame = ({
 }) => {
 	const timer = useRef(null);
 	useEffect(() => {
-		timer.current = setInterval(onTimerTick, 1000);
+		const id = setInterval(onTimerTick, 1000);
+		timer.current = id;
 		return () => clearInterval(timer.current);
-	}, [ onTimerTick, currentDeckIndex]);
-	
+	}, [onTimerTick, currentDeckIndex]);
 	return (
 		<div>
 			<Modal
-		centered={true}
-			basic
-			closeOnDimmerClick={false}
-			open={openGameOverScreen || openRoundBreakdown}
-			size="huge"
-		>
-		<Modal.Header >
-	
-				<Header>RoundBreakdown</Header>
-				
-			
-			</Modal.Header>
-			<RoundBreakdown render={(props)=>{
-				console.log(props)
-				return (<Grid centered={true}>
-                <Grid.Column centered={true} >
-                    <Grid.Row>
-                        Congratulations you finished in {props.currentElapsedTime} seconds
-                    </Grid.Row>
-                    <Grid.Row>
-                        You received {props.roundPoints} this Round
-                    </Grid.Row>
-                    <Grid.Row>
-                        You now have {props.totalGamePoints} this game
-                    </Grid.Row>
-                    <Grid.Row>
-                        Keep it up! <button onClick={()=>props.onRoundStart()}>Next Round</button>
-                    </Grid.Row>                       
-                </Grid.Column>
-            </Grid>)
-			}}
-			/>
-		</Modal>
-
-		
-
-
-			
+				centered={true}
+				basic
+				closeOnDimmerClick={false}
+				open={openGameOverScreen || openRoundBreakdown}
+				size="huge"
+			>
+				<Modal.Header>
+					<Header>RoundBreakdown</Header>
+				</Modal.Header>
+				<RoundBreakdown
+					render={(props) => {
+						console.log(props);
+						return (
+							<Grid centered={true}>
+								<Grid.Column centered={true}>
+									<Grid.Row>
+										Congratulations you finished in{' '}
+										{props.currentElapsedTime} seconds
+									</Grid.Row>
+									<Grid.Row>
+										You received {props.roundPoints} this
+										Round
+									</Grid.Row>
+									<Grid.Row>
+										You now have {props.totalGamePoints}{' '}
+										this game
+									</Grid.Row>
+									<Grid.Row>
+										Keep it up!{' '}
+										<button
+											onClick={() => props.onRoundStart()}
+										>
+											Next Round
+										</button>
+									</Grid.Row>
+								</Grid.Column>
+							</Grid>
+						);
+					}}
+				/>
+			</Modal>
 
 			<GameDashboardContainer timer={timer} />
 			<DropzoneContainer timer={timer} />

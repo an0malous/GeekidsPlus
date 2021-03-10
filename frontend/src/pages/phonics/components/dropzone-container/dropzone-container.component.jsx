@@ -17,102 +17,59 @@ const DropzoneContainer = ({
 	onCorrectLetter,
 	onRoundComplete,
 }) => {
-	const [dropzones, setDropzones] = useState([]);
-	const lettersRef = useRef([])
-	const correctCounterRef = useRef(0)
+	const [letters, setLetters] = useState([...currentWordLetters]);
+	const [correctCounter, setCorrectCounter] = useState(0);
+
+	const correctCounterRef = useRef(correctCounter);
+	const lettersRef = useRef(letters);
 	useEffect(() => {
-		lettersRef.current = currentWordLetters
+		setCorrectCounter(0);
+		setLetters([...currentWordLetters]);
+		correctCounterRef.current = correctCounter;
+		lettersRef.current = letters;
 	}, [currentWordLetters]);
+	console.log('Dropzone Container Rendered');
 
-	const handleDropzones = useCallback((payload) => {
-		return setDropzones((prev) => [...prev, payload.current]);
-	}, [setDropzones])
-
-	const checkIfLetterIsCorrect = (
-		event
-	) => {
-
-		console.log("INSIDE CHECKIFCORRECT")
+	console.log(letters);
+	console.log(correctCounter);
+	console.log('lettersRef ', lettersRef.current);
+	console.log('correctCounterRef ', correctCounter);
+	const checkIfLetterIsCorrect = (event) => {
 		for (let i = 0; i < lettersRef.current.length; i++) {
-
 			if (
-				
 				lettersRef.current[i] === event.relatedTarget.innerText &&
 				event.relatedTarget.innerText === event.target.innerText
 			) {
 				onCorrectLetter();
 				event.relatedTarget.classList.remove('draggable');
 				event.relatedTarget.classList.add('correct');
-				correctCounterRef.current = correctCounterRef.current + 1;
-				console.log('new correct counter', correctCounterRef.current)
 
-				if (lettersRef.current.length === correctCounterRef.current) {
+				setCorrectCounter((prev) => prev + 1);
+
+				if (lettersRef.length === correctCounter) {
 					clearInterval(timer.current);
+					
 					onTimerStop();
 					onRoundComplete();
+					return;
 				}
 			}
 		}
 	};
 
-	// enable draggables to be dropped into this
-	interact('.inner-dropzone').dropzone({
-		// only accept elements matching this CSS selector
-		accept: '.draggable',
-		// Require a 75% element overlap for a drop to be possible
-		overlap: 0.75,
-
-		// listen for drop related events:
-
-		ondropactivate: function (event) {
-			// add active dropzone feedback
-			event.target.classList.add('drop-active');
-		},
-		ondragenter: function (event) {
-			var draggableElement = event.relatedTarget;
-			var dropzoneElement = event.target;
-
-			// feedback the possibility of a drop
-			dropzoneElement.classList.add('drop-target');
-			draggableElement.classList.add('can-drop');
-			//draggableElement.textContent = 'Dragged in'
-		},
-		ondragleave: function (event) {
-			// remove the drop feedback style
-
-			event.target.classList.remove('correct');
-			event.target.classList.remove('incorrect');
-			event.target.classList.remove('drop-target');
-			event.relatedTarget.classList.remove('can-drop');
-			event.target.classList.remove('test');
-			//event.relatedTarget.textContent = 'Dragged out'
-		},
-		ondrop: function (event) {
-			event.stopImmediatePropagation();
-			console.log('letter dropped')
-			checkIfLetterIsCorrect(event);
-		},
-
-		ondropdeactivate: function (event) {
-			// remove active dropzone feedback
-			event.target.classList.remove('drop-active');
-			event.target.classList.remove('drop-target');
-			event.target.classList.remove('drop-target');
-		},
-	});
-
+	
 	return (
-		<Grid >
+		<Grid>
 			<Grid.Row style={{ justifyContent: 'space-evenly' }}>
 				{currentWordLetters.length > 1
 					? currentWordLetters.map((zone) => (
 							<Dropzone
-								handleDropzones={handleDropzones}
 								key={zone}
 								letter={zone}
 								style={{
 									color: 'rgba(0,0,0,0)',
-									width: "55px", height: "55px",
+									width: '55px',
+									height: '55px',
 									border: 'dotted white 2px',
 								}}
 								className="inner-dropzone"

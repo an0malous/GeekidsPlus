@@ -1,14 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
-const Dropzone = ({ letter, handleDropzones, ...rest}) => {
-    const ref= useRef(null)
+const Dropzone = ({ letter, ...rest }) => {
 
-    useEffect(()=>{
-        
-        handleDropzones(ref)
-    }, [handleDropzones])
+console.log(letter)
+
     return (
-        <div ref={ref}{...rest}>{letter}</div>
+        <div {...rest}>{letter}</div>
     );
 };
 
