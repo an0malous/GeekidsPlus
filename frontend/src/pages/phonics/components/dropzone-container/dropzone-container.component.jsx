@@ -23,11 +23,16 @@ const DropzoneContainer = ({
 	const correctCounterRef = useRef(correctCounter);
 	const lettersRef = useRef(letters);
 	useEffect(() => {
+	
 		setCorrectCounter(0);
 		setLetters([...currentWordLetters]);
 		correctCounterRef.current = correctCounter;
 		lettersRef.current = letters;
-	}, [currentWordLetters]);
+		interact('.inner-dropzone').dropzone(false)
+		return ()=>{console.log('component unmounted')
+}
+	}
+	, [currentWordLetters]);
 	console.log('Dropzone Container Rendered');
 
 	console.log(letters);
@@ -36,6 +41,11 @@ const DropzoneContainer = ({
 	console.log('correctCounterRef ', correctCounter);
 	const checkIfLetterIsCorrect = (event) => {
 		for (let i = 0; i < lettersRef.current.length; i++) {
+			console.log(event.target.textContent)
+			console.log(letters);
+			console.log(correctCounter);
+			console.log('lettersRef ', lettersRef.current);
+			console.log('correctCounterRef ', correctCounterRef.current);
 			if (
 				lettersRef.current[i] === event.relatedTarget.innerText &&
 				event.relatedTarget.innerText === event.target.innerText
@@ -46,7 +56,7 @@ const DropzoneContainer = ({
 
 				setCorrectCounter((prev) => prev + 1);
 
-				if (lettersRef.length === correctCounter) {
+				if (lettersRef.current.length === correctCounterRef.current) {
 					clearInterval(timer.current);
 					
 					onTimerStop();
@@ -57,13 +67,13 @@ const DropzoneContainer = ({
 		}
 	};
 
-	
 	return (
 		<Grid>
 			<Grid.Row style={{ justifyContent: 'space-evenly' }}>
 				{currentWordLetters.length > 1
 					? currentWordLetters.map((zone) => (
 							<Dropzone
+							checkIfLetterIsCorrect={checkIfLetterIsCorrect}
 								key={zone}
 								letter={zone}
 								style={{
