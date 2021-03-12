@@ -4,7 +4,8 @@ import {
 	calculatePoints,
 	createCurrentWordLetters,
 	filterWordData,
-	calculateLetterBonus
+	calculateLetterBonus,
+	checkIfLetterIsCorrect
 } from './game.utils';
 
 const INITIAL_STATE = {
@@ -22,7 +23,8 @@ const INITIAL_STATE = {
 	openGameOverScreen: false,
 	gameParams: {},
 	initialClock: null,
-	tick: null
+	tick: null,
+	correctCounter: 0
 };
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -110,6 +112,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				roundPoints: 0,
 				roundTime: 0,
 				currentDeckIndex: state.currentDeckIndex + 1,
+				correctCounter: 0
             };
 
 		case 'ON_ROUND_COMPLETE':
@@ -123,6 +126,12 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				gameType: action.payload,
 			};
+
+		case 'ON_LETTER_DROP':
+			return {
+				...state,
+				correctCounter: state.correctCounter + checkIfLetterIsCorrect(action.payload, state.currentWordLetters)
+			}
 
 		default:
 			return state;

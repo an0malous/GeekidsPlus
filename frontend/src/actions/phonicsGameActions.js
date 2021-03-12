@@ -2,6 +2,11 @@ export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
 });
 
+export const onLetterDrop = (event) =>({
+    type: 'ON_LETTER_DROP',
+    payload: event
+})
+
 export const getCurrentDeckIndex = () => ({
     type: 'GET_CURRENT_DECK_INDEX'
 });
@@ -21,7 +26,6 @@ export const onRoundStart = () => ({
 export const onGameOver = () => ({
     type: 'ON_GAME_OVER'
 });
-
 
 export const onGameStart = () => ({
     type: 'ON_GAME_START'

@@ -5,8 +5,8 @@ import './index.css';
 import App from './components/app/App';
 import { Provider } from 'react-redux';
 import store from './store';
-import interact from 'interactjs';
 import { BrowserRouter } from 'react-router-dom';
+
 
 ReactDOM.render(
 	<Provider store={store}>

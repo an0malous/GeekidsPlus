@@ -47,9 +47,9 @@ export const calculateLetterBonus = (roundTime, helpActivated = false) => {
 	return bonus;
 };
 
-export const onHelp =(currentWord, currentWordLetters, dropzone) => {
+export const onHelp = (currentWord, currentWordLetters, dropzone) => {
 	const difficultLetters = [];
-	
+
 	for (let i = 0; i < currentWord; i++) {
 		if (dropzone[i].classList.contains('correct') !== true) {
 			difficultLetters.push(currentWordLetters[i]);
@@ -96,4 +96,18 @@ export const createCurrentWordLetters = (currentWord) => {
 		}
 	}
 	return word;
+};
+
+export const checkIfLetterIsCorrect = (e, currentWordLetters) => {
+	for (let i = 0; i < currentWordLetters.length; i++) {
+		if (
+			currentWordLetters[i] === e.relatedTarget.innerText &&
+			e.relatedTarget.innerText === e.target.innerText
+		) {
+			e.relatedTarget.classList.remove('draggable');
+			
+
+			return 1;
+		}
+	}
 };
