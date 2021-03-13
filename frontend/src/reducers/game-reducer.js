@@ -5,7 +5,7 @@ import {
 	createCurrentWordLetters,
 	filterWordData,
 	calculateLetterBonus,
-	checkIfLetterIsCorrect
+	checkIfLetterIsCorrect,
 } from './game.utils';
 
 const INITIAL_STATE = {
@@ -24,7 +24,7 @@ const INITIAL_STATE = {
 	gameParams: {},
 	initialClock: null,
 	tick: null,
-	correctCounter: 0
+	correctCounter: 0,
 };
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -53,8 +53,8 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 
 		case 'ON_HELP':
 			return {
-				...state
-			}
+				...state,
+			};
 
 		case 'ON_TIMER_START':
 			return {
@@ -69,13 +69,15 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 		case 'ON_CORRECT_LETTER':
 			return {
 				...state,
-				totalGamePoints: state.totalGamePoints + calculateLetterBonus(state.roundTime)
-			}
+				totalGamePoints:
+					state.totalGamePoints +
+					calculateLetterBonus(state.roundTime),
+			};
 
 		case 'ON_TIMER_STOP':
 			return {
 				...state,
-				roundPoints: + calculatePoints(
+				roundPoints: +calculatePoints(
 					state.currentWords[state.currentDeckIndex].name.length,
 					state.roundTime
 				),
@@ -85,20 +87,20 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				roundTime: state.roundTime + 1,
-					//used for calculating points too
+				//used for calculating points too
 				totalGameTime: state.totalGameTime + state.tick,
 			};
 
-		case 'ON_GAME_OVER': 
+		case 'ON_GAME_OVER':
 			return {
 				...state,
-				openGameOverScreen: true
+				openGameOverScreen: true,
 			};
 
 		case 'ON_GAME_END':
 			return {
 				...state,
-				...INITIAL_STATE
+				...INITIAL_STATE,
 			};
 
 		case 'ON_ROUND_START':
@@ -112,8 +114,8 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				roundPoints: 0,
 				roundTime: 0,
 				currentDeckIndex: state.currentDeckIndex + 1,
-				correctCounter: 0
-            };
+				correctCounter: 0,
+			};
 
 		case 'ON_ROUND_COMPLETE':
 			return {
@@ -130,8 +132,13 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 		case 'ON_LETTER_DROP':
 			return {
 				...state,
-				correctCounter: state.correctCounter + checkIfLetterIsCorrect(action.payload, state.currentWordLetters)
-			}
+				correctCounter:
+					state.correctCounter +
+					checkIfLetterIsCorrect(
+						action.payload,
+						state.currentWordLetters
+					),
+			};
 
 		default:
 			return state;

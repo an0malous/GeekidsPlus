@@ -65,11 +65,13 @@ const PhonicsGame = ({
 			</Modal>
 
 			<GameDashboardContainer timer={timer} />
-			<DropzoneContainer timer={timer} />
-			<AlphabetContainer
-				currentWords={currentWords}
-				currentDeckIndex={currentDeckIndex}
-			/>
+			<div className="alphabet-container">
+				<DropzoneContainer timer={timer} />
+				<AlphabetContainer
+					currentWords={currentWords}
+					currentDeckIndex={currentDeckIndex}
+				/>
+			</div>
 		</div>
 	);
 };

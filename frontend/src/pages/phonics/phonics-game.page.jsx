@@ -49,7 +49,7 @@ const PhonicsGamePage = ({
 			</Modal.Header>
 			<Modal.Content>
 				{currentWords.length > 0 ? (
-					<PhonicsGame
+					<PhonicsGame 
 					openGameOverScreen={openGameOverScreen}
 						onTimerStop={onTimerStop} // TODO: STOP PROP DRILLING THIS AND FIND A BETTER SOLUTION
 						onTimerTick={onTimerTick}

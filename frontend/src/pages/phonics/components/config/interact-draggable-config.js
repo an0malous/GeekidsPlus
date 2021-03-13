@@ -1,13 +1,13 @@
 import interact from 'interactjs';
 
-interact(".draggable").draggable({
+interact('.draggable').draggable({
     // enable inertial throwing
-    inertia: true,
+    inertia: false,
     // keep the element within the area of it's parent
     modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: "none",
-        endOnly: true,
+      interact.modifiers.restrict({
+        restriction: '.alphabet-container',
+        endOnly: false,
       }),
     ],
     // enable autoScroll
@@ -19,17 +19,7 @@ interact(".draggable").draggable({
   
       // call this function on every dragend event
       end(event) {
-        var textEl = event.target.querySelector("p");
-  
-        textEl &&
-          (textEl.textContent =
-            "moved a distance of " +
-            Math.sqrt(
-              (Math.pow(event.pageX - event.x0, 2) +
-                Math.pow(event.pageY - event.y0, 2)) |
-                0
-            ).toFixed(2) +
-            "px");
+     console.log('dragend', event)
       },
     },
   });

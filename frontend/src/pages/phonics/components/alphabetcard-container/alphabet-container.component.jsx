@@ -52,7 +52,9 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	return (
 	
 		<Grid style={{marginTop: 0}}>
+		
 			<Grid.Row centered>
+	
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (
 						<AlphabetCard
@@ -61,10 +63,13 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 							letter={cardLetter}
 							className="draggable"
 						/>
+					
 				
 					))
 					: 'Loading Alphabet Cards...'}
+					
 			</Grid.Row>
+		
 		</Grid>
 		
 	);

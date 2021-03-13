@@ -105,9 +105,15 @@ export const checkIfLetterIsCorrect = (e, currentWordLetters) => {
 			e.relatedTarget.innerText === e.target.innerText
 		) {
 			e.relatedTarget.classList.remove('draggable');
-			
 
 			return 1;
-		}
+		} 
 	}
+	const { relatedTarget } = e;
+			console.log(relatedTarget)
+			relatedTarget.style.webkitTransform = relatedTarget.style.transform =
+				'translate(' + 0 + 'px, ' + 0 + 'px)';
+			relatedTarget.setAttribute('data-x', 0);
+			relatedTarget.setAttribute('data-y', 0); 
+			return 0 
 };
