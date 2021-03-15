@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
+import { useTransition, animated } from 'react-spring';
 import { Grid, Icon } from 'semantic-ui-react';
 
 const CarouselMenu = ({ items, onClickItemTarget }) => {
 	const [currentItem, setCurrentItem] = useState(0);
-
+   const [ targetedArrow, setTargetedArrow ] = useState({leave:'50%', from: "-100%"})
+	const transitions = useTransition(currentItem, (key) => key, {
+		from: { opacity: 0, transform: `translate3d(${targetedArrow.from},0,0)` },
+		enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+		leave: { opacity: 0, transform: `translate3d(${targetedArrow.leave},0,0)` },
+	});
 	return (
-
-
-      
 		<Grid centered={true} verticalAlign="middle">
 			<Grid.Column>
 				<Icon
 					onClick={
 						currentItem !== 0
-							? () => setCurrentItem((prevItem) => prevItem - 1)
-							: ()=>setCurrentItem(items.length - 1)
+							? () => {setTargetedArrow({leave: '-50%', from: "100%"}); setCurrentItem((prevItem) => prevItem - 1);}
+							: () => {setTargetedArrow({leave: '-50%', from: "100%"}); setCurrentItem(items.length - 1)}
 					}
 					fitted={true}
 					name="angle double left"
 				/>
 			</Grid.Column>
 
-			<Grid.Column width={12}>
+			<Grid.Column style={{display: "flex", height: "60vh", justifyContent: "center", alignItems: "center", overflow: "hidden"} }width={12}>
 				{onClickItemTarget ? (
 					<div onClick={() => onClickItemTarget(items[currentItem])}>
-						{items[currentItem]}
+               {transitions.map(({ item, props, key }) => {
+						
+                  return <animated.div key={key} style={{ position: "absolute", ...props }}>{items[item]}</animated.div>;
+               })}
 					</div>
 				) : (
-					<div>{items[currentItem]}</div>
+               <Fragment>
+					{transitions.map(({ item, props, key }) => {
+						
+                  return <animated.div key={key} style={{ position: "absolute", ...props }}>{items[item]}</animated.div>;
+               })}
+              
+            </Fragment>
 				)}
 			</Grid.Column>
 
@@ -35,8 +47,8 @@ const CarouselMenu = ({ items, onClickItemTarget }) => {
 				<Icon
 					onClick={
 						currentItem !== items.length - 1
-							? () => setCurrentItem((prevItem) => prevItem + 1)
-							: ()=>setCurrentItem(0)
+							? () => {setTargetedArrow({leave: '50%', from: "-100%"}); setCurrentItem((prevItem) => prevItem + 1)}
+							: () => {setTargetedArrow({leave: '50%', from: "-100%"}); setCurrentItem(0)}
 					}
 					fitted={true}
 					name="angle double right"
