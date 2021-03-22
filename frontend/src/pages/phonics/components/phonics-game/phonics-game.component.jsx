@@ -22,32 +22,38 @@ const PhonicsGame = ({
 	return (
 		<div>
 			<Modal
-				centered={true}
 				basic
 				closeOnDimmerClick={false}
 				open={openGameOverScreen || openRoundBreakdown}
-				size="huge"
+				size="large"
 			>
 				<Modal.Header>
-					<Header>RoundBreakdown</Header>
+					<Header color="orange">Congratulations </Header>
 				</Modal.Header>
 				<RoundBreakdown
 					render={(props) => {
 						console.log(props);
 						return (
-							<Grid centered={true}>
-								<Grid.Column centered={true}>
+							<Grid style={{fontSize: "2rem"}}>
+								<Grid.Column textAlign="center">
 									<Grid.Row>
-										Congratulations you finished in{' '}
-										{props.currentElapsedTime} seconds
+										You finished in{' '}
+										
+									</Grid.Row>
+									<Grid.Row style={{fontSize: "3rem"}}>
+									{props.currentElapsedTime} seconds
 									</Grid.Row>
 									<Grid.Row>
-										You received {props.roundPoints} this
-										Round
+									 This Round you received 
+									</Grid.Row>
+									<Grid.Row style={{fontSize: "3rem"}}>
+									{props.roundPoints} pts
 									</Grid.Row>
 									<Grid.Row>
-										You now have {props.totalGamePoints}{' '}
-										this game
+										you now have
+									</Grid.Row>
+									<Grid.Row style={{fontSize: "3rem"}}>
+									{props.totalGamePoints}{' '}
 									</Grid.Row>
 									<Grid.Row>
 										Keep it up!{' '}

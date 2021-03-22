@@ -1,4 +1,4 @@
-import { Blend, Short } from './classes.js';
+import { Add, Blend, Short } from './classes.js';
 
 export const wordList = [
     new Short ("sad", "a"),
@@ -93,6 +93,32 @@ export const wordList = [
     new Short ("gum", "u"),
     new Short ("rub", "u"),
 
+    new Add('back', "a"),
+
+    new Add('neck', "e"),
+    new Add('nest', "e"),
+    new Add('tent', "e"),
+    new Add('vest', "e"),
+
+    new Add('brick', "i"),
+    new Add('clip', "i"),
+    new Add('crib', "i"),
+    new Add('flip', "i"),
+    new Add('slip', "i"),
+    new Add('spit', "i"),
+    new Add('split', "i"),
+    new Add('twin', "i"),
+
+    new Add('corn', "o"),
+    new Add('crop', "o"),
+    new Add('horn', "o"),
+    new Add('open', "o"),
+    new Add('sock', "o"),
+    new Add('stop', "o"),
+
+    new Add('duck', "u"),
+    new Add('push', "u"),
+
     new Blend("chip", "ch"),
     new Blend("chop", "ch"),
     new Blend("chest", "ch"),
@@ -115,6 +141,9 @@ export const wordList = [
     new Blend("shower", "sh"),
     new Blend("trash", "sh"),
     new Blend("smash", "sh"),
+    new Blend("shred", "sh"),
+    new Blend("crash", "sh"),
+    new Blend("shovel", "sh"),
     
     new Blend("black", "ck"),
     new Blend("rock", "ck"),
@@ -131,21 +160,23 @@ export const wordList = [
     new Blend("tack", "ck"),
     new Blend("block", "ck"),
     new Blend("thick", "ck"),
+    new Blend("jacket", "ck"),
+    new Blend("rocket", "ck"),
 
     new Blend("stamp", "st"),
     new Blend("strap", "st"),
     new Blend("stamp", "st"),
     new Blend("stand", "st"),
     
-    new Blend("clap", "l"),
-    new Blend("club", "l"),
-    new Blend("clown", "l"),
-    new Blend("plug", "l"),
-    new Blend("slip", "l"),
-    new Blend("plus", "l"),
-    new Blend("flower", "l"),
-    new Blend("clam", "l"),
-    new Blend("blimp", "l"),
+    new Blend("clap", "cl"),
+    new Blend("club", "cl"),
+    new Blend("clown", "cl"),
+    new Blend("plug", "pl"),
+    new Blend("slip", "sl"),
+    new Blend("plus", "pl"),
+    new Blend("flower", "fl"),
+    new Blend("clam", "cl"),
+    new Blend("blimp", "bl"),
 
     new Blend("ring", "ng"),
     new Blend("wing", "ng"),
@@ -175,7 +206,7 @@ export const wordList = [
     new Blend("crane", "e"),
     new Blend("drive", "e"),
     new Blend("frame", "e"),
-    new Blend("skae", "e"),
+    new Blend("skate", "e"),
     new Blend("cake", "e"),
     new Blend("bite", "e"),
     new Blend("home", "e"),
@@ -187,5 +218,8 @@ export const wordList = [
     new Blend("rake", "e"),
     new Blend("close", "e"),
     new Blend("bake", "e"),
-    new Blend("mice", "e"),
+    new Blend("space", "e"),
+    new Blend("clover", "e"),
+    new Blend("bake", "e"),
+    new Blend("same", "e"),
 ];

@@ -4,6 +4,17 @@
 	box-sizing: border-box;
 }
 
+button {
+	border: none;
+	background: none;
+	outline: none;
+	border-radius: 15px;
+}
+
+button:active {
+	background: grey;
+}
+
 .draggable {
 	touch-action: none;
 }

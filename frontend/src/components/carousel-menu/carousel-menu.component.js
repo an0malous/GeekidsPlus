@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { Grid, Icon } from 'semantic-ui-react';
 
-const CarouselMenu = ({ items, onClickItemTarget }) => {
+const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 	const [currentItem, setCurrentItem] = useState(0);
    const [ targetedArrow, setTargetedArrow ] = useState({leave:'50%', from: "-100%"})
 	const transitions = useTransition(currentItem, (key) => key, {
@@ -11,8 +11,8 @@ const CarouselMenu = ({ items, onClickItemTarget }) => {
 		leave: { opacity: 0, transform: `translate3d(${targetedArrow.leave},0,0)` },
 	});
 	return (
-		<Grid centered={true} verticalAlign="middle">
-			<Grid.Column>
+		<Grid style={{paddingLeft: 0, paddingRight: 0}} centered={true} verticalAlign="middle">
+			<Grid.Column style={{paddingLeft: 0, paddingRight: 0}} >
 				<Icon
 					onClick={
 						currentItem !== 0
@@ -24,7 +24,7 @@ const CarouselMenu = ({ items, onClickItemTarget }) => {
 				/>
 			</Grid.Column>
 
-			<Grid.Column style={{display: "flex", height: "60vh", justifyContent: "center", alignItems: "center", overflow: "hidden"} }width={12}>
+			<Grid.Column style={{...style, display: "flex", height: "60vh", justifyContent: "center", alignItems: "center", overflow: "hidden"}} width={12}>
 				{onClickItemTarget ? (
 					<div onClick={() => onClickItemTarget(items[currentItem])}>
                {transitions.map(({ item, props, key }) => {
@@ -43,7 +43,7 @@ const CarouselMenu = ({ items, onClickItemTarget }) => {
 				)}
 			</Grid.Column>
 
-			<Grid.Column>
+			<Grid.Column style={{paddingLeft: 0, paddingRight: 0}}>
 				<Icon
 					onClick={
 						currentItem !== items.length - 1

@@ -6,19 +6,19 @@ const friendOptions = [
 		key: 'nishinomiya',
 		text: 'Nishinomiya',
 		value: 'nishinomiya',
-		image: { avatar: true, src: '/images/avatar/small/jenny.jpg' },
+
 	},
 	{
 		key: 'senri',
 		text: 'Senri-chuou',
 		value: 'senri',
-		image: { avatar: true, src: '/images/avatar/small/elliot.jpg' },
+	
 	},
 	{
 		key: 'uehon',
 		text: 'Uehonmachi',
 		value: 'uehon',
-		image: { avatar: true, src: '/images/avatar/small/stevie.jpg' },
+		
 	},
 ];
 

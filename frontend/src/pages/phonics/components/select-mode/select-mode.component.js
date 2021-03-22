@@ -1,32 +1,32 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import CarouselMenu from '../../../../components/carousel-menu/carousel-menu.component';
-import { Container } from 'semantic-ui-react';
 
 const SelectMode = ({ gameType, gameLevel, setGameMode }) => {
-	const blends = ['ch', 'sh', 'wh', 'th', 'ck', 'e', 'random'];
-	const cvc = ['a', 'e', 'i', 'o', 'u', 'random'];
+	const blends = ['ch', 'sh', 'th  qu  wh', 'e', 'ck', 'ng'];
+	const cvc = ['a', 'e', 'i', 'o', 'u'];
+	
 	return (
-		<Container>
+		<Fragment>
 			{gameType === 'competitive' ? (
-				<CarouselMenu
+				<CarouselMenu style={{fontSize: "3rem"}}
 					onClickItemTarget={(item) => {
-						console.log(item);
+					
 						setGameMode(item);
 						
 					}}
-					items={['classic', 'marathon']}
+					items={['classic', 'Marathon']}
 				/>
 			) : (
 				<CarouselMenu
 					onClickItemTarget={(item) => {
-						console.log(item);
+					
 						setGameMode(item);
 					
 					}}
 					items={gameLevel !== 'blends' ? cvc : blends}
 				/>
 			)}
-		</Container>
+			</Fragment>
 	);
 };
 

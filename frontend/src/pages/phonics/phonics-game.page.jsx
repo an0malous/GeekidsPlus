@@ -10,7 +10,7 @@ import {
 	getGameParams,
 	onGameStart,
 	onTimerTick,
-	onTimerStop
+	onTimerStop,
 } from '../../actions/phonicsGameActions';
 
 const PhonicsGamePage = ({
@@ -24,33 +24,47 @@ const PhonicsGamePage = ({
 	onGameStart,
 	onTimerTick,
 	openGameOverScreen,
-	onTimerStop
+	onTimerStop,
 }) => {
 	const [open, setOpen] = useState(true);
-	const [modalHeader, setModalHeader] = useState('Choose a Path')
+	const [modalHeader, setModalHeader] = useState('Choose a Path');
 	let history = useHistory();
-	console.log("PHONICS PAGE RENDERED")
+	console.log('PHONICS PAGE RENDERED');
 	return (
 		<Modal
-		centered={true}
+			centered={true}
 			basic
 			closeOnDimmerClick={false}
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
-			style={{margin: 0, padding: 0, backgroundColor: "rgba(102,102,102, 0.9)", borderRadius: "15px"}}
+			style={{
+				margin: 0,
+				padding: 0,
+				backgroundColor: 'rgba(102,102,102, 0.9)',
+				borderRadius: '15px',
+			}}
 			open={open}
-			size="huge"
+			size="large"
 		>
-		<Modal.Header  style={{ display: "flex", justifyContent: "space-between"}}>
-		<Icon  color="red" onClick={()=>{history.goBack(); onGameEnd()}} name="close" />
-				<Header as="h2" style={{margin: 0}}>{modalHeader}</Header>
-				
-			
+			<Modal.Header
+				style={{ display: 'flex', justifyContent: 'space-between' }}
+			>
+				<Icon
+					color="red"
+					onClick={() => {
+						history.goBack();
+						onGameEnd();
+					}}
+					name="close"
+				/>
+				<Header as="h2" style={{ margin: 0 }}>
+					{modalHeader}
+				</Header>
 			</Modal.Header>
 			<Modal.Content>
 				{currentWords.length > 0 ? (
-					<PhonicsGame 
-					openGameOverScreen={openGameOverScreen}
+					<PhonicsGame
+						openGameOverScreen={openGameOverScreen}
 						onTimerStop={onTimerStop} // TODO: STOP PROP DRILLING THIS AND FIND A BETTER SOLUTION
 						onTimerTick={onTimerTick}
 						currentWordLetters={currentWordLetters}
@@ -76,8 +90,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchCurrentWords: () => dispatch(fetchCurrentWords()),
 	onGameStart: () => dispatch(onGameStart()),
 	getGameParams: (gameInfo) => dispatch(getGameParams(gameInfo)),
-	onTimerTick: ()=>dispatch(onTimerTick()),
-	onTimerStop: ()=>dispatch(onTimerStop())
+	onTimerTick: () => dispatch(onTimerTick()),
+	onTimerStop: () => dispatch(onTimerStop()),
 });
 
 const mapStateToProps = (state) => ({
@@ -85,7 +99,7 @@ const mapStateToProps = (state) => ({
 	openRoundBreakdown: state.phonicsGameReducer.openRoundBreakdown,
 	currentWords: state.phonicsGameReducer.currentWords,
 	currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
-	currentWordLetters: state.phonicsGameReducer.currentWordLetters
+	currentWordLetters: state.phonicsGameReducer.currentWordLetters,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonicsGamePage);

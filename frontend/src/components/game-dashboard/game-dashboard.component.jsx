@@ -3,6 +3,9 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
 
+
+
+
 const GameDashboard = ({
 	currentWords,
 	onGameEnd,
@@ -10,6 +13,7 @@ const GameDashboard = ({
 	totalGamePoints,
 	time,
 	helpHandler,
+	audio
 }) => {
 	const currentWord = currentWords[currentDeckIndex];
 	return currentWords ? (
@@ -31,7 +35,7 @@ const GameDashboard = ({
 
 			<Grid.Column
 				style={{ padding: 0, margin: 0 }}
-				centered={true}
+				
 				width={6}
 			>
 				<Thumbnail
@@ -49,7 +53,7 @@ const GameDashboard = ({
 					<div>{currentDeckIndex + 1} </div> <div>/</div>{' '}
 					<div>{currentWords.length}</div>
 				</div>
-				<div><FontAwesomeIcon size="lg" icon="volume-up" /></div>
+				<button onClick={()=>audio.play()}><FontAwesomeIcon size="lg" icon="volume-up" /></button>
 			</Grid.Column>
 		</Grid>
 	) : (

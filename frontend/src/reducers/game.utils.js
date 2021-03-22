@@ -76,7 +76,7 @@ export const filterWordData = (words, { gameLevel, gameMode, gameType }) => {
 			if (gameType === 'competitive') {
 				return word.type === gameLevel;
 			} else {
-				return word.type === gameLevel && word.letter === gameMode;
+				return word.type === gameLevel && gameMode.includes(word.letter);
 			}
 		})
 	);
@@ -99,11 +99,13 @@ export const createCurrentWordLetters = (currentWord) => {
 };
 
 export const checkIfLetterIsCorrect = (e, currentWordLetters) => {
+	console.log(e.relatedTarget.textContent)
 	for (let i = 0; i < currentWordLetters.length; i++) {
 		if (
 			currentWordLetters[i] === e.relatedTarget.innerText &&
 			e.relatedTarget.innerText === e.target.innerText
 		) {
+			
 			e.relatedTarget.classList.remove('draggable');
 
 			return 1;

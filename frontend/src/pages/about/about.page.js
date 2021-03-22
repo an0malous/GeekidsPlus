@@ -1,18 +1,8 @@
 import React from 'react';
-import { Keyframes, Spring } from 'react-spring/renderprops';
-import Cirriculum from '../home/cirriculum.component';
-
+import {animated, useSpring} from 'react-spring'
 const About = () => {
-	return (
-		<div>
-			<Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
-				{(props) => <div style={props}>
-               <Cirriculum />
-            </div>}
-			</Spring>
-         
-		</div>
-	);
+	const props = useSpring({ val: 100, from: { val: 0 } })
+return <animated.span>{props.val.interpolate(val => Math.floor(val))}</animated.span>
 };
 
 export default About;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Header, Segment } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LanguageToggle from '../../../../components/language-display-container/language-toggle';
 
@@ -21,12 +21,14 @@ const CompetitiveCaption = () => {
 	);
 };
 
-const selectType = ({ setGameType }) => {
+const selectType = ({ setGameType, setModalHeader }) => {
+	
 	return (
 		<Grid stackable={true} container={true} centered={true}>
 			<Grid.Column textAlign="center" width={8}>
 				<div style={{backgroundColor: "#FA8000 ", borderRadius: "15px", padding: "5px 10px"}}
 					onClick={() => {
+						setModalHeader('Select a level');
 						setGameType('practice');
 					}}
 				>
@@ -38,6 +40,7 @@ const selectType = ({ setGameType }) => {
 				<div style={{backgroundColor: "#FA8000 ", borderRadius: "15px", padding: "5px 10px"}}
 					onClick={() => {
 						setGameType('competitive');
+						setModalHeader('Select a level');
 					}}
 				>
 					<FontAwesomeIcon color="white" size="10x" icon="medal" />

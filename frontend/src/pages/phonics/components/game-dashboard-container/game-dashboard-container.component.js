@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 const GameDashboardContainer = ({
 	currentWords,
+	currentWord,
 	helpHandler,
 	onGameEnd,
 	currentDeckIndex,
@@ -14,10 +15,12 @@ const GameDashboardContainer = ({
    onGameOver,
    timer
 }) => {
-   if(time === 0 && tick === -1 || currentDeckIndex === currentWords.length && currentWords > 1){
+   if((time === 0 && tick === -1) || (currentDeckIndex === currentWords.length && currentWords > 1)){
       onGameOver();
       clearInterval(timer.current)
    }
+
+	
 	return (
 		<GameDashboard
 			helpHandler={helpHandler}
@@ -26,6 +29,7 @@ const GameDashboardContainer = ({
 			currentDeckIndex={currentDeckIndex}
 			totalGamePoints={totalGamePoints}
 			time={time}
+			
 		/>
 	);
 };
@@ -33,6 +37,7 @@ const GameDashboardContainer = ({
 const mapStateToProps = (state) => ({
 	time: state.phonicsGameReducer.totalGameTime,
 	currentWords: state.phonicsGameReducer.currentWords,
+	currentWord: state.phonicsGameReducer.currentWords[state.phonicsGameReducer.currentDeckIndex],
 	currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
 	totalGamePoints: state.phonicsGameReducer.totalGamePoints,
    tick: state.phonicsGameReducer.tick

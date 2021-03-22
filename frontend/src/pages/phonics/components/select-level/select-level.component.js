@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Header } from 'semantic-ui-react';
 import LanguageToggle from '../../../../components/language-display-container/language-toggle';
 import bronze from '../../../../asssets/img/bronze-medal.svg';
@@ -18,28 +18,13 @@ const Caption = ({ header, content }) => {
 	);
 };
 
-const SelectLevel = ({ setGameLevel }) => {
-	const [currentItem, setCurrentItem] = useState(null);
+const SelectLevel = ({ setGameLevel, setModalHeader }) => {
+
 	const items = [
-		<div onClick={() => setGameLevel('initialSounds')}>
-			<img src={bronze} width="100%" />
-			<LanguageToggle
-				EngContent={() => (
-					<Caption
-						header="Initial Sounds"
-						content="These are all the basic sounds in the English Language."
-					/>
-				)}
-				JpContent={() => (
-					<Caption
-						header="基本の音"
-						content="英語の基本の音です。これはマスターしたらきれいな発音ができます。"
-					/>
-				)}
-			/>
-		</div>,
-		<div onClick={() => setGameLevel('cvc')}>
-			<img src={silver} width="100%" />
+		<div onClick={() => {
+			setModalHeader('last one nigs');
+			setGameLevel('cvc')}}>
+			<img alt="silver medal" src={bronze} width="100%" />
 			<LanguageToggle
 				EngContent={() => (
 					<Caption
@@ -55,8 +40,10 @@ const SelectLevel = ({ setGameLevel }) => {
 				)}
 			/>
 		</div>,
-		<div onClick={() => setGameLevel('cvcAdd')}>
-			<img src={gold} width="100%" />
+		<div onClick={() => {
+			setModalHeader('last one nigs');
+			setGameLevel('cvcAdd')}}>
+			<img alt="gold trophy" src={silver} width="100%" />
 			<LanguageToggle
 				EngContent={() => (
 					<Caption
@@ -72,8 +59,10 @@ const SelectLevel = ({ setGameLevel }) => {
 				)}
 			/>
 		</div>,
-		<div onClick={() => setGameLevel('blends')}>
-			<img src={master} width="100%" />
+		<div onClick={() => {
+			setModalHeader('last one nigs');
+			setGameLevel('blends')}}>
+			<img alt="master rank" src={gold} width="100%" />
 			<LanguageToggle
 				EngContent={() => (
 					<Caption
@@ -90,7 +79,7 @@ const SelectLevel = ({ setGameLevel }) => {
 			/>
 		</div>,
 	];
-	return <CarouselMenu handleOnChange={setCurrentItem} items={items} />;
+	return <CarouselMenu items={items} />;
 };
 
 export default SelectLevel;

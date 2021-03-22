@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Container } from 'semantic-ui-react';
+import { Modal } from 'semantic-ui-react';
 
 const Thumbnail = ({ src, alt, width, height, handleOnClick, ...rest}) => {
 

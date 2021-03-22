@@ -39,13 +39,13 @@ const PhonicsGameStartMenu = ({
 	}
 	
 	if(!gameType){
-		return <SelectType setGameType={setGameType} />;
+		return <SelectType setModalHeader={setModalHeader} setGameType={setGameType} />;
 	}
 	if(!gameLevel){
-		setModalHeader('Select a level');
-		return <SelectLevel setGameLevel={setGameLevel} />;
+		
+		return <SelectLevel setModalHeader={setModalHeader} setGameLevel={setGameLevel} />;
 	} else {
-		setModalHeader('last one nigs');
+		
 		return <SelectMode gameType={gameType} gameLevel={gameLevel} setGameMode={setGameMode}/>;
 	} 
 };

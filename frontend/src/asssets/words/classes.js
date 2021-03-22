@@ -10,7 +10,7 @@ export class Short extends Vocabulary {
     constructor(name, letter){
         super(name, letter);
         this.type = "cvc";
-        this.audio = `http://localhost:3000/assets/words/audio/cvcShort/${letter}/${name}.m4a`;
+        this.audio = `/audio/cvcShort/${letter}/${name}.m4a`;
         this.img = `/img/cvcShort/${letter}/${name}.png`;
     }
 }
@@ -19,15 +19,15 @@ export class Add extends Vocabulary {
     constructor(name, letter){
         super(name, letter);
         this.type = "cvcAdd"
-        this.audio = `../src/assets/audio/cvcAdd/${letter}/${name}.m4a`;
-        this.img = `../src/assets/img/cvcAdd/${letter}/${name}.png`;
-
+        //this.audio = `../src/assets/audio/cvcAdd/${letter}/${name}.m4a`;
+        this.img = `/img/cvcAdd/${letter}/${name}.jpg`;
     }
 }
 
 export class Blend extends Vocabulary {
-    constructor(name, letter){
+    constructor(name, letter, cardLetter=letter){
         super(name, letter);
+        this.cardLetter = cardLetter;
         this.type= "blends";
         this.img = `/img/blends/${letter}/${name}.jpg`;
         //this.img = `./assets/wordlist/img/blends/${letter}/${name}.png`;

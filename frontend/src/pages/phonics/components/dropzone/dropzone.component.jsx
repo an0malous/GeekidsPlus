@@ -1,5 +1,4 @@
 import React from 'react';
-import interact from 'interactjs'
 
 const Dropzone = ({ letter, ...rest }) => {
 
