@@ -62,7 +62,7 @@ const SelectLevel = ({ setGameLevel, setModalHeader }) => {
 		<div onClick={() => {
 			setModalHeader('last one nigs');
 			setGameLevel('blends')}}>
-			<img alt="master rank" src={gold} width="100%" />
+			<img alt="gold rank" src={gold} width="100%" />
 			<LanguageToggle
 				EngContent={() => (
 					<Caption

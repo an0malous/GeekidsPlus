@@ -11,8 +11,8 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 		leave: { opacity: 0, transform: `translate3d(${targetedArrow.leave},0,0)` },
 	});
 	return (
-		<Grid style={{paddingLeft: 0, paddingRight: 0}} centered={true} verticalAlign="middle">
-			<Grid.Column style={{paddingLeft: 0, paddingRight: 0}} >
+		<Grid  textAlign="center" centered={true} verticalAlign="middle">
+			<Grid.Column textAlign="justify" padding={true} >
 				<Icon
 					onClick={
 						currentItem !== 0
@@ -43,7 +43,7 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 				)}
 			</Grid.Column>
 
-			<Grid.Column style={{paddingLeft: 0, paddingRight: 0}}>
+			<Grid.Column textAlign="center" >
 				<Icon
 					onClick={
 						currentItem !== items.length - 1

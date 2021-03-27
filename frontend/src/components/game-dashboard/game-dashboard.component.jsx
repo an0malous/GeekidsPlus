@@ -41,6 +41,7 @@ const GameDashboard = ({
 				<Thumbnail
 					src={require(`../../asssets/words${currentWord.img}`)}
 					width="100%"
+					style={{overflow: "hidden"}}
 				/>
 			</Grid.Column>
 

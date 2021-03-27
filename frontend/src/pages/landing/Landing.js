@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import LanguageToggle from '../../components/language-display-container/language-toggle';
 
 const JapaneseSloganText = () => {
-	return <div style={{color: "yellow", wordSpacing: "0.5rem"}}>いつでも <span style={{color: "white"}}>どこでも</span> ジィーキッズ</div>
+	return <div style={{color: "yellow", wordSpacing: "0.5rem"}}>いつでも <span style={{color: "white"}}>どこでも</span> ジィキッズ</div>
 }
 
 const EnglishSloganText = () => {

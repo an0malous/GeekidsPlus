@@ -17,7 +17,7 @@ const PhonicsGameStartMenu = ({
 		const gameParams = { gameLevel, gameType, gameMode, ...rest };
 		gameParams.initialClock = 0;
 		gameParams.tick = 1;
-		if (gameMode === 'classic') {
+		if (gameMode === 'classic' || 'クラシック') {
 			gameParams.initialClock = 600;
 			gameParams.tick = -1;
 		}
@@ -25,8 +25,6 @@ const PhonicsGameStartMenu = ({
 	};
 
 	const handleGameInit = (item) => {
-		setGameMode(item)
-		console.log('handleGameInit', gameMode)
 		setModalHeader(`${gameType} / ${gameLevel} - ${gameMode} mode`)
 		const gameInfo = createGameParams(gameType, gameLevel, gameMode);
 		getGameParams(gameInfo);

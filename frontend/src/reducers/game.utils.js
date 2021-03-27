@@ -17,7 +17,9 @@ const bonusCalc = (roundTime) => {
 	}
 };
 
-export const calculateLetterBonus = (roundTime, helpActivated = false) => {
+export const calculateLetterBonus = (roundTime, helpActivated) => {
+
+	
 	let bonus = 0;
 
 	switch (true) {
@@ -43,27 +45,9 @@ export const calculateLetterBonus = (roundTime, helpActivated = false) => {
 			bonus = 10;
 			break;
 	}
-
+console.log('BONUS', bonus)
 	return bonus;
-};
-
-export const onHelp = (currentWord, currentWordLetters, dropzone) => {
-	const difficultLetters = [];
-
-	for (let i = 0; i < currentWord; i++) {
-		if (dropzone[i].classList.contains('correct') !== true) {
-			difficultLetters.push(currentWordLetters[i]);
-		}
-		const alphabetSquares = document.querySelectorAll('.alphabet-card');
-
-		for (let square of alphabetSquares) {
-			if (square.textContent === difficultLetters[0]) {
-				square.classList.add('active');
-			}
-		}
-	}
-	this.difficultLetters = [];
-};
+}
 
 export const calculatePoints = (currentWordLength = 0, time = 0) => {
 	return Math.floor(currentWordLength * 5 + bonusCalc(time));
@@ -98,18 +82,18 @@ export const createCurrentWordLetters = (currentWord) => {
 	return word;
 };
 
-export const checkIfLetterIsCorrect = (e, currentWordLetters) => {
-	console.log(e.relatedTarget.textContent)
+export const checkIfLetterIsCorrect = ((e, currentWordLetters, roundTime ) => {
+
 	for (let i = 0; i < currentWordLetters.length; i++) {
 		if (
 			currentWordLetters[i] === e.relatedTarget.innerText &&
 			e.relatedTarget.innerText === e.target.innerText
 		) {
-			
+			const letterPoints = calculateLetterBonus(roundTime);
 			e.relatedTarget.classList.remove('draggable');
-
-			return 1;
+			console.log(letterPoints)
+			return {correctCounter: 1, letterPoints};
 		} 
 	}
-			return 0 
-};
+			return {correctCounter: 0, letterPoints: 0}
+})

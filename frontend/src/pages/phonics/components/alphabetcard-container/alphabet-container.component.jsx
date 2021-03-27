@@ -7,7 +7,6 @@ import { Grid } from 'semantic-ui-react';
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	const [alphabet, setAlphabet] = useState([]);
 	const currentWord = currentWords[currentDeckIndex];
-
 	useEffect(() => {
 		const abcArr = [
 			'a',
@@ -44,9 +43,13 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			setAlphabet(shuffle(abcArr));
 
 		}
+
 		return ()=> {
+			
 				setAlphabet([]); 
-		}
+			}
+				
+	
 	}, [currentWord]);
 	
 	return (
@@ -58,6 +61,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (
 						<AlphabetCard
+						currentDeckIndex={currentDeckIndex}
 						data-testid="alphabet-card"
 							key={cardLetter}
 							letter={cardLetter}

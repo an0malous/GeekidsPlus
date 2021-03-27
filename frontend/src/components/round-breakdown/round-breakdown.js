@@ -1,9 +1,9 @@
 
 import { connect } from 'react-redux';
 
-import { onRoundStart } from '../../actions/phonicsGameActions';
+import { onRoundStart, onGameOver, onGameEnd } from '../../actions/phonicsGameActions';
 const RoundBreakdown = (props) => {
-    console.log(props)
+  
             return props.render(props)
 }
    
@@ -16,7 +16,9 @@ const mapStateToProps = state => ({
   });
 
 const mapDispatchToProps = dispatch => ({
-    onRoundStart: ()=>dispatch(onRoundStart())
+    onRoundStart: ()=>dispatch(onRoundStart()),
+    onGameOver: ()=>dispatch(onGameOver()),
+    onGameEnd: ()=>dispatch(onGameEnd())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoundBreakdown);

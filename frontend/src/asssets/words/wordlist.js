@@ -94,6 +94,14 @@ export const wordList = [
     new Short ("rub", "u"),
 
     new Add('back', "a"),
+    new Add('bank', "a"),
+    new Add('camp', "a"),
+    new Add('lamp', "a"),
+    new Add('crab', "a"),
+    new Add('trap', "a"),
+    new Add('mask', "a"),
+    new Add('sand', "a"),
+    new Add('clap', "a"),
 
     new Add('neck', "e"),
     new Add('nest', "e"),
@@ -118,6 +126,12 @@ export const wordList = [
 
     new Add('duck', "u"),
     new Add('push', "u"),
+    new Add('club', "u"),
+    new Add('jump', "u"),
+    new Add('minus', "u"),
+    new Add('plug', "u"),
+    new Add('dust', "u"),
+    new Add('under', "u"),
 
     new Blend("chip", "ch"),
     new Blend("chop", "ch"),

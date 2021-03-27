@@ -4,13 +4,11 @@ import {
 	calculatePoints,
 	createCurrentWordLetters,
 	filterWordData,
-	calculateLetterBonus,
 	checkIfLetterIsCorrect,
 } from './game.utils';
 
 const INITIAL_STATE = {
 	currentWords: [],
-	words: [],
 	currentWordLetters: [],
 	isFetching: false,
 	errorMessage: '',
@@ -19,12 +17,12 @@ const INITIAL_STATE = {
 	totalGamePoints: 0,
 	roundTime: 0,
 	totalGameTime: 0,
+	correctCounter: 0,
 	openRoundBreakdown: false,
 	openGameOverScreen: false,
 	gameParams: {},
 	initialClock: null,
 	tick: null,
-	correctCounter: 0,
 };
 
 const phonicsGameReducer = (state = INITIAL_STATE, action) => {
@@ -66,13 +64,6 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				gameParams: action.payload,
 			};
-		case 'ON_CORRECT_LETTER':
-			return {
-				...state,
-				totalGamePoints:
-					state.totalGamePoints +
-					calculateLetterBonus(state.roundTime),
-			};
 
 		case 'ON_TIMER_STOP':
 			return {
@@ -94,13 +85,14 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 		case 'ON_GAME_OVER':
 			return {
 				...state,
-				openGameOverScreen: true,
+			
+				openGameOverScreen: !state.openGameOverScreen
 			};
 
 		case 'ON_GAME_END':
 			return {
 				...state,
-				...INITIAL_STATE,
+				...INITIAL_STATE
 			};
 
 		case 'ON_ROUND_START':
@@ -130,14 +122,17 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 			};
 
 		case 'ON_LETTER_DROP':
+			const onDropVars = checkIfLetterIsCorrect(
+						action.payload,
+						state.currentWordLetters,
+						state.roundTime
+					)
 			return {
 				...state,
-				correctCounter:
-					state.correctCounter +
-					checkIfLetterIsCorrect(
-						action.payload,
-						state.currentWordLetters
-					),
+				totalGamePoints: state.totalGamePoints + onDropVars.letterPoints ,
+				
+			correctCounter: state.correctCounter + onDropVars.correctCounter,
+
 			};
 
 		default:
