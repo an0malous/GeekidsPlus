@@ -2,10 +2,7 @@ import React from 'react';
 import { Button, Container } from 'semantic-ui-react';
 import { LandingContainer, Title, GeeSpan, PlusSpan, Slogan } from './landing.styles';
 import { useHistory } from 'react-router';
-<<<<<<< HEAD
-import Login from '../login/Login';
-export const Landing = (props) => {
-=======
+
 import LanguageToggle from '../../components/language-display-container/language-toggle';
 
 const JapaneseSloganText = () => {
@@ -17,7 +14,7 @@ const EnglishSloganText = () => {
 }
 
 const LandingPage = () => {
->>>>>>> v1
+
 	let history = useHistory();
 	const handleButtonClick = (e) => {
 		console.log(e)
