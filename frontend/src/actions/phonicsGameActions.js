@@ -1,21 +1,18 @@
-
-import api from '../api';
-
 export const getCurrentWord = () => ({
     type: 'GET_CURRENT_WORD'
 });
+
+export const onLetterDrop = (event) =>({
+    type: 'ON_LETTER_DROP',
+    payload: event
+})
 
 export const getCurrentDeckIndex = () => ({
     type: 'GET_CURRENT_DECK_INDEX'
 });
 
-export const fetchCurrentWordsStart =()=> ({
-    type: 'FETCH_WORDS_START'
-});
-
-export const fetchCurrentWordsSuccess = (Words) => ({
-    type: 'FETCH_WORDS_SUCCESS',
-    payload: Words,
+export const fetchCurrentWords =()=> ({
+    type: 'FETCH_WORDS'
 });
 
 export const setCurrentWords = () => ({
@@ -24,6 +21,10 @@ export const setCurrentWords = () => ({
 
 export const onRoundStart = () => ({
     type: 'ON_ROUND_START'
+});
+
+export const onGameOver = () => ({
+    type: 'ON_GAME_OVER'
 });
 
 export const onGameStart = () => ({
@@ -42,21 +43,20 @@ export const onTimerStop = () => ({
     type: 'ON_TIMER_STOP'
 });
 
-export const stopTimer = () => ({
-    type: 'STOP_TIMER'
+export const onCorrectLetter = () => ({
+    type: 'ON_CORRECT_LETTER'
 });
 
 export const onTimerStart = () => ({
     type: 'ON_TIMER_START'
 });
 
-export const fetchCurrentWordsFailure = errorMessage => ({
-    type: 'FETCH_WORDS_FAILURE',
-    payload: errorMessage
-})
-
 export const onTimerTick = () => ({
     type: 'ON_TIMER_TICK'
+});
+
+export const onHelp = () => ({
+    type: 'ON_HELP'
 });
 
 export const getGameParams = (gameInfo) => ({
@@ -64,44 +64,4 @@ export const getGameParams = (gameInfo) => ({
     payload: gameInfo
 });
 
-export const fetchCurrentWordsAsync = () => {
-    return async (dispatch)=> {
-    
-        dispatch(fetchCurrentWordsStart());
-        try {
-       const res = await api.getCards()
-           console.log(res.data);
-           dispatch(fetchCurrentWordsSuccess(res.data))
-        } catch(error){
-            dispatch(fetchCurrentWordsFailure(`Sorry, ${error}`))
-        }
-
-    };
-};
-
-let timer = null
-export const startTimerAsync = () => {
-    return dispatch => {
-        dispatch(onTimerStart());
-        timer = setInterval(()=>dispatch(onTimerTick()), 1000)
-        dispatch(onTimerTick());
-        
-    };
-};
-
-export const stopTimer1 = () => {
-    clearInterval(timer);
-   return dispatch =>{
-   dispatch(stopTimer());
-  
-   };
-};
-
-   export const stopTimerAsync = () => {
-    clearInterval(timer);
-   return dispatch =>{
-   dispatch(stopTimer());
-  
-   };
-};
 

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlphabetCard Component Renders 1`] = `
+<div
+  className="ui container"
+>
+  <div
+    className="ui container"
+  >
+    <div
+      className="ui center aligned grid"
+    >
+      <div
+        className="column"
+      >
+        <div
+          onClick={null}
+          style={
+            Object {
+              "fontSize": "6rem",
+            }
+          }
+        >
+          ＜
+        </div>
+      </div>
+      <div
+        className="column"
+      >
+        <div
+          onClick={[Function]}
+          style={
+            Object {
+              "fontSize": "6rem",
+            }
+          }
+        >
+          a
+        </div>
+      </div>
+      <div
+        className="column"
+      >
+        <div
+          onClick={[Function]}
+        >
+          ＞
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

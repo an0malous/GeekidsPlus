@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlphabetCard Component Renders 1`] = `
+<div>
+  <div>
+    <div
+      className="ui container"
+    >
+      <div
+        className="ui centered grid"
+      >
+        <div
+          className="eight wide column"
+        >
+          <div
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="eight wide column"
+        >
+          <div
+            onClick={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

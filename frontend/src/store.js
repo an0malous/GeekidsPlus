@@ -4,12 +4,11 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import userReducer from './reducers/userReducer';
-import phonicsGameReducer from './reducers/game-reducer/game-reducer';
-
+import phonicsGameReducer from './reducers/game-reducer';
+import languageDisplayReducer from './reducers/language-display-reducer';
 const rootReducer = combineReducers ({
-    userReducer: userReducer,
-    phonicsGameReducer: phonicsGameReducer
+    phonicsGameReducer,
+    languageDisplayReducer
 });
 
 const middlewares = [thunk, logger];

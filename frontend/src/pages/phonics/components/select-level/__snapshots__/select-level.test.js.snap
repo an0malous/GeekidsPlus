@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlphabetCard Component Renders 1`] = `
+<div>
+  <div
+    className="ui container"
+  >
+    <h2
+      className="ui attached header"
+      style={
+        Object {
+          "backgroundColor": "rgb(223,181,7)",
+        }
+      }
+    >
+      Phonics
+    </h2>
+    <div
+      className="ui grid"
+    >
+      <div
+        className="four wide column"
+      >
+        <div
+          onClick={[Function]}
+        >
+          <header
+            as="h3"
+          >
+            Bronze - Initial Sounds
+          </header>
+        </div>
+      </div>
+      <div
+        className="four wide column"
+      >
+        <div
+          onClick={[Function]}
+        >
+          <header
+            as="h3"
+          >
+            Silver - CVCs
+          </header>
+        </div>
+      </div>
+      <div
+        className="four wide column"
+      >
+        <div
+          onClick={[Function]}
+        >
+          <header
+            as="h3"
+          >
+            Gold - CVC with easy blends
+          </header>
+        </div>
+      </div>
+      <div
+        className="four wide column"
+      >
+        <div
+          onClick={[Function]}
+        >
+          <header
+            as="h3"
+          >
+            Platnium - CVC with difficult blends
+          </header>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

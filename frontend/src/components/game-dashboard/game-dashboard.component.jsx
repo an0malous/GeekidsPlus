@@ -1,58 +1,65 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Grid, Rail, Button, Container } from 'semantic-ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Grid } from 'semantic-ui-react';
 import Thumbnail from '../thumbnail/thumbnail.component';
-import { startTimerAsync, onGameEnd, stopTimer1 } from '../../actions/phonicsGameActions';
-
-const GameDashboard = ({ currentWords, onGameEnd, currentDeckIndex, totalGamePoints, time, stopTimer1, startTimerAsync }) => {
-    const currentWord = currentWords[currentDeckIndex];
 
 
-    useEffect(()=>{
-        startTimerAsync();
-        return ()=> stopTimer1()
-    }, [currentDeckIndex])
 
-    return (
-        currentWords ?
-        (
-        
-        <Grid columns={3}>
-            <Grid.Row>
-                <Grid.Column centered width={5} style={{ backgroundColor: "orange"}}>
-                    <div>Points: {totalGamePoints}</div>
-                    <div>{`Time: ${parseInt(time / 60)} : ${time % 60}`}</div>
-                    <div>{`${currentDeckIndex + 1} / ${currentWords.length}`}</div>
-                </Grid.Column> 
 
-                <Grid.Column width={6} style={{ textAlign: "center"}}>
-                    <Thumbnail src={currentWord.img} width="250" height="200" />
-                </Grid.Column>
-                
-                <Grid.Column width={5} style={{ backgroundColor: "orange"}}>
-                    <Button label="Pause"/>
-                    <Button onClick={onGameEnd} label="New Game"/>
-                    <Button label="Listen" />
-                    <Button label="Help" />
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
-       
-        ): ("Loading Dashboard...")
-        );
+const GameDashboard = ({
+	currentWords,
+	onGameEnd,
+	currentDeckIndex,
+	totalGamePoints,
+	time,
+	helpHandler,
+	audio
+}) => {
+	const currentWord = currentWords[currentDeckIndex];
+	return currentWords ? (
+		<Grid verticalAlign="middle">
+			<Grid.Column
+				style={{ height: "60px", alignItems: "center", display:"flex", flexDirection: "row", justifyContent: "space-evenly", padding: 0, margin: 0 }}
+				width={5}
+				color="orange"
+			>
+				<div style={{display: "flex", flexDirection: "column"}}>
+					<div><FontAwesomeIcon size="lg" icon="trophy" />{' '}</div>
+					<div>{totalGamePoints}</div>
+				</div>
+				<div style={{display: "flex", flexDirection: "column", overflow: "hidden"}}>
+					<div><FontAwesomeIcon size="lg" icon="stopwatch" />{' '}</div>
+					<div>{`${parseInt(time / 60)} : ${time % 60}`}</div>
+				</div>
+			</Grid.Column>
+
+			<Grid.Column
+				style={{ padding: 0, margin: 0 }}
+				
+				width={6}
+			>
+				<Thumbnail
+					src={require(`../../asssets/words${currentWord.img}`)}
+					width="100%"
+					style={{overflow: "hidden"}}
+				/>
+			</Grid.Column>
+
+			<Grid.Column
+				style={{ height: "60px", alignItems: "center", display:"flex", flexDirection: "row", justifyContent: "space-evenly", padding: 0, margin: 0 }}
+				width={5}
+				color="orange"
+			>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
+					<div>{currentDeckIndex + 1} </div> <div>/</div>{' '}
+					<div>{currentWords.length}</div>
+				</div>
+				<button onClick={()=>audio.play()}><FontAwesomeIcon size="lg" icon="volume-up" /></button>
+			</Grid.Column>
+		</Grid>
+	) : (
+		'Loading Dashboard...'
+	);
 };
 
-const mapDispatchToProps = dispatch => ({
-    startTimerAsync: ()=>dispatch(startTimerAsync()),
-    onGameEnd: ()=>dispatch(onGameEnd()),
-    stopTimer1: ()=>(dispatch(stopTimer1()))
-});
-
-const mapStateToProps = state => ({
-    currentDeckIndex: state.phonicsGameReducer.currentDeckIndex,
-    currentWords: state.phonicsGameReducer.currentWords,
-    totalGamePoints: state.phonicsGameReducer.totalGamePoints,
-    time: state.phonicsGameReducer.totalGameTime
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(GameDashboard);
+export default GameDashboard;

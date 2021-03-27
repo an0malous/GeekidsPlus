@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Button, Icon } from 'semantic-ui-react';
+import { Modal } from 'semantic-ui-react';
 
-const Thumbnail = ({ src, alt, width, height }, ...rest) => {
+const Thumbnail = ({ src, alt, width, height, handleOnClick, ...rest}) => {
 
     const [open, setOpen] = useState(false);
 
@@ -16,7 +16,7 @@ const Thumbnail = ({ src, alt, width, height }, ...rest) => {
       trigger={<img src={src} alt={alt} width={width} height={height} {...rest} />}
     >
       <Modal.Content>
-      <img src={src} alt={alt} width="100%" height="100%" {...rest} />
+      <div onClick={handleOnClick ? handleOnClick : null}><img src={src} alt={alt} width="100%" height="100%" {...rest} /></div>
       </Modal.Content>
     </Modal>
                 

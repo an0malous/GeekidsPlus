@@ -18,7 +18,7 @@ const corsConfig = {
   app.options('*', cors(corsConfig));
 
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }))
 const user = require('./routes/user');
 const cards = require('./routes/flash-cards');
 const users = require('./routes/users');
