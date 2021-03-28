@@ -3,7 +3,7 @@ import { shuffle } from '../../../../utils';
 import '../config/interact-draggable-config';
 import AlphabetCard from '../alphabet-card/alphabet-card.component';
 import { Grid } from 'semantic-ui-react';
-
+import {cacheImages} from '../../../../utils'
 const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 	const [alphabet, setAlphabet] = useState([]);
 	const currentWord = currentWords[currentDeckIndex];
@@ -36,6 +36,12 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			'y',
 			'z',
 		];
+const imgs = []
+		for(letter of abcArr){
+			imgs.push(require(`../../asssets/abcs/${letter}.jpg`))
+		}
+
+		cacheImages(imgs)
 		if (currentWord.type === 'blends') {
 			abcArr.push(currentWord.letter);
 			setAlphabet(shuffle(abcArr));
