@@ -10,9 +10,11 @@ const rootReducer = combineReducers ({
     phonicsGameReducer,
     languageDisplayReducer
 });
-
-const middlewares = [thunk, logger];
-
+let middlewares = [thunk]
+if (process.env.NODE_ENV === 'development') {
+    middlewares = [...middlewares, logger];
+  }
+  
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;

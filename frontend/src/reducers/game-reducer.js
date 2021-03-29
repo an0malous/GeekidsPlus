@@ -17,6 +17,7 @@ const INITIAL_STATE = {
 	totalGamePoints: 0,
 	roundTime: 0,
 	totalGameTime: 0,
+	letterPointsTime: 0,
 	correctCounter: 0,
 	openRoundBreakdown: false,
 	openGameOverScreen: false,
@@ -78,6 +79,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				roundTime: state.roundTime + 1,
+				letterPointsTime: state.letterPointsTime + 1,
 				//used for calculating points too
 				totalGameTime: state.totalGameTime + state.tick,
 			};
@@ -85,14 +87,14 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 		case 'ON_GAME_OVER':
 			return {
 				...state,
-			
-				openGameOverScreen: !state.openGameOverScreen
+
+				openGameOverScreen: !state.openGameOverScreen,
 			};
 
 		case 'ON_GAME_END':
 			return {
 				...state,
-				...INITIAL_STATE
+				...INITIAL_STATE,
 			};
 
 		case 'ON_ROUND_START':
@@ -101,6 +103,7 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 				currentWordLetters: createCurrentWordLetters(
 					state.currentWords[state.currentDeckIndex + 1]
 				),
+
 				openRoundBreakdown: !state.openRoundBreakdown,
 				openGameOverScreen: false,
 				roundPoints: 0,
@@ -123,16 +126,24 @@ const phonicsGameReducer = (state = INITIAL_STATE, action) => {
 
 		case 'ON_LETTER_DROP':
 			const onDropVars = checkIfLetterIsCorrect(
-						action.payload,
-						state.currentWordLetters,
-						state.roundTime
-					)
+				action.payload,
+				state.currentWordLetters,
+				state.letterPointsTime
+			);
+
+			if (onDropVars.correctCounter === 0) {
+				return {
+					...state,
+				};
+			}
 			return {
 				...state,
-				totalGamePoints: state.totalGamePoints + onDropVars.letterPoints ,
-				
-			correctCounter: state.correctCounter + onDropVars.correctCounter,
+				totalGamePoints:
+					state.totalGamePoints + onDropVars.letterPoints,
 
+				correctCounter:
+					state.correctCounter + onDropVars.correctCounter,
+				letterPointsTime: 0
 			};
 
 		default:

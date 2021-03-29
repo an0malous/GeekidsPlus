@@ -36,12 +36,15 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			'y',
 			'z',
 		];
-const imgs = []
-		for(letter of abcArr){
-			imgs.push(require(`../../asssets/abcs/${letter}.jpg`))
+		
+	const nextWord = [require(`../../../../asssets/words${currentWords[currentDeckIndex].img}`)]
+	cacheImages(nextWord);
+const backsideImgs = []
+		for(let letter of abcArr){
+			backsideImgs.push(require(`../../../../asssets/abcs/${letter}.jpg`))
 		}
 
-		cacheImages(imgs)
+		cacheImages(backsideImgs)
 		if (currentWord.type === 'blends') {
 			abcArr.push(currentWord.letter);
 			setAlphabet(shuffle(abcArr));

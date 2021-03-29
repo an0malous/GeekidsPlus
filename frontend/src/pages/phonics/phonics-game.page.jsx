@@ -5,6 +5,11 @@ import PhonicsGameStartMenu from './components/start-menu/phonics-game-start-men
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { onGameEnd } from '../../actions/phonicsGameActions';
+import { cacheImages } from '../../utils'
+import bronze from '../../asssets/img/bronze-medal.svg';
+import silver from '../../asssets/img/silver-medal.svg';
+import gold from '../../asssets/img/winner.svg';
+import master from '../../asssets/img/chevron.svg';
 import {
 	fetchCurrentWords,
 	getGameParams,
@@ -13,6 +18,7 @@ import {
 	onTimerStop,
 } from '../../actions/phonicsGameActions';
 
+cacheImages([bronze, silver, gold, master])
 
 
 const PhonicsGamePage = ({

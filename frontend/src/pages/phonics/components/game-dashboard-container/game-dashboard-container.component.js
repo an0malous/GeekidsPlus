@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 const GameDashboardContainer = ({
 	currentWords,
-	currentWord,
 	helpHandler,
 	onGameEnd,
 	currentDeckIndex,
@@ -29,6 +28,7 @@ const GameDashboardContainer = ({
 			currentDeckIndex={currentDeckIndex}
 			totalGamePoints={totalGamePoints}
 			time={time}
+			audio={new Audio(require(`../../../../asssets/words${currentWords[currentDeckIndex].audio}`))}
 			
 		/>
 	);

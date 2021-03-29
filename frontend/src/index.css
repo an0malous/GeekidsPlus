@@ -23,7 +23,7 @@ button:active {
 }
 
 body {
-	background: url(./asssets/img/MOBILETEST.png);
+	background: url(./asssets/img/mobilebg.png);
 	color: black;
 	-webkit-user-select: none;
 	-moz-user-select: -moz-none;

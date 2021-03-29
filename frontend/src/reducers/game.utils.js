@@ -82,14 +82,14 @@ export const createCurrentWordLetters = (currentWord) => {
 	return word;
 };
 
-export const checkIfLetterIsCorrect = ((e, currentWordLetters, roundTime ) => {
+export const checkIfLetterIsCorrect = ((e, currentWordLetters, letterPointsTime ) => {
 
 	for (let i = 0; i < currentWordLetters.length; i++) {
 		if (
 			currentWordLetters[i] === e.relatedTarget.innerText &&
 			e.relatedTarget.innerText === e.target.innerText
 		) {
-			const letterPoints = calculateLetterBonus(roundTime);
+			const letterPoints = calculateLetterBonus(letterPointsTime);
 			e.relatedTarget.classList.remove('draggable');
 			console.log(letterPoints)
 			return {correctCounter: 1, letterPoints};
