@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { Accordion, Radio, Embed, Modal, Grid } from 'semantic-ui-react';
 import { songData } from './song-data';
 import DropdownMenu from './dropdown';
+import LanguageToggle from '../../../components/language-display-container/language-toggle'
 
 const date = new Date().getMonth();
 function getMonth() {
@@ -11,7 +12,7 @@ function getMonth() {
 		return 13 - date;
 	}
 }
-const Cirriculum = () => {
+const Songs = () => {
 	const [activeIndex, setActiveIndex] = useState(getMonth());
 	const [data, setData] = useState(null);
 	const [checked, setCheck] = useState('3-5');
@@ -29,8 +30,11 @@ const Cirriculum = () => {
 		console.log(newData);
 		setData(newData);
 	};
+	const foo = <LanguageToggle EngContent={()=>'3-5'} JpContent={()=>'3～5歳'} />
 	return (
+		
 		<div>
+		
 			<Modal
 				centered={true}
 				basic
@@ -54,35 +58,37 @@ const Cirriculum = () => {
 				</Modal.Content>
 			</Modal>
 			<DropdownMenu handleOnChange={handleOnChange} />
-			<Grid columns={3}>
-				<Grid.Row>
-					<Grid.Column width={6}>
+			<Grid textAlign="center" columns={3}>
+				
+					<Grid.Column  >
 						<Radio
-							label="Parents"
-							name="radioGroup"
+							label={<LanguageToggle EngContent={()=>'Parents'} JpContent={()=>'親子'}/>}
+						
 							value="parents"
 							checked={checked === 'parents'}
 							onChange={() => setCheck('parents')}
 						/>
 					</Grid.Column>
-					<Grid.Column width={4}>
+					<Grid.Column >
 						<Radio
-							label="3-5"
+							label={foo}
+							
 							value="3-5"
 							checked={checked === '3-5'}
 							onChange={() => setCheck('3-5')}
 						/>
 					</Grid.Column>
 
-					<Grid.Column width={6}>
+					<Grid.Column>
 						<Radio
-							label="Active English"
+							label="Active"
+					
 							value="active"
 							checked={checked === 'active'}
 							onChange={() => setCheck('active')}
 						/>
 					</Grid.Column>
-				</Grid.Row>
+			
 			</Grid>
 
 			{data ? (
@@ -132,10 +138,10 @@ const Cirriculum = () => {
 					})}
 				</Accordion>
 			) : (
-				'...Loading'
+				null
 			)}
 		</div>
 	);
 };
 
-export default Cirriculum;
+export default Songs;

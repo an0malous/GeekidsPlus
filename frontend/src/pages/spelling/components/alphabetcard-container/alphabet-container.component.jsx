@@ -37,7 +37,7 @@ const AlphabetContainer = ({ currentWords, currentDeckIndex }) => {
 			'z',
 		];
 		
-	const nextWord = [require(`../../../../asssets/words${currentWords[currentDeckIndex].img}`)]
+	const nextWord = [require(`../../../../asssets/words${currentWords[currentDeckIndex + 1].img}`)]
 	cacheImages(nextWord);
 const backsideImgs = []
 		for(let letter of abcArr){
@@ -70,6 +70,8 @@ const backsideImgs = []
 				{alphabet.length > 0
 					? alphabet.map(cardLetter => (
 						<AlphabetCard
+						style={{width: "55px", height: "65px"}}
+						animatedStyles={{width: "55px", height: "65px", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", fontSize:"2.5rem", border: "1px solid black", color: "red", borderRadius: "15%", backgroundColor: "white"}}
 						currentDeckIndex={currentDeckIndex}
 						data-testid="alphabet-card"
 							key={cardLetter}

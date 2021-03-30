@@ -24,7 +24,7 @@ const PracticeCaption = () => {
 
 const CompetitiveCaption = () => {
 	return (
-		<div style={{ padding: '15px' }}>
+		<div>
 			<LanguageToggle
 				EngContent={() => (
 					<Fragment>

@@ -25,7 +25,7 @@ const PhonicsGameStartMenu = ({
 	};
 
 	const handleGameInit = (item) => {
-		setModalHeader(`${gameType} / ${gameLevel} - ${gameMode} mode`)
+		setModalHeader(`${gameType} / ${gameLevel} - ${gameMode}`)
 		const gameInfo = createGameParams(gameType, gameLevel, gameMode);
 		getGameParams(gameInfo);
 		fetchCurrentWords();

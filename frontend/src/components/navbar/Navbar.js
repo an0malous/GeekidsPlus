@@ -15,12 +15,12 @@ const Navbar = ({ onToggleClick }) => {
 		<Menu color="black">
 			<Menu.Item
 				as={Link}
-				to={"/home"}
-				name="home"
-				active={activeItem === 'home'}
+				to={"/dashboard"}
+				name="dashboard"
+				active={activeItem === 'dashboard'}
 				onClick={handleItemClick}
 			>
-				<LanguageToggle JpContent={()=><div>Home<div style={{fontSize: "0.58rem"}}>ホーム</div></div>} EngContent={()=>'Home'} />
+				<LanguageToggle JpContent={()=><div>Dashboard<div style={{fontSize: "0.58rem"}}>ダッシュボード</div></div>} EngContent={()=>'Dashboard'} />
 			</Menu.Item>
 
 			<Menu.Item
@@ -34,12 +34,12 @@ const Navbar = ({ onToggleClick }) => {
 			</Menu.Item>
 			<Menu.Item
 				as={Link}
-				to={"/concept"}
-				name="concept"
-				active={activeItem === 'concept'}
+				to={"/spelling"}
+				name="spelling"
+				active={activeItem === 'spelling'}
 				onClick={handleItemClick}
 			>
-				<LanguageToggle JpContent={()=><div>Concept<div style={{fontSize: "0.55rem"}}>コンセプト</div></div>} EngContent={()=>'Concept'} />
+				<LanguageToggle JpContent={()=><div>Spelling<div style={{fontSize: "0.55rem"}}>つづり</div></div>} EngContent={()=>'Spelling'} />
 			</Menu.Item>
 			
 			<Menu.Item className="borderless" position="right" >

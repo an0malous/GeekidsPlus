@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { Grid, Icon } from 'semantic-ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 	const [currentItem, setCurrentItem] = useState(0);
@@ -11,16 +12,19 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 		leave: { opacity: 0, transform: `translate3d(${targetedArrow.leave},0,0)` },
 	});
 	return (
-		<Grid  textAlign="center" centered={true} verticalAlign="middle">
-			<Grid.Column textAlign="justify" padding={true} >
-				<Icon
+		<Grid textAlign="center" centered={true} verticalAlign="middle">
+			<Grid.Column style={{display: "flex", justifyContent: "left"}} color="black" >
+				<FontAwesomeIcon  style={{display: "flex", justifySelf: "left"}} 
+					icon="angle-double-left" 	
+					color="white"
+					size="lg"
 					onClick={
 						currentItem !== 0
 							? () => {setTargetedArrow({leave: '-50%', from: "100%"}); setCurrentItem((prevItem) => prevItem - 1);}
 							: () => {setTargetedArrow({leave: '-50%', from: "100%"}); setCurrentItem(items.length - 1)}
 					}
-					fitted={true}
-					name="angle double left"
+				
+					
 				/>
 			</Grid.Column>
 
@@ -43,15 +47,19 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 				)}
 			</Grid.Column>
 
-			<Grid.Column textAlign="center" >
-				<Icon
+			<Grid.Column s color="black" textAlign="center" >
+				<FontAwesomeIcon 
+					icon="angle-double-left" 	
+					color="white"
+					size="lg"
 					onClick={
 						currentItem !== items.length - 1
 							? () => {setTargetedArrow({leave: '50%', from: "-100%"}); setCurrentItem((prevItem) => prevItem + 1)}
 							: () => {setTargetedArrow({leave: '50%', from: "-100%"}); setCurrentItem(0)}
 					}
-					fitted={true}
-					name="angle double right"
+					
+				
+				
 				/>
 			</Grid.Column>
 		</Grid>
