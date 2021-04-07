@@ -19,7 +19,7 @@ export class Add extends Vocabulary {
     constructor(name, letter){
         super(name, letter);
         this.type = "cvcAdd"
-        //this.audio = `../src/assets/audio/cvcAdd/${letter}/${name}.m4a`;
+        this.audio = `/audio/cvcAdd/${letter}/${name}.m4a`;
         this.img = `/img/cvcAdd/${letter}/${name}.jpg`;
     }
 }

@@ -21,17 +21,11 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 		},
 	});
 	return (
-		<Grid textAlign="center" centered={true} verticalAlign="middle">
+		<Grid centered={true} verticalAlign="middle">
 			<Grid.Column
-				style={{ display: 'flex', justifyContent: 'left' }}
-				color="black"
-			>
-				<FontAwesomeIcon
-					style={{ display: 'flex', justifySelf: 'left' }}
-					icon="angle-double-left"
-					color="white"
-					size="lg"
-					onClick={
+				style={{borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: "30vh", background: 'rgba(0,0,0,0.2)' }}
+				
+				onClick={
 						currentItem !== 0
 							? () => {
 									setTargetedArrow({
@@ -48,6 +42,11 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 									setCurrentItem(items.length - 1);
 							  }
 					}
+			>
+				<FontAwesomeIcon
+					icon="angle-double-left"
+					color="white"
+					size="lg"
 				/>
 			</Grid.Column>
 
@@ -91,12 +90,7 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 				)}
 			</Grid.Column>
 
-			<Grid.Column s color="black" textAlign="center">
-				<FontAwesomeIcon
-					icon="angle-double-left"
-					color="white"
-					size="lg"
-					onClick={
+			<Grid.Column style={{borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', height: "30vh", background: 'rgba(0,0,0,0.2)' }} onClick={
 						currentItem !== items.length - 1
 							? () => {
 									setTargetedArrow({
@@ -112,7 +106,11 @@ const CarouselMenu = ({ items, onClickItemTarget, style }) => {
 									});
 									setCurrentItem(0);
 							  }
-					}
+					}>
+				<FontAwesomeIcon
+					icon="angle-double-right"
+					color="white"
+					size="lg"
 				/>
 			</Grid.Column>
 		</Grid>
